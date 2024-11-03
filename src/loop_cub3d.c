@@ -14,42 +14,43 @@
 
 void	remove_old_player(t_win *win, t_player *player)
 {
-	int	col;
-	int	line;
+	int	width;
+	int	height;
 
-	line = player->old_posi - 2;
-	while (line < player->old_posi + 3)
+	height = player->old_posw - 2;
+	while (height < player->old_posw + 3)
 	{
-		col = player->old_posj - 2;
-		while (col < player->old_posj + 3)
+		width = player->old_posh - 2;
+		while (width < player->old_posh + 3)
 		{
-			mlx_pixel_put (win->mlx_ptr, win->mlx_win, line, col, BLACK);
-			col++;
+			mlx_pixel_put (win->mlx_ptr, win->mlx_win, height, width, BLACK);
+			width++;
 		}
-		line++;
+		height++;
 	}
 }
 
 void	put_player(t_win *win, t_player *player)
 {
-	int	col;
-	int	line;
+	int	width;
+	int	height;
 
-	line = player->posi - 2;
-	while (line < player->posi + 3)
+	height = player->posw - 2;
+	while (height < player->posw + 3)
 	{
-		col = player->posj - 2;
-		while (col < player->posj + 3)
+		width = player->posh - 2;
+		while (width < player->posh + 3)
 		{
-			mlx_pixel_put (win->mlx_ptr, win->mlx_win, line, col, WHITE);
-			col++;
+			mlx_pixel_put (win->mlx_ptr, win->mlx_win, height, width, WHITE);
+			width++;
 		}
-		line++;
+		height++;
 	}
 }
 
 void	loop_cub3d(t_data *data)
 {
+	fill_screen2d (data);
 	put_player (data->win, data->player);
 	mlx_hook (data->win->mlx_win, 2, 1L << 0, handle_keypress, data);
 	mlx_hook (data->win->mlx_win, 17, 0, close_win, data);

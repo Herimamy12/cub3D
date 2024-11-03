@@ -33,6 +33,13 @@ void	destroy_win(t_win *win)
 	free (win);
 }
 
+void	destroy_map(t_map *map)
+{
+	if (map->map)
+		destroy_str (map->map);
+	free (map);
+}
+
 void	destroy_data(t_data *data)
 {
 	if (!data)
@@ -40,7 +47,9 @@ void	destroy_data(t_data *data)
 	if (data->win)
 		destroy_win (data->win);
 	if (data->map)
-		destroy_str (data->map);
+		destroy_map (data->map);
+	if (data->dim)
+		free (data->dim);
 	if (data->player)
 		free (data->player);
 	free (data);

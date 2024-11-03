@@ -6,4 +6,4 @@ SIZE :
 			1 brick : (lbrick : 960 / larg) x (hbrick : 540 / haut)
 
 	PLAYER :
-			(lbrick / 3) x (hbrick / 3)
+			(lplay : 960 / (larg + larg)) x (lplay : 540 / (larg + larg))

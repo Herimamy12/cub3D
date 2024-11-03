@@ -17,16 +17,16 @@ int	ft_mov_player(int keycode, t_player *player)
 	int	ret;
 
 	ret = 1;
-	player->old_posi = player->posi;
-	player->old_posj = player->posj;
+	player->old_posw = player->posw;
+	player->old_posh = player->posh;
 	if (keycode == NORTH)
-		player->posj -= 2;
+		player->posh -= 2;
 	else if (keycode == SOUTH)
-		player->posj += 2;
+		player->posh += 2;
 	else if (keycode == EAST)
-		player->posi += 2;
+		player->posw += 2;
 	else if (keycode == WEST)
-		player->posi -= 2;
+		player->posw -= 2;
 	else
 		ret = 0;
 	return (ret);

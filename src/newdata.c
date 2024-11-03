@@ -12,32 +12,33 @@
 
 #include "../include/cube3d.h"
 
-t_player	*new_player(void)
+t_player	*new_player(t_map *map, t_scale *dim)
 {
 	t_player	*player;
 
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->posi = WIDTH / 2;
-	player->posj = HEIGHT / 2;
-	player->old_posi = WIDTH / 2;
-	player->old_posj = HEIGHT / 2;
+	player->posw = get_width_position (map) * dim->wb;
+	player->posh = get_height_position (map) * dim->hb;
+	player->posw += (dim->wp);
+	player->posh += (dim->hp);
+	// player->orientation = get_player_orientation (map->map);
+	player->old_posw = player->posw;
+	player->old_posh = player->posh;
 	return (player);
 }
 
-char	**new_map(char *av)
+t_map	*new_struct_map(char *av)
 {
-	int		fd;
-	char	**map;
+	t_map	*map;
 
-	fd = open(av, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	map = get_map(fd);
-	close (fd);
+	map = (t_map *)malloc(sizeof(t_map));
+	map->map = new_map (av);
 	if (!map)
 		return (NULL);
+	map->width = count_width_map (map->map);
+	map->height = count_heigth_map (map->map);
 	return (map);
 }
 
@@ -63,9 +64,9 @@ t_data	*new_data(char *av)
 	if (!data)
 		return (NULL);
 	data->win = new_win();
-	data->map = new_map(av);
-	data->dim = init_dimension();
-	data->player = new_player();
+	data->map = new_struct_map (av);
+	data->dim = init_dimension(data->map);
+	data->player = new_player(data->map, data->dim);
 	if (!data->win || !data->map)
 	{
 		destroy_data (data);
