@@ -23,7 +23,7 @@ t_player	*new_player(t_map *map, t_scale *dim)
 	player->posh = get_height_position (map) * dim->hb;
 	player->posw += (dim->wp);
 	player->posh += (dim->hp);
-	// player->orientation = get_player_orientation (map->map);
+	player->orientation = get_player_orientation (map);
 	player->old_posw = player->posw;
 	player->old_posh = player->posh;
 	return (player);
@@ -67,6 +67,7 @@ t_data	*new_data(char *av)
 	data->map = new_struct_map (av);
 	data->dim = init_dimension(data->map);
 	data->player = new_player(data->map, data->dim);
+	data->forb = init_forb();
 	if (!data->win || !data->map)
 	{
 		destroy_data (data);

@@ -34,11 +34,24 @@
 // # define F_LEFT 65361
 // # define F_RIGHT 65363
 
-// LOCATION
+// DEGRE ORIENTATION BASE EST
+# define DEGERR -1
+# define DEGEA 0
+# define DEGNO 90
+# define DEGWE 180
+# define DEGSO 270
+# define DEGMAX 360
+# define DEGMIN 0
+
+// LOCATION (DEPLACEMENT FLECHE)
 # define NORTH 65362
 # define SOUTH 65364
 # define WEST 65361
 # define EAST 65363
+
+// ROTATION CAMERA (RC_)
+# define RC_LEFT 65430 // touche pad 4
+# define RC_RIGHT 65432 // touche pad 6
 
 // COLOR
 # define RED 0x00FF0000
@@ -54,12 +67,12 @@ typedef struct s_win
 	void	*mlx_win;
 }			t_win;
 
-// SIZE : wb : width_brick and wp : width_player and wm : width map
+// SIZE (Only for 2D)
 typedef struct s_scale
 {
-	int	wb;
+	int	wb;		// wb : width_brick 
 	int	hb;
-	int	wp;
+	int	wp;		// wp : width_player
 	int	hp;
 }		t_scale;
 
@@ -70,6 +83,14 @@ typedef struct s_map
 	int		height;
 	char	**map;
 }			t_map;
+
+// FORBIDDDEN GROUND STRUCT
+typedef struct s_forb
+{
+	int				width;
+	int				height;
+	struct s_forb	*next;
+}					t_forb;
 
 // PLAYER STRUCT
 typedef struct s_player
@@ -84,9 +105,9 @@ typedef struct s_player
 // DATA STRUCT
 typedef struct s_data
 {
-	// char		**map;
 	t_win		*win;
 	t_map		*map;
+	t_forb		*forb;
 	t_scale		*dim;
 	t_player	*player;
 }				t_data;
@@ -94,6 +115,7 @@ typedef struct s_data
 // NEW && DESTROY (DATA AND WINDOW)
 t_win		*new_win(void);
 t_data		*new_data(char *av);
+t_forb		*init_forb(void);
 t_player	*new_player(t_map *map, t_scale *dim);
 t_scale		*init_dimension(t_map *map);
 void		destroy_str(char **str);
@@ -115,12 +137,13 @@ void		put_player(t_win *win, t_player *player);
 void		loop_cub3d(t_data *data);
 void		remove_old_player(t_win *win, t_player *player);
 int			ft_mov_player(int keycode, t_player *player);
+
 // LOOP && BRICK WALL 2D && PLAYER 2D
 void		fill_screen2d(t_data *data);
-void		prepared_position2d(t_data *data, char set);
 void		fill_brick_wall2d(t_data *data, int height, int width);
 int			get_height_position(t_map *map);
 int			get_width_position(t_map *map);
+int			get_player_orientation(t_map *map);
 
 // OTHER && DEBUG
 void		print_map(char **map);

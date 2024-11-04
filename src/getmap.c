@@ -33,3 +33,23 @@ char	**get_map(int fd)
 	free (line);
 	return (map);
 }
+
+int	count_heigth_map(char **map)
+{
+	int	height;
+
+	height = 0;
+	while (map[height])
+		height++;
+	return (height);
+}
+
+int	count_width_map(char **map)
+{
+	int	width;
+
+	width = 0;
+	while (map[0][width])
+		width++;
+	return (width);
+}

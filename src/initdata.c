@@ -41,22 +41,15 @@ char	**new_map(char *av)
 	return (map);
 }
 
-int	count_heigth_map(char **map)
+t_forb	*init_forb(void)
 {
-	int	height;
+	t_forb	*forb;
 
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
-}
-
-int	count_width_map(char **map)
-{
-	int	width;
-
-	width = 0;
-	while (map[0][width])
-		width++;
-	return (width);
+	forb = (t_forb *)malloc(sizeof(forb));
+	if (!forb)
+		return (NULL);
+	forb->width  = 0;
+	forb->height = 0;
+	forb->next = NULL;
+	return (forb);
 }

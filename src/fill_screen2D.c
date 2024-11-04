@@ -35,7 +35,7 @@ void	fill_brick_wall2d(t_data *data, int height, int width)
 	}
 }
 
-void	prepared_position2d(t_data *data, char set)
+void	fill_screen2d(t_data *data)
 {
 	int	width;
 	int	height;
@@ -46,21 +46,10 @@ void	prepared_position2d(t_data *data, char set)
 		width = 0;
 		while (width < data->map->width)
 		{
-			if (data->map->map[height][width] == set)
-			{
-				if (set == '1')
-					fill_brick_wall2d (data, height, width);
-				// else
-				// 	fill_player2d (data, height, width);
-			}
+			if (data->map->map[height][width] == '1')
+				fill_brick_wall2d (data, height, width);
 			width++;
 		}
 		height++;
 	}
-}
-
-void	fill_screen2d(t_data *data)
-{
-	prepared_position2d(data, '1');
-	// prepared_position2d(data, 'P');
 }

@@ -21,7 +21,6 @@ int	main(int ac, char **av)
 	data = new_data (av[1]);
 	if (!data)
 		return (1);
-	// print_map (data->map);
 	loop_cub3d (data);
 	return (0);
 }
