@@ -40,16 +40,3 @@ char	**new_map(char *av)
 		return (NULL);
 	return (map);
 }
-
-t_forb	*init_forb(void)
-{
-	t_forb	*forb;
-
-	forb = (t_forb *)malloc(sizeof(forb));
-	if (!forb)
-		return (NULL);
-	forb->width  = 0;
-	forb->height = 0;
-	forb->next = NULL;
-	return (forb);
-}

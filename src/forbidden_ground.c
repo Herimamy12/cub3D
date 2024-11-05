@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   forbidden_ground.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nherimam <nherimam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 23:13:56 by nherimam          #+#    #+#             */
-/*   Updated: 2024/10/03 23:13:58 by nherimam         ###   ########.fr       */
+/*   Created: 2024/11/04 20:57:30 by nherimam          #+#    #+#             */
+/*   Updated: 2024/11/04 20:57:34 by nherimam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
 
-int	main(int ac, char **av)
+t_forb	*new_forb(int width, int height)
 {
-	t_data	*data;
+	t_forb	*new;
 
-	if (ac != 2)
-		return (1);
-	data = new_data (av[1]);
-	if (!data)
-		return (1);
-	forb_addback (&data->forb, new_forb (1, 1));
-	loop_cub3d (data);
-	return (0);
+	new = (t_forb *)malloc(sizeof(t_forb));
+	if (new)
+		return (NULL);
+	new->width = width;
+	new->height = height;
+	new->next = NULL;
+	return (new);
+}
+
+void	forb_addback(t_forb **forb, t_forb *next)
+{
+	// while (forb[0] && forb[0]->next)
+	// 	forb[0] = forb[0]->next;
+	forb[0]->next = next;
 }

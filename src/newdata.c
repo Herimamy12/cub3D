@@ -67,7 +67,7 @@ t_data	*new_data(char *av)
 	data->map = new_struct_map (av);
 	data->dim = init_dimension(data->map);
 	data->player = new_player(data->map, data->dim);
-	data->forb = init_forb();
+	data->forb = new_forb(0, 0);
 	if (!data->win || !data->map)
 	{
 		destroy_data (data);

@@ -29,6 +29,7 @@ void	fill_brick_wall2d(t_data *data, int height, int width)
 		{
 			mlx_pixel_put (data->win->mlx_ptr, data->win->mlx_win,
 				initw, inith, WHITE);
+			// forb_addback (&(data->forb), new_forb (initw, inith));
 			initw++;
 		}
 		inith++;
@@ -41,10 +42,10 @@ void	fill_screen2d(t_data *data)
 	int	height;
 
 	height = 0;
-	while (height < data->map->height)
+	while (data->map->map[height])
 	{
 		width = 0;
-		while (width < data->map->width)
+		while (data->map->map[height][width])
 		{
 			if (data->map->map[height][width] == '1')
 				fill_brick_wall2d (data, height, width);

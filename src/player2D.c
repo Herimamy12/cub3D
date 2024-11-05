@@ -18,10 +18,10 @@ int	get_width_position(t_map *map)
 	int	height;
 
 	height = 0;
-	while (height < map->height)
+	while (map->map[height])
 	{
 		width = 0;
-		while (width < map->width)
+		while (map->map[height][width])
 		{
 			if (map->map[height][width] == 'N' ||
 				map->map[height][width] == 'S' ||
@@ -41,10 +41,10 @@ int	get_height_position(t_map *map)
 	int	height;
 
 	height = 0;
-	while (height < map->height)
+	while (map->map[height])
 	{
 		width = 0;
-		while (width < map->width)
+		while (map->map[height][width])
 		{
 			if (map->map[height][width] == 'N' ||
 				map->map[height][width] == 'S' ||
@@ -64,10 +64,10 @@ int	get_player_orientation(t_map *map)
 	int	height;
 
 	height = 0;
-	while (height < map->height)
+	while (map->map[height])
 	{
 		width = 0;
-		while (width < map->width)
+		while (map->map[height][width])
 		{
 			if (map->map[height][width] == 'N')
 				return (DEGNO);

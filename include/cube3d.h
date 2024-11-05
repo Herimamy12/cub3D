@@ -115,13 +115,16 @@ typedef struct s_data
 // NEW && DESTROY (DATA AND WINDOW)
 t_win		*new_win(void);
 t_data		*new_data(char *av);
-t_forb		*init_forb(void);
 t_player	*new_player(t_map *map, t_scale *dim);
 t_scale		*init_dimension(t_map *map);
 void		destroy_str(char **str);
 void		destroy_win(t_win *win);
 void		destroy_data(t_data *data);
 int			close_win(t_data *data);
+
+// ALL FORBIDEN GROUND
+t_forb		*new_forb(int width, int height);
+void		forb_addback(t_forb **forb, t_forb *next);
 
 // MAP && PARSING
 t_map		*new_struct_map(char *av);
