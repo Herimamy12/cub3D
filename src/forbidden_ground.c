@@ -17,7 +17,7 @@ t_forb	*new_forb(int width, int height)
 	t_forb	*new;
 
 	new = (t_forb *)malloc(sizeof(t_forb));
-	if (new)
+	if (!new)
 		return (NULL);
 	new->width = width;
 	new->height = height;
@@ -27,7 +27,11 @@ t_forb	*new_forb(int width, int height)
 
 void	forb_addback(t_forb **forb, t_forb *next)
 {
-	// while (forb[0] && forb[0]->next)
-	// 	forb[0] = forb[0]->next;
+	t_forb	*tmp;
+
+	tmp = forb[0];
+	while (forb[0] && forb[0]->next)
+		forb[0] = forb[0]->next;
 	forb[0]->next = next;
+	forb[0] = tmp;
 }

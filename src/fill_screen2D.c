@@ -48,7 +48,10 @@ void	fill_screen2d(t_data *data)
 		while (data->map->map[height][width])
 		{
 			if (data->map->map[height][width] == '1')
+			{
+				forb_addback (&(data->forb), new_forb (width, height));
 				fill_brick_wall2d (data, height, width);
+			}
 			width++;
 		}
 		height++;

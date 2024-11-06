@@ -95,7 +95,7 @@ typedef struct s_forb
 // PLAYER STRUCT
 typedef struct s_player
 {
-	int	posw;
+	int	posw;	// position width player
 	int	old_posw;
 	int	posh;
 	int	old_posh;
@@ -125,6 +125,7 @@ int			close_win(t_data *data);
 // ALL FORBIDEN GROUND
 t_forb		*new_forb(int width, int height);
 void		forb_addback(t_forb **forb, t_forb *next);
+void		destroy_list(t_forb *forb);
 
 // MAP && PARSING
 t_map		*new_struct_map(char *av);
@@ -139,7 +140,11 @@ int			handle_keypress(int keycode, t_data *data);
 void		put_player(t_win *win, t_player *player);
 void		loop_cub3d(t_data *data);
 void		remove_old_player(t_win *win, t_player *player);
-int			ft_mov_player(int keycode, t_player *player);
+int			ft_mov_player(int keycode, t_data *data);
+void		let_mov_north(t_data *data, t_forb *forb, t_forb *tmp);
+void		let_mov_south(t_data *data, t_forb *forb, t_forb *tmp);
+void		let_mov_east(t_data *data, t_forb *forb, t_forb *tmp);
+void		let_mov_west(t_data *data, t_forb *forb, t_forb *tmp);
 
 // LOOP && BRICK WALL 2D && PLAYER 2D
 void		fill_screen2d(t_data *data);
@@ -150,5 +155,7 @@ int			get_player_orientation(t_map *map);
 
 // OTHER && DEBUG
 void		print_map(char **map);
+void		print_one_forb(t_forb *forb);
+void		print_list_forb(t_forb *forb);
 
 #endif

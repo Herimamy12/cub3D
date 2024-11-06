@@ -12,21 +12,23 @@
 
 #include "../include/cube3d.h"
 
-int	ft_mov_player(int keycode, t_player *player)
+int	ft_mov_player(int keycode, t_data *data)
 {
-	int	ret;
+	int		ret;
+	t_forb	*tmp;
 
 	ret = 1;
-	player->old_posw = player->posw;
-	player->old_posh = player->posh;
+	tmp = NULL;
+	data->player->old_posw = data->player->posw;
+	data->player->old_posh = data->player->posh;
 	if (keycode == NORTH)
-		player->posh -= 2;
+		let_mov_north (data, data->forb, tmp);
 	else if (keycode == SOUTH)
-		player->posh += 2;
+		let_mov_south (data, data->forb, tmp);
 	else if (keycode == EAST)
-		player->posw += 2;
+		let_mov_east (data, data->forb, tmp);
 	else if (keycode == WEST)
-		player->posw -= 2;
+		let_mov_west (data, data->forb, tmp);
 	else
 		ret = 0;
 	return (ret);
@@ -39,7 +41,7 @@ int	handle_keypress(int keycode, t_data *data)
 	res = 0;
 	if (keycode == ESC)
 		destroy_data (data);
-	res = ft_mov_player (keycode, data->player);
+	res = ft_mov_player (keycode, data);
 	if (res)
 		remove_old_player (data->win, data->player);
 	put_player (data->win, data->player);

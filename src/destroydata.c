@@ -50,6 +50,8 @@ void	destroy_data(t_data *data)
 		destroy_map (data->map);
 	if (data->dim)
 		free (data->dim);
+	if (data->forb)
+		destroy_list(data->forb);
 	if (data->player)
 		free (data->player);
 	free (data);
@@ -60,4 +62,17 @@ int	close_win(t_data *data)
 {
 	handle_keypress(ESC, data);
 	return (1);
+}
+
+void	destroy_list(t_forb *forb)
+{
+	t_forb	*tmp;
+
+	tmp = forb;
+	while (forb)
+	{
+		forb = forb->next;
+		free (tmp);
+		tmp = forb;
+	}
 }

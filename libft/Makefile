@@ -9,6 +9,8 @@ SRC = libft_utils.c libft_next.c \
 
 OBJ = $(SRC:.c=.o)
 
+.SILENT :
+
 %.o : %.c
 		$(CC) $(CFLAGS) -o $@ -c $<
 

@@ -20,3 +20,20 @@ void	print_map(char **map)
 	while (map[i])
 		printf("%s\n", map[i++]);
 }
+
+void	print_one_forb(t_forb *forb)
+{
+	if (!forb)
+		return ;
+	printf("width : %d | height : %d\n", forb->width, forb->height);
+}
+
+void	print_list_forb(t_forb *forb)
+{
+	while (forb && forb->next)
+	{
+		print_one_forb(forb);
+		forb = forb->next;
+	}
+	print_one_forb(forb);
+}
