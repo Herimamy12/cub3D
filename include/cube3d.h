@@ -25,14 +25,14 @@
 # define HEIGHT 540
 # define NAME "cube3d"
 
+// ONE BLOC FIXE && PLAYER FIXE
+# define CUB_BWIDTH 60
+# define CUB_BHEIGHT 60
+# define CUB_PWIDTH 30
+# define CUB_PHEIGHT 30
+
 // QUIT
 # define ESC 65307
-
-// // DIRECTION CLIC
-// # define F_UP 65362
-// # define F_DOWN 65364
-// # define F_LEFT 65361
-// # define F_RIGHT 65363
 
 // DEGRE ORIENTATION BASE EST
 # define DEGERR -1
@@ -70,7 +70,7 @@ typedef struct s_win
 // SIZE (Only for 2D)
 typedef struct s_scale
 {
-	int	wb;		// wb : width_brick 
+	int	wb;		// wb : width_brick in scale variable
 	int	hb;
 	int	wp;		// wp : width_player
 	int	hp;
@@ -95,11 +95,14 @@ typedef struct s_forb
 // PLAYER STRUCT
 typedef struct s_player
 {
-	int	posw;	// position width player
+	int	mapw;	// position in the map 2D
+	int	maph;
+	int	posw;	// position width player en pixel
 	int	old_posw;
 	int	posh;
 	int	old_posh;
 	int	orientation;
+	int	old_orientation;
 }		t_player;
 
 // DATA STRUCT
@@ -152,6 +155,19 @@ void		fill_brick_wall2d(t_data *data, int height, int width);
 int			get_height_position(t_map *map);
 int			get_width_position(t_map *map);
 int			get_player_orientation(t_map *map);
+void		put_orientation_east(t_win *win, t_player *player);
+void		put_orientation_north(t_win *win, t_player *player);
+void		put_orientation_south(t_win *win, t_player *player);
+void		put_orientation_west(t_win *win, t_player *player);
+void		maj_data_player(t_player *player);
+void		put_player_orientation(t_win *win, t_player *player);
+void		removed_player_orientation(t_win *win, t_player *player);
+void		removed_orientation_east(t_win *win, t_player *player);
+void		removed_orientation_north(t_win *win, t_player *player);
+void		removed_orientation_south(t_win *win, t_player *player);
+void		removed_orientation_west(t_win *win, t_player *player);
+void		let_rotate_left(t_player *player);
+void		let_rotate_right(t_player *player);
 
 // OTHER && DEBUG
 void		print_map(char **map);

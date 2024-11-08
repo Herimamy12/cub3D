@@ -90,6 +90,7 @@ void	remove_old_player(t_win *win, t_player *player)
 	int	height;
 
 	height = player->old_posw - 2;
+	removed_player_orientation(win, player);
 	while (height < player->old_posw + 3)
 	{
 		width = player->old_posh - 2;
@@ -108,6 +109,7 @@ void	put_player(t_win *win, t_player *player)
 	int	height;
 
 	height = player->posw - 2;
+	put_player_orientation(win, player);
 	while (height < player->posw + 3)
 	{
 		width = player->posh - 2;

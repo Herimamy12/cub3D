@@ -63,16 +63,3 @@ int	close_win(t_data *data)
 	handle_keypress(ESC, data);
 	return (1);
 }
-
-void	destroy_list(t_forb *forb)
-{
-	t_forb	*tmp;
-
-	tmp = forb;
-	while (forb)
-	{
-		forb = forb->next;
-		free (tmp);
-		tmp = forb;
-	}
-}

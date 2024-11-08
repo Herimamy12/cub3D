@@ -12,6 +12,32 @@
 
 #include "../include/cube3d.h"
 
+/*############################################################################*/
+/*																			  */
+/*          Ici, nous avons deux version de new player. L'une                 */
+/*          pour la taille variable et l'autre pour la taille                 */
+/*          fixe que je pense que ca va adapter au mieux avec                 */
+/*          la cub3D en generale                                              */
+/*																			  */
+/*############################################################################*/
+
+// t_player	*new_player(t_map *map, t_scale *dim)
+// {
+// 	t_player	*player;
+
+// 	player = (t_player *)malloc(sizeof(t_player));
+// 	if (!player)
+// 		return (NULL);
+// 	player->posw = get_width_position (map) * dim->wb;
+// 	player->posh = get_height_position (map) * dim->hb;
+// 	player->posw += (dim->wp);
+// 	player->posh += (dim->hp);
+// 	player->orientation = get_player_orientation (map);
+// 	player->old_posw = player->posw;
+// 	player->old_posh = player->posh;
+// 	return (player);
+// }
+
 t_player	*new_player(t_map *map, t_scale *dim)
 {
 	t_player	*player;
@@ -19,15 +45,24 @@ t_player	*new_player(t_map *map, t_scale *dim)
 	player = (t_player *)malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->posw = get_width_position (map) * dim->wb;
-	player->posh = get_height_position (map) * dim->hb;
-	player->posw += (dim->wp);
-	player->posh += (dim->hp);
+	player->mapw = get_width_position (map);
+	player->maph = get_height_position (map);
+	player->posw = player->mapw * CUB_BWIDTH;
+	player->posh = player->maph * CUB_BHEIGHT;
+	player->posw += CUB_PWIDTH;
+	player->posh += CUB_PHEIGHT;
 	player->orientation = get_player_orientation (map);
+	player->old_orientation = player->orientation;
 	player->old_posw = player->posw;
 	player->old_posh = player->posh;
 	return (player);
+	(void)dim;
 }
+
+/*############################################################################*/
+/*############################################################################*/
+/*############################################################################*/
+/*############################################################################*/
 
 t_map	*new_struct_map(char *av)
 {

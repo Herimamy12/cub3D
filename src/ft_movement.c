@@ -19,8 +19,7 @@ int	ft_mov_player(int keycode, t_data *data)
 
 	ret = 1;
 	tmp = NULL;
-	data->player->old_posw = data->player->posw;
-	data->player->old_posh = data->player->posh;
+	maj_data_player(data->player);
 	if (keycode == NORTH)
 		let_mov_north (data, data->forb, tmp);
 	else if (keycode == SOUTH)
@@ -29,6 +28,10 @@ int	ft_mov_player(int keycode, t_data *data)
 		let_mov_east (data, data->forb, tmp);
 	else if (keycode == WEST)
 		let_mov_west (data, data->forb, tmp);
+	else if (keycode == RC_LEFT)
+		let_rotate_left (data->player);
+	else if (keycode == RC_RIGHT)
+		let_rotate_right (data->player);
 	else
 		ret = 0;
 	return (ret);
@@ -46,4 +49,27 @@ int	handle_keypress(int keycode, t_data *data)
 		remove_old_player (data->win, data->player);
 	put_player (data->win, data->player);
 	return (res);
+}
+
+void	maj_data_player(t_player *player)
+{
+	player->old_posw = player->posw;
+	player->old_posh = player->posh;
+	player->old_orientation = player->orientation;
+}
+
+void	let_rotate_left(t_player *player)
+{
+	if (player->orientation < 315)
+		player->orientation += 45;
+	else
+		player->orientation = 0;
+}
+
+void	let_rotate_right(t_player *player)
+{
+	if (player->orientation > 0)
+		player->orientation -= 45;
+	else
+		player->orientation = 315;
 }
