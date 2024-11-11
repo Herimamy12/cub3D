@@ -1,15 +1,50 @@
 #include "../include/cube3d.h"
+#include <math.h>
+
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 600
+#define FOV 60.0 // Champ de vision de 60°
+
+#define MAP_WIDTH 5
+#define MAP_HEIGHT 7
 
 // Carte (1 = mur, 0 = vide, P = position du joueur)
 char *map[MAP_HEIGHT] = {
-    "1111111",
-    "100P001",
-    "1000001",
-    "1000001",
-    "1000001",
-    "1001001",
-    "1111111"
+    "11111",
+    "10101",
+    "10001",
+    "10P01",
+    "10001",
+    "10101",
+    "11111"
 };
+
+// Structures pour gérer l'image
+typedef struct s_image {
+    void *img;
+    char *addr;
+    int bpp;
+    int line_length;
+    int endian;
+    int width;
+    int height;
+} t_image;
+
+typedef struct s_player {
+    double x;
+    double y;
+    double angle; // Direction de vue du joueur
+} t_player;
+
+typedef struct s_data {
+    void *mlx;
+    void *win;
+    t_player player;
+    t_image win_tex;     // Image pour le rendu de la fenêtre
+    t_image wall_tex;    // Texture des murs
+    t_image floor_tex;   // Texture du sol
+    t_image ceiling_tex; // Texture du plafond
+} t_data;
 
 // Fonction pour initialiser l'image
 void init_image(t_data *data, t_image *img, char *filename) {
@@ -48,10 +83,6 @@ void cast_ray(t_data *data, double ray_angle, int column) {
     double distance = 0;
     int hit = 0;
 
-    // Normaliser l'angle pour le rendre dans la plage [0, 2*PI]
-    ray_angle = fmod(ray_angle, 2 * M_PI);
-    if (ray_angle < 0) ray_angle += 2 * M_PI;
-
     // Lancer le rayon jusqu'à rencontrer un mur
     while (!hit) {
         ray_x += ray_dx * 0.1;
@@ -68,16 +99,13 @@ void cast_ray(t_data *data, double ray_angle, int column) {
         }
     }
 
-    // Correction du fish-eye : ajuster la distance en fonction de l'angle du rayon
-    double corrected_distance = distance * cos(ray_angle - data->player.angle);
-
-    // Projeter l'image en fonction de la distance corrigée
-    int line_height = (int)(WIN_HEIGHT / corrected_distance);
+    // Projeter l'image en fonction de la distance
+    int line_height = (int)(WIN_HEIGHT / distance);
     int line_start = (WIN_HEIGHT - line_height) / 2;
     int line_end = line_start + line_height;
 
     // Calculer le point sur la texture à afficher en fonction de la distance
-    int texture_x = (int)(ray_x * 64) % data->wall_tex.width;
+    int texture_x = (int)(ray_x * 64) % data->wall_tex.width; // Calcul de la position sur la texture
     for (int y = line_start; y < line_end; y++) {
         int texture_y = (int)((y - line_start) / (double)line_height * data->wall_tex.height);
         int color = get_texture_pixel(&data->wall_tex, texture_x, texture_y);
