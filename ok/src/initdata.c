@@ -40,3 +40,42 @@ char	**new_map(char *av)
 		return (NULL);
 	return (map);
 }
+
+t_cubplay	*new_cubplay(t_map *map)
+{
+	int			width;
+	int			height;
+	t_cubplay	*new;
+
+	new = (t_cubplay *)malloc(sizeof(t_cubplay));
+	if (!new)
+		return (NULL);
+	height = -1;
+	while (++height < map->height && map->map[height])
+	{
+		width = -1;
+		while (++width < map->width && map->map[height][width])
+		{
+			if (map->map[height][width] != '0'
+				&& map->map[height][width] != '1')
+			{
+				new->width = width + 0.5;
+				new->height = height + 0.5;
+				new->angle = get_angle(map->map, width, height);
+			}
+		}
+	}
+	return (new);
+}
+
+double	get_angle(char **map, int width, int height)
+{
+	if (map[height][width] == 'N')
+		return (DEGNOR);
+	else if (map[height][width] == 'S')
+		return (DEGSOT);
+	else if (map[height][width] == 'W')
+		return (DEGWES);
+	return (0);
+	(void)map;
+}

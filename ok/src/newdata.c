@@ -103,10 +103,19 @@ t_data	*new_data(char *av)
 	data->dim = init_dimension(data->map);
 	data->player = new_player(data->map, data->dim);
 	data->forb = new_forb(0, 0);
-	if (!data->win || !data->map)
-	{
-		destroy_data (data);
-		return (NULL);
-	}
+	data->cubplay = new_cubplay(data->map);
+	data->win_tex = new_win_texture(data);
+	data->wall_tex = alloc_image();
+	init_image(data, data->wall_tex, "./textures/wall.xpm");
 	return (data);
+}
+
+t_image	*alloc_image(void)
+{
+	t_image	*img;
+
+	img = (t_image *)malloc(sizeof(t_image));
+	if (!img)
+		return (NULL);
+	return (img);
 }

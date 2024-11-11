@@ -14,8 +14,9 @@
 
 void	loop_cub3d(t_data *data)
 {
-	fill_screen2d (data);
-	put_player (data->win, data->player);
+//	fill_screen2d (data);
+//	put_player (data->win, data->player);
+	render(data);
 	mlx_hook (data->win->mlx_win, 2, 1L << 0, handle_keypress, data);
 	mlx_hook (data->win->mlx_win, 17, 0, close_win, data);
 	mlx_loop (data->win->mlx_ptr);

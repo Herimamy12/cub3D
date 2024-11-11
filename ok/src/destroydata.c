@@ -44,16 +44,14 @@ void	destroy_data(t_data *data)
 {
 	if (!data)
 		return ;
-	if (data->win)
-		destroy_win (data->win);
-	if (data->map)
-		destroy_map (data->map);
-	if (data->dim)
-		free (data->dim);
-	if (data->forb)
-		destroy_list(data->forb);
-	if (data->player)
-		free (data->player);
+	destroy_image(data->win_tex, data->win);
+	destroy_image(data->wall_tex, data->win);
+	destroy_win (data->win);
+	destroy_map (data->map);
+	destroy_list(data->forb);
+	free (data->dim);
+	free (data->player);
+	free (data->cubplay);
 	free (data);
 	exit (0);
 }

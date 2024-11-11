@@ -24,3 +24,9 @@ void	destroy_list(t_forb *forb)
 		tmp = forb;
 	}
 }
+
+void	destroy_image(t_image *img, t_win *win)
+{
+	mlx_destroy_image(win->mlx_ptr, img->img);
+	free(img);
+}

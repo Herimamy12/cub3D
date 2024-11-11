@@ -13,6 +13,7 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
+# include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,16 +26,19 @@
 # define HEIGHT 540
 # define NAME "cube3d"
 
-// ONE BLOC FIXE && PLAYER FIXE
+// ONE BLOC FIXE && PLAYER FIXE 2D
 # define CUB_BWIDTH 60
 # define CUB_BHEIGHT 60
 # define CUB_PWIDTH 30
 # define CUB_PHEIGHT 30
 
+// FIELD OF VIEW PLAYER 90°
+# define FOV (M_PI / 2)
+
 // QUIT
 # define ESC 65307
 
-// DEGRE ORIENTATION BASE EST
+// DEGRE ORIENTATION BASE EST FOR 2D
 # define DEGERR -1
 # define DEGEA 0
 # define DEGNO 90
@@ -42,6 +46,12 @@
 # define DEGSO 270
 # define DEGMAX 360
 # define DEGMIN 0
+
+// ANGLE ORIENTATION FORT 3D
+# define DEGEAS 0
+# define DEGNOR ((3 * M_PI) / 2)
+# define DEGWES M_PI
+# define DEGSOT (M_PI / 2)
 
 // LOCATION (DEPLACEMENT FLECHE)
 # define NORTH 65362
@@ -56,8 +66,10 @@
 // COLOR
 # define RED 0x00FF0000
 # define BLUE 0x000000FF
+# define SKYBLUE 0x87CEEB
 # define BLACK 0x00000000
 # define GREEN 0x0000FF00
+# define GREENLAND 0x2E8B57
 # define WHITE 0x00FFFFFF
 
 // WINDOW STRUCT
@@ -84,6 +96,18 @@ typedef struct s_map
 	char	**map;
 }			t_map;
 
+// TEXTURES IMAGES STRUCT
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}			t_image;
+
 // FORBIDDDEN GROUND STRUCT
 typedef struct s_forb
 {
@@ -92,7 +116,7 @@ typedef struct s_forb
 	struct s_forb	*next;
 }					t_forb;
 
-// PLAYER STRUCT
+// PLAYER STRUCT FOR 2D
 typedef struct s_player
 {
 	int	mapw;	// position in the map 2D
@@ -105,14 +129,25 @@ typedef struct s_player
 	int	old_orientation;
 }		t_player;
 
+// PLAYER STRUCT FOR 3D
+typedef struct s_cubplay
+{
+	double	width;
+	double	height;
+	double	angle;
+}			t_cubplay;
+
 // DATA STRUCT
 typedef struct s_data
 {
 	t_win		*win;
 	t_map		*map;
-	t_forb		*forb;
-	t_scale		*dim;
-	t_player	*player;
+	t_forb		*forb;		// just for 2d forbidden ground
+	t_scale		*dim;		// 2d dimension calc
+	t_player	*player;	// for player 2d
+	t_cubplay	*cubplay;
+	t_image		*win_tex;
+	t_image		*wall_tex;
 }				t_data;
 
 // NEW && DESTROY (DATA AND WINDOW)
@@ -173,5 +208,25 @@ void		let_rotate_right(t_player *player);
 void		print_map(char **map);
 void		print_one_forb(t_forb *forb);
 void		print_list_forb(t_forb *forb);
+
+// INITIATION OF 3D
+t_cubplay	*new_cubplay(t_map *map);
+double		get_angle(char **map, int width, int height);
+t_image		*alloc_image(void);
+t_image		*new_win_texture(t_data *data);
+void		destroy_image(t_image *img, t_win *win);
+
+// BEGIN CHAT
+// INIT
+void		init_image(t_data *data, t_image *img, char *filename);
+void		my_mlx_pixel_put(t_image *img, int x, int y, int color);
+int			get_texture_pixel(t_image *img, int x, int y);
+
+// RAYCAST
+void		cast_ray(t_data *data, double ray_angle, int column);
+
+// RENDER
+void		render(t_data *data);
+// END CHAT
 
 #endif

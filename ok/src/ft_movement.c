@@ -45,9 +45,10 @@ int	handle_keypress(int keycode, t_data *data)
 	if (keycode == ESC)
 		destroy_data (data);
 	res = ft_mov_player (keycode, data);
-	if (res)
-		remove_old_player (data->win, data->player);
-	put_player (data->win, data->player);
+//	if (res)
+//		remove_old_player (data->win, data->player);
+//	put_player (data->win, data->player);
+	render(data);
 	return (res);
 }
 
