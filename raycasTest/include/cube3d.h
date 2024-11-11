@@ -23,8 +23,7 @@
 
 # define WIN_WIDTH 960
 # define WIN_HEIGHT 540
-// # define FOV 60.0 // Champ de vision de 60°
-# define FOV (M_PI / 2) // Champ de vision de 60°
+# define FOV (M_PI / 2) // Champ de vision de 90°
 
 # define MAP_WIDTH 7
 # define MAP_HEIGHT 7
@@ -58,5 +57,19 @@ typedef struct s_data
 	t_image		floor_tex;		// Texture du sol
 	t_image		ceiling_tex;	// Texture du plafond
 }				t_data;
+
+// MAP TEST
+extern char *map[MAP_HEIGHT];
+
+// INIT
+void	init_image(t_data *data, t_image *img, char *filename);
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+int		get_texture_pixel(t_image *img, int x, int y);
+
+// RAYCAST
+void	cast_ray(t_data *data, double ray_angle, int column);
+
+// RENDER
+void	render(t_data *data);
 
 #endif
