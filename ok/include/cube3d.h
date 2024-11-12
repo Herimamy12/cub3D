@@ -33,7 +33,7 @@
 # define CUB_PHEIGHT 30
 
 // FIELD OF VIEW PLAYER 90°
-# define FOV (M_PI / 2)
+# define FOV 1.5708			// (M_PI / 2)
 
 // QUIT
 # define ESC 65307
@@ -49,9 +49,9 @@
 
 // ANGLE ORIENTATION FORT 3D
 # define DEGEAS 0
-# define DEGNOR ((3 * M_PI) / 2)
+# define DEGNOR 4.7124		// ((3 * M_PI) / 2)
 # define DEGWES M_PI
-# define DEGSOT (M_PI / 2)
+# define DEGSOT 1.5708		// (M_PI / 2)
 
 // LOCATION (DEPLACEMENT FLECHE)
 # define NORTH 65362
@@ -137,9 +137,20 @@ typedef struct s_cubplay
 	double	angle;
 }			t_cubplay;
 
+typedef struct s_ray
+{
+	double	angle;
+	double	width;
+	double	height;
+	double	dwidth;
+	double	dheight;
+	double	distance;
+}			t_ray;
+
 // DATA STRUCT
 typedef struct s_data
 {
+	t_ray		*ray;
 	t_win		*win;
 	t_map		*map;
 	t_forb		*forb;		// just for 2d forbidden ground
@@ -215,6 +226,11 @@ double		get_angle(char **map, int width, int height);
 t_image		*alloc_image(void);
 t_image		*new_win_texture(t_data *data);
 void		destroy_image(t_image *img, t_win *win);
+int			is_player(char set);
+double  	adjust_ray_angle(double ray_angle);
+t_ray		*init_ray(void);
+void		cast_ray_wall(t_data *data);
+void		put_the_wall(t_data *data, int start, int end, int width);
 
 // BEGIN CHAT
 // INIT

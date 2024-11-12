@@ -12,60 +12,72 @@
 
 #include "../include/cube3d.h"
 
-void	cast_ray(t_data *data, double ray_angle, int column)
+void	cast_ray(t_data *data, double ray_angle, int width)
 {
-	int		hit = 0;
+	int	height;
+	int	start;
+	int	end;
 
-	int		map_x;
-	int		map_y;
+	data->ray->distance = 0;
+	data->ray->dwidth = cos(ray_angle);
+	data->ray->dheight = sin(ray_angle);
+	data->ray->width = data->cubplay->width;
+	data->ray->height = data->cubplay->height;
+	ray_angle = adjust_ray_angle(ray_angle);
+	cast_ray_wall(data);
+	data->ray->distance = data->ray->distance
+		* cos(ray_angle - data->cubplay->angle);
+	height = (int)(HEIGHT / data->ray->distance);
+	start = (HEIGHT - height) / 2;
+	end = start + height;
+	put_the_wall(data, start, end, width);
+}
 
-    int		line_height;
-    int		line_start;
-    int		line_end;
+void	put_the_wall(t_data *data, int start, int end, int width)
+{
+	int	height;
+	int	texture_x;
+	int	texture_y;
+	int	color;
 
-	int		texture_x;
-	int		texture_y;
-	int		color;
+	height = (int)(HEIGHT / data->ray->distance);
+	texture_x = (int)(data->ray->width * 64) % data->wall_tex->width;
+	for (int y = start; y < end; y++)
+	{
+		texture_y = (int)((y - start)
+				/ (double)height * data->wall_tex->height);
+		color = get_texture_pixel(data->wall_tex, texture_x, texture_y);
+		my_mlx_pixel_put(data->win_tex, width, y, color);
+	}
+}
 
-	double	ray_x = data->cubplay->width;
-	double	ray_y = data->cubplay->height;
-	double	ray_dx = cos(ray_angle);
-	double	ray_dy = sin(ray_angle);
+void	cast_ray_wall(t_data *data)
+{
+	int	wall;
+	int	map_w;
+	int	map_h;
 
-	double	distance = 0;
-	double	corrected_distance;
+	wall = 0;
+	while (!wall)
+	{
+		data->ray->width += data->ray->dwidth * 0.1;
+		data->ray->height += data->ray->dheight * 0.1;
+		data->ray->distance += 0.1;
+		map_w = (int)data->ray->width;
+		map_h = (int)data->ray->height;
+		if (map_h >= 0 && map_h < HEIGHT && map_w >= 0 && map_w < WIDTH)
+		{
+			if (!data->map->map[map_h] || !data->map->map[map_h][map_w] ||
+				data->map->map[map_h][map_w] == '1')
+				wall = 1;
+		}
+	}
+}
 
-    ray_angle = fmod(ray_angle, 2 * M_PI);
-    if (ray_angle < 0)
-    	ray_angle += 2 * M_PI;
-
-    while (!hit)
-    {
-        ray_x += ray_dx * 0.1;
-        ray_y += ray_dy * 0.1;
-        distance += 0.1;
-
-        map_x = (int)ray_x;
-        map_y = (int)ray_y;
-        if (map_y >= 0 && map_y < HEIGHT && map_x >= 0 && map_x < WIDTH)
-        {
-            if (!data->map->map[map_y] || !data->map->map[map_y][map_x] ||
-				data->map->map[map_y][map_x] == '1')
-                hit = 1;
-        }
-    }
-
-    corrected_distance = distance * cos(ray_angle - data->cubplay->angle);
-
-    line_height = (int)(HEIGHT / corrected_distance);
-    line_start = (HEIGHT - line_height) / 2;
-    line_end = line_start + line_height;
-
-    texture_x = (int)(ray_x * 64) % data->wall_tex->width;
-    for (int y = line_start; y < line_end; y++)
-    {
-        texture_y = (int)((y - line_start) / (double)line_height * data->wall_tex->height);
-        color = get_texture_pixel(data->wall_tex, texture_x, texture_y);
-        my_mlx_pixel_put(data->win_tex, column, y, color);
-    }
+double	adjust_ray_angle(double ray_angle)
+{
+	ray_angle = fmod(ray_angle, 2 * M_PI);
+	if (ray_angle < 0)
+		ray_angle += 2 * M_PI;
+	return (ray_angle);
 }

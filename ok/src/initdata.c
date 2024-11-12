@@ -56,8 +56,7 @@ t_cubplay	*new_cubplay(t_map *map)
 		width = -1;
 		while (++width < map->width && map->map[height][width])
 		{
-			if (map->map[height][width] != '0'
-				&& map->map[height][width] != '1')
+			if (is_player(map->map[height][width]))
 			{
 				new->width = width + 0.5;
 				new->height = height + 0.5;
@@ -66,6 +65,19 @@ t_cubplay	*new_cubplay(t_map *map)
 		}
 	}
 	return (new);
+}
+
+int	is_player(char set)
+{
+	if (set == 'N')
+		return (1);
+	else if (set == 'S')
+		return (1);
+	else if (set == 'W')
+		return (1);
+	else if (set == 'E')
+		return (1);
+	return (0);
 }
 
 double	get_angle(char **map, int width, int height)

@@ -106,8 +106,25 @@ t_data	*new_data(char *av)
 	data->cubplay = new_cubplay(data->map);
 	data->win_tex = new_win_texture(data);
 	data->wall_tex = alloc_image();
+	data->ray = init_ray();
 	init_image(data, data->wall_tex, "./textures/wall.xpm");
 	return (data);
+}
+
+t_ray	*init_ray(void)
+{
+	t_ray	*new;
+
+	new = (t_ray *)malloc(sizeof(t_ray));
+	if (!new)
+		return (NULL);
+	new->angle = 0;
+	new->width = 0;
+	new->height = 0;
+	new->dwidth = 0;
+	new->dheight = 0;
+	new->distance = 0;
+	return (new);
 }
 
 t_image	*alloc_image(void)

@@ -52,6 +52,7 @@ void	destroy_data(t_data *data)
 	free (data->dim);
 	free (data->player);
 	free (data->cubplay);
+	free (data->ray);
 	free (data);
 	exit (0);
 }

@@ -16,7 +16,6 @@ void	render(t_data *data)
 {
 	int		width;
 	int		height;
-	double	ray_angle;
 
 	height = -1;
 	while (++height < HEIGHT / 2)
@@ -32,9 +31,9 @@ void	render(t_data *data)
 	width = -1;
 	while (++width < WIDTH)
 	{
-		ray_angle = data->cubplay->angle - FOV / 2.0
+		data->ray->angle = data->cubplay->angle - FOV / 2.0
 			+ (width / (double)WIDTH) * FOV;
-		cast_ray(data, ray_angle, width);
+		cast_ray(data, data->ray->angle, width);
 	}
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->mlx_win,
 		data->win_tex->img, 0, 0);
