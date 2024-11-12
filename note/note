@@ -1,0 +1,23 @@
+SIZE :
+	ECRAN :
+			960 x 540
+
+	MAP 2D (BRICK WALL) :
+			1 brick : (lbrick : 960 / larg) x (hbrick : 540 / haut)
+
+	PLAYER :
+			(lplay : 960 / (larg + larg)) x (lplay : 540 / (larg + larg))
+
+
+
+Nov 8 :
+		Tache a faire :
+			- Tracer la direction											ok
+			- Faire la rotation de la direction								ok
+			- Adapter le deplacement d'avancer suivant la direction			-
+			- Tracer la rayon jusqu'au mur (faire de calcul et tout)		-
+			- Envoyer la premiere image test								-
+
+
+Nov 9 :
+		Je pense que faire la raycast est important

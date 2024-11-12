@@ -17,3 +17,12 @@ Deja adapte avec le code 2d
 Reste à faire : Mouvement et rotation du joueur en 3d
 Nb : Rendu dans le dossier ok
 Lire le readme du dossier
+
+			Readme merge
+
+			Nov 11-12
+Raycast ok avec map map2 map3 map6
+
+			Nov 12 
+
+1 bug trouvé sur image not found ou vaste scale
