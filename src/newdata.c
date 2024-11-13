@@ -108,8 +108,12 @@ t_data	*new_data(char *av)
 	data->cubplay = new_cubplay(data->map);
 	data->win_tex = new_win_texture(data);
 	data->wall_tex = alloc_image();
+	data->east_tex = alloc_image();
+	data->west_tex = alloc_image();
+	data->north_tex = alloc_image();
+	data->south_tex = alloc_image();
 	data->ray = init_ray();
-	init_image(data, data->wall_tex, "./textures/wall.xpm");
+	init_all_image(data);
 	return (data);
 }
 

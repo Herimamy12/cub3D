@@ -39,8 +39,8 @@
 # define ADDCAST 0.005
 
 // ROTATION SPEED
-# define S_ROTATION 0.025
-# define S_MOUVEMENT 1.5
+# define S_ROTATION 0.035
+# define S_MOVEMENT 2
 
 // QUIT
 # define ESC 65307
@@ -168,6 +168,10 @@ typedef struct s_data
 	t_cubplay	*cubplay;
 	t_image		*win_tex;
 	t_image		*wall_tex;
+	t_image		*east_tex;
+	t_image		*west_tex;
+	t_image		*north_tex;
+	t_image		*south_tex;
 	int			texture_x;	// pour les coordonnées des textures
 	int			texture_y;
 }				t_data;
@@ -245,6 +249,11 @@ void		put_the_wall(t_data *data, int start, int end, int width);
 int			rotate_cub(int keycode, t_data *data);
 int			is_cub_event(int keycode);
 int			cub_event(int keycode, t_data *data);
+int			movement(t_data *data, double w, double h);
+void		reset_flag(t_data *data);
+int			is_wall(t_data *data, double w, double h);
+void		init_all_image(t_data *data);
+void		get_wall_texture(t_data *data, int map_w, int map_h);
 
 // BEGIN CHAT
 // INIT

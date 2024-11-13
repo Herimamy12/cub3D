@@ -41,7 +41,12 @@ void	put_the_wall(t_data *data, int start, int end, int width)
 
 	y = start;
 	height = (int)(HEIGHT / data->ray->distance);
-	data->texture_x = (int)(data->ray->width * 64) % data->wall_tex->width;
+	if (data->wall_tex == data->north_tex || data->wall_tex == data->east_tex)
+		data->texture_x = (int)(data->ray->width * data->wall_tex->width)
+			% data->wall_tex->width;
+	else
+		data->texture_x = (int)(data->ray->height * data->wall_tex->width)
+			% data->wall_tex->width;
 	while (y < end)
 	{
 		data->texture_y = (int)((y - start)
@@ -71,8 +76,36 @@ void	cast_ray_wall(t_data *data)
 		{
 			if (!data->map->map[map_h] || !data->map->map[map_h][map_w] ||
 				data->map->map[map_h][map_w] == '1')
+			{
 				wall = 1;
+				get_wall_texture(data, map_w, map_h);
+			}
 		}
+		else
+			break ;
+	}
+}
+
+void	get_wall_texture(t_data *data, int map_w, int map_h)
+{
+	double	hit_x;
+	double	hit_y;
+
+	hit_x = data->ray->width - map_w;
+	hit_y = data->ray->height - map_h;
+	if (fabs(hit_x) > fabs(hit_y))
+	{
+		if (hit_x > 0.9950)
+			data->wall_tex = data->west_tex;
+		else
+			data->wall_tex = data->east_tex;
+	}
+	else
+	{
+		if (hit_y > 0.9950)
+			data->wall_tex = data->north_tex;
+		else
+			data->wall_tex = data->south_tex;
 	}
 }
 

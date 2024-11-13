@@ -12,6 +12,15 @@
 
 #include "../include/cube3d.h"
 
+void	init_all_image(t_data *data)
+{
+	init_image(data, data->wall_tex, "./textures/wall.xpm");
+	init_image(data, data->east_tex, "./textures/east.xpm");
+	init_image(data, data->west_tex, "./textures/west.xpm");
+	init_image(data, data->north_tex, "./textures/north.xpm");
+	init_image(data, data->south_tex, "./textures/south.xpm");
+}
+
 void	render(t_data *data)
 {
 	int		width;
