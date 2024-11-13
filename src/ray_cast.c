@@ -14,9 +14,9 @@
 
 void	cast_ray(t_data *data, double ray_angle, int width)
 {
-	int	height;
-	int	start;
 	int	end;
+	int	start;
+	int	height;
 
 	data->ray->distance = 0;
 	data->ray->dwidth = cos(ray_angle);
@@ -62,9 +62,9 @@ void	cast_ray_wall(t_data *data)
 	wall = 0;
 	while (!wall)
 	{
-		data->ray->width += data->ray->dwidth * 0.1;
-		data->ray->height += data->ray->dheight * 0.1;
-		data->ray->distance += 0.1;
+		data->ray->width += data->ray->dwidth * ADDCAST;
+		data->ray->height += data->ray->dheight * ADDCAST;
+		data->ray->distance += ADDCAST;
 		map_w = (int)data->ray->width;
 		map_h = (int)data->ray->height;
 		if (map_h >= 0 && map_h < HEIGHT && map_w >= 0 && map_w < WIDTH)

@@ -35,8 +35,12 @@
 // FIELD OF VIEW PLAYER 90°
 # define FOV 1.5708			// (M_PI / 2)
 
+// CONST FOR THE ADDITION IN THE RAY CAST DIM
+# define ADDCAST 0.005
+
 // ROTATION SPEED
 # define S_ROTATION 0.025
+# define S_MOUVEMENT 1.5
 
 // QUIT
 # define ESC 65307
@@ -138,6 +142,8 @@ typedef struct s_cubplay
 	double	width;
 	double	height;
 	double	angle;
+	int		l_r;
+	int		u_d;
 }			t_cubplay;
 
 typedef struct s_ray
@@ -238,6 +244,7 @@ void		cast_ray_wall(t_data *data);
 void		put_the_wall(t_data *data, int start, int end, int width);
 int			rotate_cub(int keycode, t_data *data);
 int			is_cub_event(int keycode);
+int			cub_event(int keycode, t_data *data);
 
 // BEGIN CHAT
 // INIT

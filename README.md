@@ -26,8 +26,3 @@ Raycast ok avec map map2 map3 map6
 			Nov 12 
 
 1 bug trouvé sur image not found ou vaste scale
-
-
-
-NETPRACTICE
-https://github.com/lpaube/NetPractice/blob/main/README.fr.md
