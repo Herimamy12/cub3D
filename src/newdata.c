@@ -107,7 +107,6 @@ t_data	*new_data(char *av)
 	data->forb = new_forb(0, 0);
 	data->cubplay = new_cubplay(data->map);
 	data->win_tex = new_win_texture(data);
-	data->wall_tex = alloc_image();
 	data->east_tex = alloc_image();
 	data->west_tex = alloc_image();
 	data->north_tex = alloc_image();
