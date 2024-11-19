@@ -12,14 +12,6 @@
 
 #include "../include/cube3d.h"
 
-void	init_all_image(t_data *data)
-{
-	init_image(data, data->east_tex, "./textures/east.xpm");
-	init_image(data, data->west_tex, "./textures/west.xpm");
-	init_image(data, data->north_tex, "./textures/north.xpm");
-	init_image(data, data->south_tex, "./textures/south.xpm");
-}
-
 void	render(t_data *data)
 {
 	int		width;
@@ -41,8 +33,16 @@ void	render(t_data *data)
 	{
 		data->ray->angle = data->cubplay->angle - FOV / 2.0
 			+ (width / (double)WIDTH) * FOV;
-		cast_ray(data, data->ray->angle, width);
+		adjust_ray_angle(data);
+		cast_ray(data, width);
 	}
 	mlx_put_image_to_window(data->win->mlx_ptr, data->win->mlx_win,
 		data->win_tex->img, 0, 0);
+}
+
+void	adjust_ray_angle(t_data *data)
+{
+	data->ray->angle = fmod(data->ray->angle, 2 * M_PI);
+	if (data->ray->angle < 0)
+		data->ray->angle += 2 * M_PI;
 }

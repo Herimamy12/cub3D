@@ -38,6 +38,8 @@ int	count_heigth_map(char **map)
 {
 	int	height;
 
+	if (map == NULL)
+		return (0);
 	height = 0;
 	while (map[height])
 		height++;
@@ -52,6 +54,8 @@ int	count_width_map(char **map)
 
 	count = 0;
 	height = 0;
+	if (map == NULL)
+		return (0);
 	while (map[height])
 	{
 		width = 0;

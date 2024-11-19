@@ -12,33 +12,19 @@
 
 #include "../include/cube3d.h"
 
-void	cast_ray(t_data *data, double ray_angle, int width)
+void	cast_ray(t_data *data, int width)
 {
-	int	end;
-	int	start;
-	int	height;
-
 	data->ray->distance = 0;
-	data->ray->dwidth = cos(ray_angle);
-	data->ray->dheight = sin(ray_angle);
 	data->ray->width = data->cubplay->width;
 	data->ray->height = data->cubplay->height;
-	ray_angle = adjust_ray_angle(ray_angle);
+	data->ray->dwidth = cos(data->ray->angle);
+	data->ray->dheight = sin(data->ray->angle);
 	cast_ray_wall(data);
-	data->ray->distance = data->ray->distance
-		* cos(ray_angle - data->cubplay->angle);
-	height = (int)(HEIGHT / data->ray->distance);
-	start = (HEIGHT - height) / 2;
-	end = start + height;
-	put_the_wall(data, start, end, width);
-}
-
-double	adjust_ray_angle(double ray_angle)
-{
-	ray_angle = fmod(ray_angle, 2 * M_PI);
-	if (ray_angle < 0)
-		ray_angle += 2 * M_PI;
-	return (ray_angle);
+	data->ray->distance *= cos(data->ray->angle - data->cubplay->angle);
+	data->wall->height = (int)(HEIGHT / data->ray->distance);
+	data->wall->start = (HEIGHT - data->wall->height) / 2;
+	data->wall->end = data->wall->start + data->wall->height;
+	assign_the_wall(data, width);
 }
 
 void	cast_ray_wall(t_data *data)
@@ -79,40 +65,38 @@ void	get_wall_texture(t_data *data, int map_w, int map_h)
 	if (fabs(hit_x) > fabs(hit_y))
 	{
 		if (hit_x > 0.9950)
-			data->wall_tex = data->west_tex;	// east -> west
+			data->wall_tex = data->west_tex;
 		else
-			data->wall_tex = data->south_tex;	// north -> south
+			data->wall_tex = data->south_tex;
 	}
 	else
 	{
 		if (hit_y > 0.9950)
-			data->wall_tex = data->north_tex;	// west -> north
+			data->wall_tex = data->north_tex;
 		else
-			data->wall_tex = data->east_tex;	// south -> east
+			data->wall_tex = data->east_tex;
 	}
 }
 
-void	put_the_wall(t_data *data, int start, int end, int width)
+void	assign_the_wall(t_data *data, int width)
 {
-	int	y;
-	int	height;
 	int	color;
+	int	height;
 
-	y = start;
-	height = (int)(HEIGHT / data->ray->distance);
+	height = data->wall->start;
 	if (data->wall_tex == data->north_tex || data->wall_tex == data->south_tex)
-		data->texture_x = (int)(data->ray->width * data->wall_tex->width)
+		data->wall->tex_w = (int)(data->ray->width * data->wall_tex->width)
 			% data->wall_tex->width;
 	else
-		data->texture_x = (int)(data->ray->height * data->wall_tex->width)
+		data->wall->tex_w = (int)(data->ray->height * data->wall_tex->width)
 			% data->wall_tex->width;
-	while (y < end)
+	while (height < data->wall->end)
 	{
-		data->texture_y = (int)((y - start)
-				/ (double)height * data->wall_tex->height);
-		color = get_texture_pixel(data->wall_tex, data->texture_x,
-				data->texture_y);
-		my_mlx_pixel_put(data->win_tex, width, y, color);
-		y++;
+		data->wall->tex_h = (int)((height - data->wall->start)
+				/ (double)data->wall->height * data->wall_tex->height);
+		color = get_texture_pixel(data->wall_tex, data->wall->tex_w,
+				data->wall->tex_h);
+		my_mlx_pixel_put(data->win_tex, width, height, color);
+		height++;
 	}
 }

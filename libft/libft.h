@@ -6,7 +6,7 @@
 /*   By: nherimam <nherimam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 22:31:57 by nherimam          #+#    #+#             */
-/*   Updated: 2024/10/04 22:32:00 by nherimam         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:17:44 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	**ft_split(char const *s, char c);
 int		ft_count_word(char const *s, char c);
 int		ft_isdigit(int c);
 int		ft_strcmp(char *cmd, char *set);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(char *old, char *str);
 
 #endif

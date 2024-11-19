@@ -5,7 +5,8 @@ NAME = libft.a
 CFLAGS = -Wall -Werror -Wextra
 
 SRC = libft_utils.c libft_next.c \
-		get_next_line.c libft.c
+		get_next_line.c libft.c \
+		ft_strncmp.c
 
 OBJ = $(SRC:.c=.o)
 

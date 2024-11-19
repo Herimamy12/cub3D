@@ -44,17 +44,15 @@ void	destroy_data(t_data *data)
 {
 	if (!data)
 		return ;
-	destroy_image(data->win_tex, data->win);
-	destroy_image(data->north_tex, data->win);
-	destroy_image(data->south_tex, data->win);
-	destroy_image(data->east_tex, data->win);
-	destroy_image(data->west_tex, data->win);
+	destroy_image (data->win_tex, data->win);
+	destroy_image (data->north_tex, data->win);
+	destroy_image (data->south_tex, data->win);
+	destroy_image (data->east_tex, data->win);
+	destroy_image (data->west_tex, data->win);
 	destroy_win (data->win);
 	destroy_map (data->map);
-	destroy_list(data->forb);
-	free (data->dim);
-	free (data->player);
 	free (data->cubplay);
+	free (data->wall);
 	free (data->ray);
 	free (data);
 	exit (0);

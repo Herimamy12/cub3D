@@ -12,20 +12,6 @@
 
 #include "../include/cube3d.h"
 
-t_scale	*init_dimension(t_map *map)
-{
-	t_scale	*dim;
-
-	dim = (t_scale *)malloc(sizeof(t_scale));
-	if (!dim)
-		return (NULL);
-	dim->wb = WIDTH / map->width;
-	dim->hb = HEIGHT / map->height;
-	dim->wp = WIDTH / (map->width + map->width);
-	dim->hp = HEIGHT / (map->height + map->height);
-	return (dim);
-}
-
 char	**new_map(char *av)
 {
 	int		fd;
@@ -34,11 +20,23 @@ char	**new_map(char *av)
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
+	if (is_arg_valid(av) == 0)
+		return (NULL);
 	map = get_map(fd);
+	if (is_in_order(map) == 0)
+		return (destroy_str(map), NULL);
 	close (fd);
 	if (!map)
 		return (NULL);
 	return (map);
+}
+
+void	init_all_image(t_data *data)
+{
+	init_image(data, data->east_tex, data->map->text_ea);
+	init_image(data, data->west_tex, data->map->text_we);
+	init_image(data, data->north_tex, data->map->text_no);
+	init_image(data, data->south_tex, data->map->text_so);
 }
 
 t_cubplay	*new_cubplay(t_map *map)

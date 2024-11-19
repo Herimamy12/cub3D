@@ -19,7 +19,7 @@ void	init_image(t_data *data, t_image *img, char *filename)
 	if (!img->img)
 	{
 		printf("Erreur de chargement de l'image: %s\n", filename);
-		// destroy_data(data);
+		destroy_data(data);
 		exit(1);
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length,

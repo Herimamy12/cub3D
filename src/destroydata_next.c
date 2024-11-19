@@ -12,19 +12,6 @@
 
 #include "../include/cube3d.h"
 
-void	destroy_list(t_forb *forb)
-{
-	t_forb	*tmp;
-
-	tmp = forb;
-	while (forb)
-	{
-		forb = forb->next;
-		free (tmp);
-		tmp = forb;
-	}
-}
-
 void	destroy_image(t_image *img, t_win *win)
 {
 	mlx_destroy_image(win->mlx_ptr, img->img);

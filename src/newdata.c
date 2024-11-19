@@ -12,58 +12,6 @@
 
 #include "../include/cube3d.h"
 
-/*############################################################################*/
-/*																			  */
-/*          Ici, nous avons deux version de new player. L'une                 */
-/*          pour la taille variable et l'autre pour la taille                 */
-/*          fixe que je pense que ca va adapter au mieux avec                 */
-/*          la cub3D en generale                                              */
-/*																			  */
-/*############################################################################*/
-
-// t_player	*new_player(t_map *map, t_scale *dim)
-// {
-// 	t_player	*player;
-
-// 	player = (t_player *)malloc(sizeof(t_player));
-// 	if (!player)
-// 		return (NULL);
-// 	player->posw = get_width_position (map) * dim->wb;
-// 	player->posh = get_height_position (map) * dim->hb;
-// 	player->posw += (dim->wp);
-// 	player->posh += (dim->hp);
-// 	player->orientation = get_player_orientation (map);
-// 	player->old_posw = player->posw;
-// 	player->old_posh = player->posh;
-// 	return (player);
-// }
-
-t_player	*new_player(t_map *map, t_scale *dim)
-{
-	t_player	*player;
-
-	player = (t_player *)malloc(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	player->mapw = get_width_position (map);
-	player->maph = get_height_position (map);
-	player->posw = player->mapw * CUB_BWIDTH;
-	player->posh = player->maph * CUB_BHEIGHT;
-	player->posw += CUB_PWIDTH;
-	player->posh += CUB_PHEIGHT;
-	player->orientation = get_player_orientation (map);
-	player->old_orientation = player->orientation;
-	player->old_posw = player->posw;
-	player->old_posh = player->posh;
-	return (player);
-	(void)dim;
-}
-
-/*############################################################################*/
-/*############################################################################*/
-/*############################################################################*/
-/*############################################################################*/
-
 t_map	*new_struct_map(char *av)
 {
 	t_map	*map;
@@ -74,6 +22,10 @@ t_map	*new_struct_map(char *av)
 		return (NULL);
 	map->width = count_width_map (map->map);
 	map->height = count_heigth_map (map->map);
+	map->text_no = get_texture(map->map, "NO");
+	map->text_so = get_texture(map->map, "SO");
+	map->text_ea = get_texture(map->map, "EA");
+	map->text_we = get_texture(map->map, "WE");
 	return (map);
 }
 
@@ -98,13 +50,10 @@ t_data	*new_data(char *av)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
-	data->texture_x = 0;
-	data->texture_y = 0;
-	data->win = new_win();
 	data->map = new_struct_map (av);
-	data->dim = init_dimension(data->map);
-	data->player = new_player(data->map, data->dim);
-	data->forb = new_forb(0, 0);
+	if (data->map->map == NULL)
+		return (free(data->map), free(data), NULL);
+	data->win = new_win();
 	data->cubplay = new_cubplay(data->map);
 	data->win_tex = new_win_texture(data);
 	data->east_tex = alloc_image();
@@ -112,6 +61,7 @@ t_data	*new_data(char *av)
 	data->north_tex = alloc_image();
 	data->south_tex = alloc_image();
 	data->ray = init_ray();
+	data->wall = init_wall();
 	init_all_image(data);
 	return (data);
 }
@@ -124,4 +74,19 @@ t_image	*alloc_image(void)
 	if (!img)
 		return (NULL);
 	return (img);
+}
+
+t_wall	*init_wall(void)
+{
+	t_wall	*new;
+
+	new = (t_wall *)malloc(sizeof(t_wall));
+	if (!new)
+		return (NULL);
+	new->end = 0;
+	new->start = 0;
+	new->height = 0;
+	new->tex_w = 0;
+	new->tex_h = 0;
+	return (new);
 }

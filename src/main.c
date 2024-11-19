@@ -17,10 +17,17 @@ int	main(int ac, char **av)
 	t_data	*data;
 
 	if (ac != 2)
+	{
+		write(2, "Error : argument\n", 17);
 		return (1);
+	}
 	data = new_data (av[1]);
 	if (!data)
+	{
+		write(2, "Error : map\n", 12);
 		return (1);
+	}
+	get_color(data->map->map, "F");
 	loop_cub3d (data);
 	return (0);
 }

@@ -52,7 +52,7 @@ int	cub_event(int keycode, t_data *data)
 		data->cubplay->l_r = -1;
 	else
 		data->cubplay->l_r = 1;
-	return (movement(data, w, h));
+	return (moovement(data, w, h));
 }
 
 int	is_cub_event(int keycode)
