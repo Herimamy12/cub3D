@@ -60,32 +60,50 @@ void	adjust_ray_angle(t_data *data)
 		data->ray->angle += 2 * M_PI;
 }
 
-/* *************************************************************** */
+/* ************************************************************************** */
 
 void draw_mini_map(t_data *data)
 {
     int map_x, map_y;
-    int mini_map_size = 150;
-    int map_scale = mini_map_size / data->map->width;
-    int wall_scale = (map_scale / 1.5) * 1.2;
+    int mini_map_size = 120;
+    int map_scale = mini_map_size / 20;
+    int wall_scale = 5;  // Taille fixe de 5x5 pour chaque mur
     int player_x, player_y;
     
-    int mini_map_x = 10;
-    int mini_map_y = HEIGHT - mini_map_size - 10;
+    int mini_map_x = 15;
+    int mini_map_y = HEIGHT - 120;
     
-    for (map_y = 0; map_y < data->map->height; map_y++)
+    // Limite de la zone à afficher autour du joueur
+    int view_distance = 8;  // Nombre de cases autour du joueur à afficher
+    
+    // Calculer la zone à afficher autour du joueur
+    int player_map_x = (int)(data->cubplay->width);
+    int player_map_y = (int)(data->cubplay->height);
+    
+    int start_x = player_map_x - view_distance;
+    int start_y = player_map_y - view_distance;
+    int end_x = player_map_x + view_distance;
+    int end_y = player_map_y + view_distance;
+
+    // Limiter les coordonnées aux bords de la carte
+    if (start_x < 0) start_x = 0;
+    if (start_y < 0) start_y = 0;
+    if (end_x >= data->map->width) end_x = data->map->width - 1;
+    if (end_y >= data->map->height) end_y = data->map->height - 1;
+
+    for (map_y = start_y; map_y <= end_y; map_y++)
     {
-        for (map_x = 0; map_x < data->map->width; map_x++)
+        for (map_x = start_x; map_x <= end_x; map_x++)
         {
-            if (data->map->map[map_y][map_x] == '1')
+            if (data->map->map[map_y][map_x] == '1')  // Si c'est un mur
             {
                 for (int i = 0; i < wall_scale; i++)
                 {
                     for (int j = 0; j < wall_scale; j++)
                     {
                         my_mlx_pixel_put(data->win_tex, 
-                            mini_map_x + map_x * map_scale + i, 
-                            mini_map_y + map_y * map_scale + j, 
+                            mini_map_x + (map_x - start_x) * map_scale + i, 
+                            mini_map_y + (map_y - start_y) * map_scale + j, 
                             WALL_COLOR);
                     }
                 }
@@ -93,8 +111,8 @@ void draw_mini_map(t_data *data)
         }
     }
 
-    player_x = (int)(data->cubplay->width * map_scale);
-    player_y = (int)(data->cubplay->height * map_scale);
+    player_x = (int)((data->cubplay->width - start_x) * map_scale);
+    player_y = (int)((data->cubplay->height - start_y) * map_scale);
     
     my_mlx_pixel_put(data->win_tex, 
         mini_map_x + player_x, 
@@ -104,12 +122,13 @@ void draw_mini_map(t_data *data)
     draw_fov(data, mini_map_x + player_x, mini_map_y + player_y, map_scale);
 }
 
+
 void draw_fov(t_data *data, int x, int y, int scale)
 {
     double fov_angle = FOV;
     double player_angle = data->cubplay->angle;
-    int fov_distance = 1;
-    int num_rays = 5;
+    int fov_distance = 10;
+    int num_rays = 20;
 
     double left_angle = player_angle - (fov_angle / 2);
 
