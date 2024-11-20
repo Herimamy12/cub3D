@@ -53,6 +53,7 @@ void	destroy_data(t_data *data)
 	destroy_map (data->map);
 	free (data->cubplay);
 	free (data->wall);
+	free (data->mini);
 	free (data->ray);
 	free (data);
 	exit (0);

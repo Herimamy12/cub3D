@@ -46,12 +46,12 @@ int	convert_color(char *line)
 	i = 0;
 	while (color[i])
 	{
-		// printf("line[%d] == {%s}\n", i, color[i]);
+		printf("line[%d] == {%s}\n", i, color[i]);
 		res = (res * 10) + hexadecima(line[i]);
-		// printf("res == {%x}\n", res);
+		printf("res == {%x}\n", res);
 		i ++;
 	}
-	// printf("res == {%x}\n", res);
+	printf("res == {%x}\n", res);
 	// printf("line == {%s}\n", &line[i]);
 	return (1);
 }

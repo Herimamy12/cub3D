@@ -25,6 +25,11 @@
 # define WIDTH 960
 # define HEIGHT 540
 # define NAME "cube3d"
+# define M_WIDTH 120
+# define M_HEIGHT 80
+# define MW_SIZE 8
+# define M_STARTW 10
+# define M_STARTH 450		// (HEIGHT - M_HEIGHT - 10)
 
 // FIELD OF VIEW PLAYER 90°
 # define FOV 1.5708			// (M_PI / 2)
@@ -63,6 +68,9 @@
 # define GREEN 0x0000FF00
 # define GREENLAND 0x2E8B57
 # define WHITE 0x00FFFFFF
+# define YELLOW 0xFFFF00
+# define GRAY 0x333333
+# define RAY_GRAY 0x4F4F4F4F
 
 // WINDOW STRUCT
 typedef struct s_win
@@ -126,6 +134,15 @@ typedef struct s_wall
 	int	tex_h;
 }		t_wall;
 
+// STRUCT FOR MINI MAP
+typedef struct s_mini
+{
+	int	play_w;
+	int	play_h;
+	int	offset_w;
+	int	offset_h;
+}		t_mini;
+
 // DATA STRUCT
 typedef struct s_data
 {
@@ -133,6 +150,7 @@ typedef struct s_data
 	t_win		*win;
 	t_map		*map;
 	t_wall		*wall;
+	t_mini		*mini;
 	t_cubplay	*cubplay;
 	t_image		*win_tex;
 	t_image		*wall_tex;
@@ -185,6 +203,7 @@ int			is_wall(t_data *data, double w, double h);
 void		init_all_image(t_data *data);
 void		get_wall_texture(t_data *data, int map_w, int map_h);
 t_wall		*init_wall(void);
+t_mini		*init_mini(void);
 
 // BEGIN CHAT
 // INIT

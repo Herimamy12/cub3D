@@ -96,7 +96,7 @@ void	assign_the_wall(t_data *data, int width)
 				/ (double)data->wall->height * data->wall_tex->height);
 		color = get_texture_pixel(data->wall_tex, data->wall->tex_w,
 				data->wall->tex_h);
-		// my_mlx_pixel_put(data->win_tex, width, height, color);
+		my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;
 	}
 	// à supprimer

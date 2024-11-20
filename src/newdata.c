@@ -62,8 +62,23 @@ t_data	*new_data(char *av)
 	data->south_tex = alloc_image();
 	data->ray = init_ray();
 	data->wall = init_wall();
+	data->mini = init_mini();
 	init_all_image(data);
 	return (data);
+}
+
+t_mini	*init_mini(void)
+{
+	t_mini	*new;
+
+	new = (t_mini *)malloc(sizeof(t_mini));
+	if (!new)
+		return (NULL);
+	new->play_w = 0;
+	new->play_h = 0;
+	new->offset_w = 0;
+	new->offset_h = 0;
+	return (new);
 }
 
 t_image	*alloc_image(void)
