@@ -100,7 +100,7 @@ void draw_mini_map(t_data *data)
         PLAYER_COLOR);  // Utiliser une couleur distinctive pour le joueur
 
     // Afficher la direction du joueur sur la mini-map (optionnel)
-    // draw_player_direction(data, mini_map_x + player_x, mini_map_y + player_y, map_scale);
+    draw_player_direction(data, mini_map_x + player_x, mini_map_y + player_y, map_scale);
 }
 
 // Fonction pour dessiner la direction du joueur sur la mini-map

@@ -51,10 +51,7 @@ int	is_arg_valid(char *av)
 	if (len <= 4)
 		return (0);
 	if (lft_strcmp(&av[len - 4], ".cub") != 0)
-	{
-		printf("ato\n");
 		return (0);
-	}
 	i = 0;
 	while (i < len - 4)
 	{
