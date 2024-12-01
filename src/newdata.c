@@ -78,6 +78,11 @@ t_mini	*init_mini(void)
 	new->play_h = 0;
 	new->offset_w = 0;
 	new->offset_h = 0;
+	new->angle = 0;
+	new->ray_w = 0;
+	new->ray_h = 0;
+	new->step_w = 0;
+	new->step_h = 0;
 	return (new);
 }
 

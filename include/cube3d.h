@@ -27,7 +27,7 @@
 # define NAME "cube3d"
 # define M_WIDTH 120
 # define M_HEIGHT 80
-# define MW_SIZE 8
+# define MW_SIZE 8			// mini wall size
 # define M_STARTW 10
 # define M_STARTH 450		// (HEIGHT - M_HEIGHT - 10)
 
@@ -51,20 +51,21 @@
 # define DEGSOT 1.5708		// (M_PI / 2)
 
 // LOCATION (DEPLACEMENT FLECHE)
-# define NORTH 65362
-# define SOUTH 65364
-# define WEST 65361
-# define EAST 65363
+# define NORTH 119
+# define SOUTH 115
+# define WEST 97
+# define EAST 100
 
 // ROTATION CAMERA (RC_)
-# define RC_LEFT 65430 // touche pad 4
-# define RC_RIGHT 65432 // touche pad 6
+# define RC_LEFT 65361
+# define RC_RIGHT 65363
 
 // COLOR
 # define RED 0x00FF0000
 # define BLUE 0x000000FF
 # define SKYBLUE 0x87CEEB
 # define BLACK 0x00000000
+# define BLACK_WALL 0x00000020
 # define GREEN 0x0000FF00
 # define GREENLAND 0x2E8B57
 # define WHITE 0x00FFFFFF
@@ -94,23 +95,23 @@ typedef struct s_map
 // TEXTURES IMAGES STRUCT
 typedef struct s_image
 {
-	void	*img;
-	char	*addr;
 	int		bpp;
-	int		line_length;
-	int		endian;
 	int		width;
+	int		endian;
+	int		line_length;
 	int		height;
+	char	*addr;
+	void	*img;
 }			t_image;
 
 // PLAYER STRUCT FOR 3D
 typedef struct s_cubplay
 {
+	int		l_r;
+	int		u_d;
 	double	width;
 	double	height;
 	double	angle;
-	int		l_r;
-	int		u_d;
 }			t_cubplay;
 
 // RAY REQUIREMENT STRUCT
@@ -137,11 +138,16 @@ typedef struct s_wall
 // STRUCT FOR MINI MAP
 typedef struct s_mini
 {
-	int	play_w;
-	int	play_h;
-	int	offset_w;
-	int	offset_h;
-}		t_mini;
+	int		play_w;		// mini width player position
+	int		play_h;
+	int		offset_w;
+	int		offset_h;
+	double	angle;
+	double	ray_w;
+	double	ray_h;
+	double	step_w;
+	double	step_h;
+}			t_mini;
 
 // DATA STRUCT
 typedef struct s_data
@@ -151,13 +157,13 @@ typedef struct s_data
 	t_map		*map;
 	t_wall		*wall;
 	t_mini		*mini;
-	t_cubplay	*cubplay;
 	t_image		*win_tex;
 	t_image		*wall_tex;
 	t_image		*east_tex;
 	t_image		*west_tex;
 	t_image		*north_tex;
 	t_image		*south_tex;
+	t_cubplay	*cubplay;
 }				t_data;
 
 // NEW && DESTROY (DATA AND WINDOW)
@@ -178,6 +184,7 @@ void		destroy_map(t_map *map);
 
 // LOOP && MOOV && KEYPRESS
 int			handle_keypress(int keycode, t_data *data);
+int			handle_mouse_move(int x, int y, t_data *data);
 void		loop_cub3d(t_data *data);
 
 // OTHER && DEBUG
@@ -193,7 +200,7 @@ int			is_player(char set);
 void		adjust_ray_angle(t_data *data);
 t_ray		*init_ray(void);
 void		cast_ray_wall(t_data *data);
-int			rotate_cub(int keycode, t_data *data);
+int			rotate_cub(float angle, t_data *data);
 void		assign_the_wall(t_data *data, int width);
 int			is_cub_event(int keycode);
 int			cub_event(int keycode, t_data *data);
@@ -205,7 +212,6 @@ void		get_wall_texture(t_data *data, int map_w, int map_h);
 t_wall		*init_wall(void);
 t_mini		*init_mini(void);
 
-// BEGIN CHAT
 // INIT
 void		init_image(t_data *data, t_image *img, char *filename);
 void		my_mlx_pixel_put(t_image *img, int x, int y, int color);
@@ -213,12 +219,18 @@ int			get_texture_pixel(t_image *img, int x, int y);
 
 // RAYCAST
 void		cast_ray(t_data *data, int width);
-// void		cast_ray(t_data *data, double ray_angle, int column);
 
 // RENDER
 void		render(t_data *data);
 
-// END CHAT
+// MINI MAP
+void		draw_mini_map(t_data *data);
+void		draw_border(t_data *data);
+void		draw_mini_ray(t_data *data);
+void		draw_mini_wall(t_data *data);
+void		draw_mini_player(t_data *data);
+void		put_mini_wall(t_data *data, int width, int height);
+void		put_mini_ray(t_data *data, double step_x, double step_y);
 
 // PARSE MAP
 int			is_line_map(char *line);

@@ -99,7 +99,4 @@ void	assign_the_wall(t_data *data, int width)
 		my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;
 	}
-	// à supprimer
-	(void)color;
-	(void)width;
 }

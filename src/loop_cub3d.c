@@ -16,6 +16,7 @@ void	loop_cub3d(t_data *data)
 {
 	render(data);
 	mlx_hook (data->win->mlx_win, 2, 1L << 0, handle_keypress, data);
+	mlx_hook (data->win->mlx_win, 6, 1L << 6, handle_mouse_move, data);
 	mlx_hook (data->win->mlx_win, 17, 0, close_win, data);
 	mlx_loop (data->win->mlx_ptr);
 }
@@ -27,8 +28,6 @@ int	handle_keypress(int keycode, t_data *data)
 	res = 0;
 	if (keycode == ESC)
 		destroy_data (data);
-	else if (keycode == RC_LEFT || keycode == RC_RIGHT)
-		res = rotate_cub(keycode, data);
 	else if (is_cub_event(keycode))
 		res = cub_event(keycode, data);
 	reset_flag(data);
@@ -37,43 +36,31 @@ int	handle_keypress(int keycode, t_data *data)
 	return (res);
 }
 
-int	cub_event(int keycode, t_data *data)
+int	handle_mouse_move(int x, int y, t_data *data)
 {
-	double	w;
-	double	h;
+	int			res;
+	int			delta_x;
+	static int	last_x = -1;
 
-	w = 0;
-	h = 0;
-	if (keycode == NORTH)
-		data->cubplay->u_d = 1;
-	else if (keycode == SOUTH)
-		data->cubplay->u_d = -1;
-	else if (keycode == EAST)
-		data->cubplay->l_r = -1;
-	else
-		data->cubplay->l_r = 1;
-	return (moovement(data, w, h));
-}
-
-int	is_cub_event(int keycode)
-{
-	return (keycode == NORTH || keycode == SOUTH
-		|| keycode == EAST || keycode == WEST);
-}
-
-int	rotate_cub(int keycode, t_data *data)
-{
-	if (keycode == RC_LEFT)
+	(void)y;
+	if (last_x == -1 || abs(x - last_x) >= 20)
 	{
-		data->cubplay->angle -= S_ROTATION;
-		if (data->cubplay->angle < 0)
-			data->cubplay->angle -= 2 * M_PI;
+		last_x = x;
+		return (0);
 	}
-	else if (keycode == RC_RIGHT)
+	res = 0;
+	delta_x = x - last_x;
+	if (delta_x > 15)
 	{
-		data->cubplay->angle += S_ROTATION;
-		if (data->cubplay->angle > 2 * M_PI)
-			data->cubplay->angle -= 2 * M_PI;
+		last_x = x;
+		res = rotate_cub((delta_x - 15) * S_ROTATION, data);
 	}
-	return (1);
+	else if (delta_x < -15)
+	{
+		last_x = x;
+		res = rotate_cub((delta_x + 15) * S_ROTATION, data);
+	}
+	if (res)
+		render(data);
+	return (0);
 }

@@ -7,9 +7,6 @@ Let's finished this work ;D
 
 /* ******************************************************************* */
 
-Code
-
-Completer la fonction draw_mini_map
 
 * Détail attendu de la fonction draw_mini_map :
 
@@ -24,3 +21,7 @@ Completer la fonction draw_mini_map
 - Tracage des rayons(FOV) du vision du joueur jusqu'à ce que les rayons touche à un mur
 - L'affichage doit centrer sur le joueur
 - Seulement les maps à l'interieur de l'ecran de mini carte s'affichent
+
+		DIM 1 DECEMBRE 2024
+- Mini map fini 
+- Segfault sur la map toujours a gerer par la gestione d'erreur
