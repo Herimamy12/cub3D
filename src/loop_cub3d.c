@@ -28,6 +28,8 @@ int	handle_keypress(int keycode, t_data *data)
 	res = 0;
 	if (keycode == ESC)
 		destroy_data (data);
+	else if (keycode == RC_LEFT || keycode == RC_RIGHT)
+		res = rotate_cub_key(keycode, data);
 	else if (is_cub_event(keycode))
 		res = cub_event(keycode, data);
 	reset_flag(data);
@@ -63,4 +65,21 @@ int	handle_mouse_move(int x, int y, t_data *data)
 	if (res)
 		render(data);
 	return (0);
+}
+
+int	rotate_cub_key(int keycode, t_data *data)
+{
+	if (keycode == RC_LEFT)
+	{
+		data->cubplay->angle -= S_ROTATION;
+		if (data->cubplay->angle < 0)
+			data->cubplay->angle -= 2 * M_PI;
+	}
+	else if (keycode == RC_RIGHT)
+	{
+		data->cubplay->angle += S_ROTATION;
+		if (data->cubplay->angle > 2 * M_PI)
+			data->cubplay->angle -= 2 * M_PI;
+	}
+	return (1);
 }

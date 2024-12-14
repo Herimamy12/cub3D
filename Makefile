@@ -4,6 +4,8 @@ LIBFT	=	./libft/libft.a
 
 LIBFT_DIR	=	./libft/
 
+INC_DIR	=	./include/cube3d.h
+
 LIBX	=	./minilibx-linux/libmlx.a
 
 LIBXX	=	./minilibx-linux/libmlx_Linux.a
@@ -12,7 +14,7 @@ LIBX_DIR	=	./minilibx-linux/
 
 CC	=	cc
 
-CFLAGS	=	-Wall -Werror -Wextra -g
+CFLAGS	=	-Wall -Werror -Wextra
 
 LIBX_FLAGS	=	-lXext -lX11 -lm
 
@@ -32,7 +34,7 @@ ${OBJ_DIR}/%.o	:	./src/%.c
 
 all	:	${NAME}
 
-${NAME}	:	${OBJ}
+${NAME}	:	${OBJ} $(INC_DIR)
 		make -C ${LIBX_DIR}
 		make -C ${LIBFT_DIR}
 		${CC} ${CFLAGS} -o $@ ${OBJ} ${LIBFT} ${LIBX} ${LIBXX} ${LIBX_FLAGS}

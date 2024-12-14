@@ -22,20 +22,20 @@
 # include "../minilibx-linux/mlx_int.h"
 
 // WINDOW PARAMETER
-# define WIDTH 960
-# define HEIGHT 540
+# define WIDTH 1280
+# define HEIGHT 720
 # define NAME "cube3d"
 # define M_WIDTH 120
 # define M_HEIGHT 80
-# define MW_SIZE 8			// mini wall size
+# define MW_SIZE 8		// mini wall size
 # define M_STARTW 10
-# define M_STARTH 450		// (HEIGHT - M_HEIGHT - 10)
+# define M_STARTH 620		// (HEIGHT - M_HEIGHT - 10)
 
 // FIELD OF VIEW PLAYER 90°
-# define FOV 1.5708			// (M_PI / 2)
+# define FOV 1.047197551			// (M_PI / 3)
 
 // CONST FOR THE ADDITION IN THE RAY CAST DIM
-# define ADDCAST 0.005
+# define ADDCAST 0.009
 
 // ROTATION SPEED
 # define S_ROTATION 0.035
@@ -201,6 +201,7 @@ void		adjust_ray_angle(t_data *data);
 t_ray		*init_ray(void);
 void		cast_ray_wall(t_data *data);
 int			rotate_cub(float angle, t_data *data);
+int			rotate_cub_key(int keycode, t_data *data);
 void		assign_the_wall(t_data *data, int width);
 int			is_cub_event(int keycode);
 int			cub_event(int keycode, t_data *data);
@@ -211,6 +212,9 @@ void		init_all_image(t_data *data);
 void		get_wall_texture(t_data *data, int map_w, int map_h);
 t_wall		*init_wall(void);
 t_mini		*init_mini(void);
+void		get_intersec_verticale(t_data *data);
+void		get_intersec_horizontale(t_data *data);
+void		roundf_ray(t_data *data);
 
 // INIT
 void		init_image(t_data *data, t_image *img, char *filename);

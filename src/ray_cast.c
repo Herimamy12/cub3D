@@ -20,6 +20,7 @@ void	cast_ray(t_data *data, int width)
 	data->ray->dwidth = cos(data->ray->angle);
 	data->ray->dheight = sin(data->ray->angle);
 	cast_ray_wall(data);
+	roundf_ray(data);
 	data->ray->distance *= cos(data->ray->angle - data->cubplay->angle);
 	data->wall->height = (int)(HEIGHT / data->ray->distance);
 	data->wall->start = (HEIGHT - data->wall->height) / 2;
@@ -64,14 +65,14 @@ void	get_wall_texture(t_data *data, int map_w, int map_h)
 	hit_y = data->ray->height - map_h;
 	if (fabs(hit_x) > fabs(hit_y))
 	{
-		if (hit_x > 0.9950)
+		if (hit_x > (1 - ADDCAST))
 			data->wall_tex = data->west_tex;
 		else
 			data->wall_tex = data->south_tex;
 	}
 	else
 	{
-		if (hit_y > 0.9950)
+		if (hit_y > (1 - ADDCAST))
 			data->wall_tex = data->north_tex;
 		else
 			data->wall_tex = data->east_tex;
