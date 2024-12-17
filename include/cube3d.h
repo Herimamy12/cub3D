@@ -38,7 +38,8 @@
 # define ADDCAST 0.01
 
 // ROTATION SPEED
-# define S_ROTATION 0.035
+# define S_ROTATE 0.03		// souris
+# define S_ROTATION 0.035	// clavier
 # define S_MOOVEMENT 2
 
 // QUIT
@@ -149,6 +150,12 @@ typedef struct s_mini
 	double	step_h;
 }			t_mini;
 
+typedef struct s_anim
+{
+	t_image	*zero;
+	t_image	*one;
+}			t_anim;
+
 // DATA STRUCT
 typedef struct s_data
 {
@@ -157,6 +164,7 @@ typedef struct s_data
 	t_map		*map;
 	t_wall		*wall;
 	t_mini		*mini;
+	t_anim		*anim;
 	t_image		*win_tex;
 	t_image		*wall_tex;
 	t_image		*east_tex;
@@ -226,7 +234,7 @@ void		init_all_image(t_data *data);
 void		cast_ray(t_data *data, int width);
 
 // RENDER
-void		render(t_data *data);
+int			render(t_data *data);
 
 // MINI MAP
 void		draw_mini_map(t_data *data);
@@ -236,6 +244,9 @@ void		draw_mini_wall(t_data *data);
 void		draw_mini_player(t_data *data);
 void		put_mini_wall(t_data *data, int width, int height);
 void		put_mini_ray(t_data *data, double step_x, double step_y);
+
+// TMP POUR L"ANIMATION
+t_anim		*init_anim(void);
 
 // PARSE MAP
 int			is_line_map(char *line);

@@ -37,6 +37,9 @@ void	init_all_image(t_data *data)
 	init_image(data, data->west_tex, data->map->text_we);
 	init_image(data, data->north_tex, data->map->text_no);
 	init_image(data, data->south_tex, data->map->text_so);
+
+	init_image(data, data->anim->one, "./textures/anime/1.xpm");
+	init_image(data, data->anim->zero, "./textures/anime/21.xpm");
 }
 
 t_cubplay	*new_cubplay(t_map *map)

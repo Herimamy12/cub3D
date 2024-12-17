@@ -63,8 +63,21 @@ t_data	*new_data(char *av)
 	data->ray = init_ray();
 	data->wall = init_wall();
 	data->mini = init_mini();
+	data->anim = init_anim();
 	init_all_image(data);
 	return (data);
+}
+
+t_anim	*init_anim(void)
+{
+	t_anim	*anim;
+
+	anim = (t_anim *)malloc(sizeof(t_anim));
+	if (!anim)
+		return (NULL);
+	anim->zero = alloc_image();
+	anim->one = alloc_image();
+	return (anim);
 }
 
 t_image	*alloc_image(void)
