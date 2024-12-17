@@ -30,12 +30,12 @@ void	cast_ray(t_data *data, int width)
 
 void	cast_ray_wall(t_data *data)
 {
-	int	wall;
+	int	go;
 	int	map_w;
 	int	map_h;
 
-	wall = 0;
-	while (!wall)
+	go = 1;
+	while (go)
 	{
 		data->ray->width += data->ray->dwidth * ADDCAST;
 		data->ray->height += data->ray->dheight * ADDCAST;
@@ -46,36 +46,10 @@ void	cast_ray_wall(t_data *data)
 		{
 			if (data->map->map[map_h] && data->map->map[map_h][map_w]
 				&& data->map->map[map_h][map_w] == '1')
-			{
-				wall = 1;
-				get_wall_texture(data, map_w, map_h);
-			}
+				break ;
 		}
 		else
 			break ;
-	}
-}
-
-void	get_wall_texture(t_data *data, int map_w, int map_h)
-{
-	double	hit_x;
-	double	hit_y;
-
-	hit_x = data->ray->width - map_w;
-	hit_y = data->ray->height - map_h;
-	if (fabs(hit_x) > fabs(hit_y))
-	{
-		if (hit_x > (1 - ADDCAST))
-			data->wall_tex = data->west_tex;
-		else
-			data->wall_tex = data->south_tex;
-	}
-	else
-	{
-		if (hit_y > (1 - ADDCAST))
-			data->wall_tex = data->north_tex;
-		else
-			data->wall_tex = data->east_tex;
 	}
 }
 

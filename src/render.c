@@ -14,6 +14,22 @@
 
 void	render(t_data *data)
 {
+	draw_ceiling_floor (data);
+	draw_ray_per_width (data);
+	draw_mini_map (data);
+	mlx_put_image_to_window (data->win->mlx_ptr, data->win->mlx_win,
+		data->win_tex->img, 0, 0);
+}
+
+void	adjust_ray_angle(t_data *data)
+{
+	data->ray->angle = fmod (data->ray->angle, 2 * M_PI);
+	if (data->ray->angle < 0)
+		data->ray->angle += 2 * M_PI;
+}
+
+void	draw_ceiling_floor(t_data *data)
+{
 	int		width;
 	int		height;
 
@@ -23,11 +39,17 @@ void	render(t_data *data)
 		width = -1;
 		while (++width < WIDTH)
 		{
-			my_mlx_pixel_put(data->win_tex, width, height, SKYBLUE);
-			my_mlx_pixel_put(data->win_tex,
+			my_mlx_pixel_put (data->win_tex, width, height, SKYBLUE);
+			my_mlx_pixel_put (data->win_tex,
 				width, HEIGHT - height - 1, GREENLAND);
 		}
 	}
+}
+
+void	draw_ray_per_width(t_data *data)
+{
+	int		width;
+
 	width = -1;
 	while (++width < WIDTH)
 	{
@@ -36,14 +58,4 @@ void	render(t_data *data)
 		adjust_ray_angle(data);
 		cast_ray(data, width);
 	}
-	draw_mini_map(data);
-	mlx_put_image_to_window(data->win->mlx_ptr, data->win->mlx_win,
-		data->win_tex->img, 0, 0);
-}
-
-void	adjust_ray_angle(t_data *data)
-{
-	data->ray->angle = fmod(data->ray->angle, 2 * M_PI);
-	if (data->ray->angle < 0)
-		data->ray->angle += 2 * M_PI;
 }

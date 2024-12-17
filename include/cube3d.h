@@ -35,7 +35,7 @@
 # define FOV 1.047197551			// (M_PI / 3)
 
 // CONST FOR THE ADDITION IN THE RAY CAST DIM
-# define ADDCAST 0.009
+# define ADDCAST 0.01
 
 // ROTATION SPEED
 # define S_ROTATION 0.035
@@ -169,6 +169,7 @@ typedef struct s_data
 // NEW && DESTROY (DATA AND WINDOW)
 t_win		*new_win(void);
 t_data		*new_data(char *av);
+t_image		*new_win_texture(t_data *data);
 void		destroy_str(char **str);
 void		destroy_win(t_win *win);
 void		destroy_data(t_data *data);
@@ -181,6 +182,7 @@ char		**get_map(int fd);
 int			count_width_map(char **map);
 int			count_heigth_map(char **map);
 void		destroy_map(t_map *map);
+t_cubplay	*new_cubplay(t_map *map);
 
 // LOOP && MOOV && KEYPRESS
 int			handle_keypress(int keycode, t_data *data);
@@ -191,14 +193,10 @@ void		loop_cub3d(t_data *data);
 void		print_map(char **map);
 
 // INITIATION OF 3D
-t_cubplay	*new_cubplay(t_map *map);
 double		get_angle(char **map, int width, int height);
-t_image		*alloc_image(void);
-t_image		*new_win_texture(t_data *data);
 void		destroy_image(t_image *img, t_win *win);
 int			is_player(char set);
 void		adjust_ray_angle(t_data *data);
-t_ray		*init_ray(void);
 void		cast_ray_wall(t_data *data);
 int			rotate_cub(float angle, t_data *data);
 int			rotate_cub_key(int keycode, t_data *data);
@@ -208,18 +206,21 @@ int			cub_event(int keycode, t_data *data);
 int			moovement(t_data *data, double w, double h);
 void		reset_flag(t_data *data);
 int			is_wall(t_data *data, double w, double h);
-void		init_all_image(t_data *data);
-void		get_wall_texture(t_data *data, int map_w, int map_h);
-t_wall		*init_wall(void);
-t_mini		*init_mini(void);
 void		get_intersec_verticale(t_data *data);
 void		get_intersec_horizontale(t_data *data);
 void		roundf_ray(t_data *data);
+void		draw_ceiling_floor(t_data *data);
+void		draw_ray_per_width(t_data *data);
 
 // INIT
+t_image		*alloc_image(void);
 void		init_image(t_data *data, t_image *img, char *filename);
 void		my_mlx_pixel_put(t_image *img, int x, int y, int color);
 int			get_texture_pixel(t_image *img, int x, int y);
+t_wall		*init_wall(void);
+t_mini		*init_mini(void);
+t_ray		*init_ray(void);
+void		init_all_image(t_data *data);
 
 // RAYCAST
 void		cast_ray(t_data *data, int width);
