@@ -137,6 +137,7 @@ typedef struct s_wall
 	int	height;
 	int	tex_w;
 	int	tex_h;
+	int	type;
 }		t_wall;
 
 // STRUCT FOR MINI MAP
@@ -157,9 +158,13 @@ typedef struct s_anim
 {
 	t_image	*zero;
 	t_image	*one;
-	t_image	*five;
-	t_image	*fiveten;
-	t_image *ten;
+	t_image	*two;
+	t_image	*three;
+	t_image *four;
+	t_image *five;
+	t_image *six;
+	t_image *seven;
+	t_image *eight;
 }			t_anim;
 
 // DATA STRUCT

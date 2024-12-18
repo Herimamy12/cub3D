@@ -38,11 +38,15 @@ void	init_all_image(t_data *data)
 	init_image(data, data->north_tex, data->map->text_no);
 	init_image(data, data->south_tex, data->map->text_so);
 
-	init_image(data, data->anim->one, "./textures/anime/0.xpm");
-	init_image(data, data->anim->zero, "./textures/anime/1.xpm");
+	init_image(data, data->anim->zero, "./textures/anime/0.xpm");
+	init_image(data, data->anim->one, "./textures/anime/1.xpm");
+	init_image(data, data->anim->two, "./textures/anime/2.xpm");
+	init_image(data, data->anim->three, "./textures/anime/3.xpm");
+	init_image(data, data->anim->four, "./textures/anime/4.xpm");
 	init_image(data, data->anim->five, "./textures/anime/5.xpm");
-	init_image(data, data->anim->fiveten, "./textures/anime/15.xpm");
-	init_image(data, data->anim->ten, "./textures/anime/10.xpm");
+	init_image(data, data->anim->six, "./textures/anime/6.xpm");
+	init_image(data, data->anim->seven, "./textures/anime/7.xpm");
+	init_image(data, data->anim->eight, "./textures/anime/8.xpm");
 }
 
 t_cubplay	*new_cubplay(t_map *map)

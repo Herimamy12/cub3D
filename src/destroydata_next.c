@@ -22,8 +22,12 @@ void	destroy_anim(t_anim *anim, t_win *win)
 {
 	destroy_image (anim->zero, win);
 	destroy_image (anim->one, win);
+	destroy_image (anim->two, win);
+	destroy_image (anim->three, win);
+	destroy_image (anim->four, win);
 	destroy_image (anim->five, win);
-	destroy_image (anim->ten, win);
-	destroy_image (anim->fiveten, win);
+	destroy_image (anim->six, win);
+	destroy_image (anim->seven, win);
+	destroy_image (anim->eight, win);
 	free (anim);
 }

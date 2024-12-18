@@ -77,9 +77,13 @@ t_anim	*init_anim(void)
 		return (NULL);
 	anim->zero = alloc_image();
 	anim->one = alloc_image();
-	anim->ten = alloc_image();
+	anim->two = alloc_image();
+	anim->three = alloc_image();
+	anim->four = alloc_image();
 	anim->five = alloc_image();
-	anim->fiveten = alloc_image();
+	anim->six = alloc_image();
+	anim->seven = alloc_image();
+	anim->eight = alloc_image();
 	return (anim);
 }
 
@@ -105,5 +109,6 @@ t_wall	*init_wall(void)
 	new->height = 0;
 	new->tex_w = 0;
 	new->tex_h = 0;
+	new->type = 0;
 	return (new);
 }

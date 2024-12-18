@@ -63,8 +63,12 @@ void	assign_the_wall(t_data *data, int width)
 		data->wall->tex_w = (int)(data->ray->width * data->wall_tex->width)
 			% data->wall_tex->width;
 	else
+
 		data->wall->tex_w = (int)(data->ray->height * data->wall_tex->width)
 			% data->wall_tex->width;
+	if (data->wall->type)
+		data->wall->tex_w = data->wall_tex->width - data->wall->tex_w;
+
 	while (height < data->wall->end)
 	{
 		data->wall->tex_h = (int)((height - data->wall->start)
