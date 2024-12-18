@@ -24,7 +24,7 @@ void	get_intersec_verticale(t_data *data)
 	if (cos (data->ray->angle) >= 0)
 		data->wall_tex = data->east_tex;
 	else
-		data->wall_tex = data->west_tex;
+		data->wall_tex = get_circl(data);
 }
 
 void	get_intersec_horizontale(t_data *data)

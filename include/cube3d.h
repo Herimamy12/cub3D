@@ -37,6 +37,9 @@
 // CONST FOR THE ADDITION IN THE RAY CAST DIM
 # define ADDCAST 0.01
 
+// TIME TO SLEEP
+# define SLEEP_TIME 15000
+
 // ROTATION SPEED
 # define S_ROTATE 0.03		// souris
 # define S_ROTATION 0.035	// clavier
@@ -154,6 +157,9 @@ typedef struct s_anim
 {
 	t_image	*zero;
 	t_image	*one;
+	t_image	*five;
+	t_image	*fiveten;
+	t_image *ten;
 }			t_anim;
 
 // DATA STRUCT
@@ -182,6 +188,7 @@ void		destroy_str(char **str);
 void		destroy_win(t_win *win);
 void		destroy_data(t_data *data);
 int			close_win(t_data *data);
+void		destroy_anim(t_anim *anim, t_win *win);
 
 // MAP && PARSING
 t_map		*new_struct_map(char *av);
@@ -219,6 +226,7 @@ void		get_intersec_horizontale(t_data *data);
 void		roundf_ray(t_data *data);
 void		draw_ceiling_floor(t_data *data);
 void		draw_ray_per_width(t_data *data);
+t_image		*get_circl(t_data *data);
 
 // INIT
 t_image		*alloc_image(void);

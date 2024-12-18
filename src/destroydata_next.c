@@ -17,3 +17,13 @@ void	destroy_image(t_image *img, t_win *win)
 	mlx_destroy_image(win->mlx_ptr, img->img);
 	free(img);
 }
+
+void	destroy_anim(t_anim *anim, t_win *win)
+{
+	destroy_image (anim->zero, win);
+	destroy_image (anim->one, win);
+	destroy_image (anim->five, win);
+	destroy_image (anim->ten, win);
+	destroy_image (anim->fiveten, win);
+	free (anim);
+}

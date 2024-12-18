@@ -77,6 +77,9 @@ t_anim	*init_anim(void)
 		return (NULL);
 	anim->zero = alloc_image();
 	anim->one = alloc_image();
+	anim->ten = alloc_image();
+	anim->five = alloc_image();
+	anim->fiveten = alloc_image();
 	return (anim);
 }
 
