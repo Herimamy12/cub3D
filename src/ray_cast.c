@@ -59,21 +59,21 @@ void	assign_the_wall(t_data *data, int width)
 	int	height;
 
 	height = data->wall->start;
-	if (data->wall_tex == data->north_tex || data->wall_tex == data->south_tex)
-		data->wall->tex_w = (int)(data->ray->width * data->wall_tex->width)
-			% data->wall_tex->width;
+	if (data->tex->wall_tex == data->tex->north_tex || data->tex->wall_tex == data->tex->south_tex)
+		data->wall->tex_w = (int)(data->ray->width * data->tex->wall_tex->width)
+			% data->tex->wall_tex->width;
 	else
 
-		data->wall->tex_w = (int)(data->ray->height * data->wall_tex->width)
-			% data->wall_tex->width;
+		data->wall->tex_w = (int)(data->ray->height * data->tex->wall_tex->width)
+			% data->tex->wall_tex->width;
 	if (data->wall->type)
-		data->wall->tex_w = data->wall_tex->width - data->wall->tex_w;
+		data->wall->tex_w = data->tex->wall_tex->width - data->wall->tex_w;
 
 	while (height < data->wall->end)
 	{
 		data->wall->tex_h = (int)((height - data->wall->start)
-				/ (double)data->wall->height * data->wall_tex->height);
-		color = get_texture_pixel(data->wall_tex, data->wall->tex_w,
+				/ (double)data->wall->height * data->tex->wall_tex->height);
+		color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
 				data->wall->tex_h);
 		my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;

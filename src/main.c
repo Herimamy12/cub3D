@@ -14,19 +14,17 @@
 
 int	main(int ac, char **av)
 {
+	// t_load	*load;
 	t_data	*data;
 
 	if (ac != 2)
-	{
-		write(2, "Error : argument\n", 17);
-		return (1);
-	}
+		return (write(2, "Error : argument\n", 17), 1);
+	// load = new_load ();
+	// if (!load)
+	// 	return (write (2, "Error loading game\n", 19), 1);
 	data = new_data (av[1]);
 	if (!data)
-	{
-		write(2, "Error : map\n", 12);
-		return (1);
-	}
+		return (write(2, "Error : creation data\n", 12), 1);
 	get_color(data->map->map, "F");
 	loop_cub3d (data);
 	return (0);

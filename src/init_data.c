@@ -12,14 +12,13 @@
 
 #include "../include/cube3d.h"
 
-void	init_image(t_data *data, t_image *img, char *filename)
+void	init_image(t_win *win, t_image *img, char *filename)
 {
-	img->img = mlx_xpm_file_to_image(data->win->mlx_ptr, filename,
+	img->img = mlx_xpm_file_to_image(win->mlx_ptr, filename,
 			&img->width, &img->height);
 	if (!img->img)
 	{
 		printf("Erreur de chargement de l'image: %s\n", filename);
-		destroy_data(data);
 		exit(1);
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length,
@@ -47,14 +46,14 @@ int	get_texture_pixel(t_image *img, int x, int y)
 	return (*(unsigned int *)(img->addr + pixel_index));
 }
 
-t_image	*new_win_texture(t_data *data)
+t_image	*new_win_texture(t_win *win)
 {
 	t_image	*win_tex;
 
 	win_tex = (t_image *)malloc(sizeof(t_image));
 	if (!win_tex)
 		return (NULL);
-	win_tex->img = mlx_new_image(data->win->mlx_ptr, WIDTH, HEIGHT);
+	win_tex->img = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
 	win_tex->bpp = 0;
 	win_tex->line_length = 0;
 	win_tex->endian = 0;

@@ -54,18 +54,30 @@ t_data	*new_data(char *av)
 	if (data->map->map == NULL)
 		return (free(data->map), free(data), NULL);
 	data->win = new_win();
+	data->win_tex = new_win_texture(data->win);
+	data->load = init_anim();
 	data->cubplay = new_cubplay(data->map);
-	data->win_tex = new_win_texture(data);
-	data->east_tex = alloc_image();
-	data->west_tex = alloc_image();
-	data->north_tex = alloc_image();
-	data->south_tex = alloc_image();
+	data->tex = init_tex();
 	data->ray = init_ray();
 	data->wall = init_wall();
 	data->mini = init_mini();
 	data->anim = init_anim();
 	init_all_image(data);
 	return (data);
+}
+
+t_tex	*init_tex(void)
+{
+	t_tex	*tex;
+
+	tex = (t_tex *)malloc(sizeof(t_tex));
+	if (!tex)
+		return (NULL);
+	tex->east_tex = alloc_image();
+	tex->west_tex = alloc_image();
+	tex->north_tex = alloc_image();
+	tex->south_tex = alloc_image();
+	return (tex);
 }
 
 t_anim	*init_anim(void)

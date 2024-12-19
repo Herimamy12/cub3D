@@ -23,13 +23,13 @@ void	get_intersec_verticale(t_data *data)
 	if (cos (data->ray->angle) >= 0)
 	{
 		data->ray->height -= dist_heigth;
-		data->wall_tex = data->east_tex;
+		data->tex->wall_tex = data->tex->east_tex;
 		data->wall->type = 0;
 	}
 	else
 	{
 		data->ray->height += dist_heigth;
-		data->wall_tex = get_circl(data);
+		data->tex->wall_tex = get_circl(data->anim);
 		data->wall->type = 1;
 	}
 }
@@ -45,13 +45,13 @@ void	get_intersec_horizontale(t_data *data)
 	if (sin (data->ray->angle) >= 0)
 	{
 		data->ray->width -= dist_width;
-		data->wall_tex = data->south_tex;
+		data->tex->wall_tex = data->tex->south_tex;
 		data->wall->type = 1;
 	}
 	else
 	{
 		data->ray->width += dist_width;
-		data->wall_tex = data->north_tex;
+		data->tex->wall_tex = data->tex->north_tex;
 		data->wall->type = 0;
 	}
 }

@@ -46,16 +46,16 @@ int	let_sleep(void)
 	return (0);
 }
 
-t_image	*get_circl(t_data *data)
+t_image	*get_circl(t_anim *anim)
 {
 	int			tmp;
 	static int	index = 0;
 
 	if (let_sleep())
-		return (circl_image(data->anim, index));
+		return (circl_image(anim, index));
 	index ++;
 	tmp = index;
 	if (index == 9)
 		index = 0;
-	return (circl_image(data->anim, tmp));
+	return (circl_image(anim, tmp));
 }
