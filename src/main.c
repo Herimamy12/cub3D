@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	// t_load	*load;
+	t_win	*win;
 	t_data	*data;
 
 	if (ac != 2)
@@ -22,7 +23,8 @@ int	main(int ac, char **av)
 	// load = new_load ();
 	// if (!load)
 	// 	return (write (2, "Error loading game\n", 19), 1);
-	data = new_data (av[1]);
+	win = new_win();
+	data = new_data (av[1], win);
 	if (!data)
 		return (write(2, "Error : creation data\n", 12), 1);
 	get_color(data->map->map, "F");

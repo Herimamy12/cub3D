@@ -57,60 +57,60 @@ void	init_anim_image(t_data *data)
 	init_image(data->win, data->anim->eight, "./textures/anime/8.xpm");
 }
 
-void	draw_load_to_window(t_data *data)
-{
-	int x;
-	int y;
-	int	width;
-	int	heigth;
-	t_image *load;
+// void	draw_load_to_window(t_data *data)
+// {
+// 	int x;
+// 	int y;
+// 	int	width;
+// 	int	heigth;
+// 	t_image *load;
 
-	width = 0;
+// 	width = 0;
 
-	load = get_circl (data->load);
-	while (width < WIDTH)
-	{
-		height = 0;
-		x = (width)
-		while (heigth < HEIGHT)
-		{
-			heigth++;
-		}
-		width++;
-	} 
+// 	load = get_circl (data->load);
+// 	while (width < WIDTH)
+// 	{
+// 		height = 0;
+// 		x = (width)
+// 		while (heigth < HEIGHT)
+// 		{
+// 			heigth++;
+// 		}
+// 		width++;
+// 	} 
 
 
-	{
-		int	color;
-		int	height;
+// 	{
+// 		int	color;
+// 		int	height;
 
-		height = data->wall->start;
-		if (data->tex->wall_tex == data->tex->north_tex || data->tex->wall_tex == data->tex->south_tex)
-			data->wall->tex_w = (int)(data->ray->width * data->tex->wall_tex->width)
-				% data->tex->wall_tex->width;
-		else
+// 		height = data->wall->start;
+// 		if (data->tex->wall_tex == data->tex->north_tex || data->tex->wall_tex == data->tex->south_tex)
+// 			data->wall->tex_w = (int)(data->ray->width * data->tex->wall_tex->width)
+// 				% data->tex->wall_tex->width;
+// 		else
 
-			data->wall->tex_w = (int)(data->ray->height * data->tex->wall_tex->width)
-				% data->tex->wall_tex->width;
-		if (data->wall->type)
-			data->wall->tex_w = data->tex->wall_tex->width - data->wall->tex_w;
+// 			data->wall->tex_w = (int)(data->ray->height * data->tex->wall_tex->width)
+// 				% data->tex->wall_tex->width;
+// 		if (data->wall->type)
+// 			data->wall->tex_w = data->tex->wall_tex->width - data->wall->tex_w;
 
-		while (height < data->wall->end)
-		{
-			data->wall->tex_h = (int)((height - data->wall->start)
-					/ (double)data->wall->height * data->tex->wall_tex->height);
-			color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
-					data->wall->tex_h);
-			my_mlx_pixel_put(data->win_tex, width, height, color);
-			height++;
-		}
-	}
-}
+// 		while (height < data->wall->end)
+// 		{
+// 			data->wall->tex_h = (int)((height - data->wall->start)
+// 					/ (double)data->wall->height * data->tex->wall_tex->height);
+// 			color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
+// 					data->wall->tex_h);
+// 			my_mlx_pixel_put(data->win_tex, width, height, color);
+// 			height++;
+// 		}
+// 	}
+// }
 
 void	init_all_image(t_data *data)
 {
 	init_load_image(data);
-	draw_load_to_window(data);
+	// draw_load_to_window(data);
 	init_anim_image(data);
 	init_image(data->win, data->tex->east_tex, data->map->text_ea);
 	init_image(data->win, data->tex->west_tex, data->map->text_we);

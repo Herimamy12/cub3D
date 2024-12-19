@@ -216,7 +216,7 @@ typedef struct s_data
 // NEW && DESTROY (DATA AND WINDOW)
 t_win		*new_win(void);
 t_tex		*init_tex(void);
-t_data		*new_data(char *av);
+t_data		*new_data(char *av, t_win *win);
 t_image		*new_win_texture(t_win *win);
 void		destroy_str(char **str);
 void		destroy_win(t_win *win);

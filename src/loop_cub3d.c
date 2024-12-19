@@ -38,7 +38,7 @@ int	handle_keypress(int keycode, t_data *data)
 
 int	handle_mouse_move(int x, int y, t_data *data)
 {
-	int			res;
+	// int			res;
 	int			delta_x;
 	static int	last_x = -1;
 
@@ -48,17 +48,17 @@ int	handle_mouse_move(int x, int y, t_data *data)
 		last_x = x;
 		return (0);
 	}
-	res = 0;
+	// res = 0;
 	delta_x = x - last_x;
 	if (delta_x > 10)
 	{
 		last_x = x;
-		res = rotate_cub((delta_x - 10) * S_ROTATE, data);
+		/*res = */rotate_cub((delta_x - 10) * S_ROTATE, data);
 	}
 	else if (delta_x < -10)
 	{
 		last_x = x;
-		res = rotate_cub((delta_x + 10) * S_ROTATE, data);
+		/*res = */rotate_cub((delta_x + 10) * S_ROTATE, data);
 	}
 	return (0);
 }

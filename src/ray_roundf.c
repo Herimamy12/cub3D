@@ -59,10 +59,10 @@ void	get_intersec_horizontale(t_data *data)
 void	roundf_ray(t_data *data)
 {
 	double	last_width;
-	double	last_heigth;
+	// double	last_heigth;
 
 	last_width = data->ray->width - (ADDCAST * cos(data->ray->angle));
-	last_heigth = data->ray->height - (ADDCAST * sin(data->ray->angle));
+	// last_heigth = data->ray->height - (ADDCAST * sin(data->ray->angle));
 	if (data->map->map[(int)data->ray->height][(int)last_width] == '1')
 		get_intersec_horizontale(data);
 	else
