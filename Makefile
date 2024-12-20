@@ -12,9 +12,9 @@ LIBXX	=	./minilibx-linux/libmlx_Linux.a
 
 LIBX_DIR	=	./minilibx-linux/
 
-CC	=	cc
+CC	=	gcc
 
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-g -Wall -Werror -Wextra
 
 LIBX_FLAGS	=	-lXext -lX11 -lm
 

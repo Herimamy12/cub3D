@@ -12,17 +12,20 @@
 
 #include "../include/cube3d.h"
 
-t_load	*new_load(void)
+t_load	*new_load(t_win *win, int *loading)
 {
 	t_load	*load;
 
 	load = (t_load *)malloc(sizeof(t_load));
 	if (!load)
 		return (NULL);
-	load->win = new_win();
-	load->win_tex = new_win_texture(load->win);
+	load->loading = loading;
+	load->win = win;
+	load->img = alloc_image();
+	load->win_tex = new_win_texture(win);
 	load->anim = init_anim();
 	init_all_load(load);
+	init_image(load->win, load->img, "./textures/load.xpm");
 	return (load);
 }
 

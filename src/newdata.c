@@ -43,7 +43,7 @@ t_win	*new_win(void)
 	return (win);
 }
 
-t_data	*new_data(char *av, t_win *win)
+t_data	*new_data(char *av, t_win *win, int *load)
 {
 	t_data	*data;
 
@@ -51,11 +51,9 @@ t_data	*new_data(char *av, t_win *win)
 	if (!data)
 		return (NULL);
 	data->map = new_struct_map (av);
-	if (data->map->map == NULL)
-		return (free(data->map), free(data), NULL);
+	data->load = load;
 	data->win = win;
-	data->win_tex = new_win_texture(data->win);
-	data->load = init_anim();
+	data->win_tex = new_win_texture(win);
 	data->cubplay = new_cubplay(data->map);
 	data->tex = init_tex();
 	data->ray = init_ray();

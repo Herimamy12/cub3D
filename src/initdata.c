@@ -31,19 +31,6 @@ char	**new_map(char *av)
 	return (map);
 }
 
-void	init_load_image(t_data *data)
-{
-	init_image(data->win, data->load->zero, "./textures/load/0.xpm");
-	init_image(data->win, data->load->one, "./textures/load/1.xpm");
-	init_image(data->win, data->load->two, "./textures/load/2.xpm");
-	init_image(data->win, data->load->three, "./textures/load/3.xpm");
-	init_image(data->win, data->load->four, "./textures/load/4.xpm");
-	init_image(data->win, data->load->five, "./textures/load/5.xpm");
-	init_image(data->win, data->load->six, "./textures/load/6.xpm");
-	init_image(data->win, data->load->seven, "./textures/load/7.xpm");
-	init_image(data->win, data->load->eight, "./textures/load/8.xpm");
-}
-
 void	init_anim_image(t_data *data)
 {
 	init_image(data->win, data->anim->zero, "./textures/anime/0.xpm");
@@ -109,13 +96,11 @@ void	init_anim_image(t_data *data)
 
 void	init_all_image(t_data *data)
 {
-	init_load_image(data);
-	// draw_load_to_window(data);
-	init_anim_image(data);
 	init_image(data->win, data->tex->east_tex, data->map->text_ea);
 	init_image(data->win, data->tex->west_tex, data->map->text_we);
 	init_image(data->win, data->tex->north_tex, data->map->text_no);
 	init_image(data->win, data->tex->south_tex, data->map->text_so);
+	init_anim_image(data);
 }
 
 t_cubplay	*new_cubplay(t_map *map)

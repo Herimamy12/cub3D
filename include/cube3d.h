@@ -38,7 +38,7 @@
 # define ADDCAST 0.01
 
 // TIME TO SLEEP
-# define SLEEP_TIME 15000
+# define SLEEP_TIME 1500
 
 // ROTATION SPEED
 # define S_ROTATE 0.03		// souris
@@ -193,14 +193,17 @@ typedef struct s_anim
 // STRUCT GENERALE FOR ANIMATION LOADING
 typedef struct s_load
 {
+	int		*loading;
 	t_win	*win;
 	t_anim	*anim;
+	t_image	*img;
 	t_image	*win_tex;
 }			t_load;
 
 // DATA STRUCT
 typedef struct s_data
 {
+	int			*load;
 	t_tex		*tex;
 	t_ray		*ray;
 	t_win		*win;
@@ -208,7 +211,6 @@ typedef struct s_data
 	t_wall		*wall;
 	t_mini		*mini;
 	t_anim		*anim;
-	t_anim		*load;
 	t_image		*win_tex;
 	t_cubplay	*cubplay;
 }				t_data;
@@ -216,7 +218,7 @@ typedef struct s_data
 // NEW && DESTROY (DATA AND WINDOW)
 t_win		*new_win(void);
 t_tex		*init_tex(void);
-t_data		*new_data(char *av, t_win *win);
+t_data		*new_data(char *av, t_win *win, int *load);
 t_image		*new_win_texture(t_win *win);
 void		destroy_str(char **str);
 void		destroy_win(t_win *win);
@@ -292,7 +294,7 @@ void		put_mini_ray(t_data *data, double step_x, double step_y);
 t_anim		*init_anim(void);
 
 // LOADING ANIMATION
-t_load		*new_load(void);
+t_load		*new_load(t_win *win, int *loading);
 void		init_all_load(t_load *load);
 
 // PARSE MAP

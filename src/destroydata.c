@@ -49,7 +49,6 @@ void	destroy_data(t_data *data)
 	if (!data)
 		return ;
 	destroy_image (data->win_tex, data->win);
-	destroy_anim (data->load, data->win);
 	destroy_anim (data->anim, data->win);
 	destroy_tex (data->tex, data->win);
 	destroy_win (data->win);

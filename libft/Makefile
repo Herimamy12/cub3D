@@ -2,7 +2,7 @@ CC = cc
 
 NAME = libft.a
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fPIE
 
 SRC = libft_utils.c libft_next.c \
 		get_next_line.c libft.c \
