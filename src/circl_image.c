@@ -35,27 +35,25 @@ t_image	*circl_image(t_anim *anim, int index)
 	return (anim->zero);
 }
 
-int	let_sleep(void)
+int	let_sleep(int *now, int delay)
 {
-	static int	sleep_time = 0;
-
-	sleep_time ++;
-	if (sleep_time < SLEEP_TIME)
+	if ((*now)++ < delay)
 		return (1);
-	sleep_time = 0;
+	(*now) = 0;
 	return (0);
 }
 
-t_image	*get_circl(t_anim *anim)
+t_image	*get_circl(t_data *data)
 {
 	int			tmp;
+	static int	now = 0;
 	static int	index = 0;
 
-	if (let_sleep())
-		return (circl_image(anim, index));
+	if (let_sleep(&now, 2 * SLEEP_TIME))
+		return (circl_image(data->anim, index));
 	index ++;
 	tmp = index;
 	if (index == 9)
 		index = 0;
-	return (circl_image(anim, tmp));
+	return (circl_image(data->anim, tmp));
 }

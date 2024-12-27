@@ -31,76 +31,23 @@ char	**new_map(char *av)
 	return (map);
 }
 
-void	init_anim_image(t_data *data)
-{
-	init_image(data->win, data->anim->zero, "./textures/anime/0.xpm");
-	init_image(data->win, data->anim->one, "./textures/anime/1.xpm");
-	init_image(data->win, data->anim->two, "./textures/anime/2.xpm");
-	init_image(data->win, data->anim->three, "./textures/anime/3.xpm");
-	init_image(data->win, data->anim->four, "./textures/anime/4.xpm");
-	init_image(data->win, data->anim->five, "./textures/anime/5.xpm");
-	init_image(data->win, data->anim->six, "./textures/anime/6.xpm");
-	init_image(data->win, data->anim->seven, "./textures/anime/7.xpm");
-	init_image(data->win, data->anim->eight, "./textures/anime/8.xpm");
-}
-
-// void	draw_load_to_window(t_data *data)
-// {
-// 	int x;
-// 	int y;
-// 	int	width;
-// 	int	heigth;
-// 	t_image *load;
-
-// 	width = 0;
-
-// 	load = get_circl (data->load);
-// 	while (width < WIDTH)
-// 	{
-// 		height = 0;
-// 		x = (width)
-// 		while (heigth < HEIGHT)
-// 		{
-// 			heigth++;
-// 		}
-// 		width++;
-// 	} 
-
-
-// 	{
-// 		int	color;
-// 		int	height;
-
-// 		height = data->wall->start;
-// 		if (data->tex->wall_tex == data->tex->north_tex || data->tex->wall_tex == data->tex->south_tex)
-// 			data->wall->tex_w = (int)(data->ray->width * data->tex->wall_tex->width)
-// 				% data->tex->wall_tex->width;
-// 		else
-
-// 			data->wall->tex_w = (int)(data->ray->height * data->tex->wall_tex->width)
-// 				% data->tex->wall_tex->width;
-// 		if (data->wall->type)
-// 			data->wall->tex_w = data->tex->wall_tex->width - data->wall->tex_w;
-
-// 		while (height < data->wall->end)
-// 		{
-// 			data->wall->tex_h = (int)((height - data->wall->start)
-// 					/ (double)data->wall->height * data->tex->wall_tex->height);
-// 			color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
-// 					data->wall->tex_h);
-// 			my_mlx_pixel_put(data->win_tex, width, height, color);
-// 			height++;
-// 		}
-// 	}
-// }
-
 void	init_all_image(t_data *data)
 {
-	init_image(data->win, data->tex->east_tex, data->map->text_ea);
-	init_image(data->win, data->tex->west_tex, data->map->text_we);
-	init_image(data->win, data->tex->north_tex, data->map->text_no);
-	init_image(data->win, data->tex->south_tex, data->map->text_so);
-	init_anim_image(data);
+	init_image(data, data->tex->east_tex, data->map->text_ea);
+	init_image(data, data->tex->west_tex, data->map->text_we);
+	init_image(data, data->tex->north_tex, data->map->text_no);
+	init_image(data, data->tex->south_tex, data->map->text_so);
+	init_image(data, data->anim->zero, "./textures/anime/0.xpm");
+	init_image(data, data->anim->one, "./textures/anime/1.xpm");
+	init_image(data, data->anim->two, "./textures/anime/2.xpm");
+	init_image(data, data->anim->three, "./textures/anime/3.xpm");
+	init_image(data, data->anim->four, "./textures/anime/4.xpm");
+	init_image(data, data->anim->five, "./textures/anime/5.xpm");
+	init_image(data, data->anim->six, "./textures/anime/6.xpm");
+	init_image(data, data->anim->seven, "./textures/anime/7.xpm");
+	init_image(data, data->anim->eight, "./textures/anime/8.xpm");
+	init_image(data, data->tex->open_tex, "./textures/open.xpm");
+	init_image(data, data->tex->close_tex, "./textures/close.xpm");
 }
 
 t_cubplay	*new_cubplay(t_map *map)

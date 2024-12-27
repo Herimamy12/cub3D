@@ -12,6 +12,18 @@
 
 #include "../include/cube3d.h"
 
+int	door_close(t_data *data, double w, double h)
+{
+	int	map_w;
+	int	map_h;
+
+	map_w = (int)((roundf(w) / 5) + data->cubplay->width);
+	map_h = (int)((roundf(h) / 5) + data->cubplay->height);
+	if (data->map->map[map_h][map_w] == 'P' && !data->map->door)
+		return (1);
+	return (0);
+}
+
 int	moovement(t_data *data, double w, double h)
 {
 	if (data->cubplay->u_d == 1)
@@ -34,7 +46,7 @@ int	moovement(t_data *data, double w, double h)
 		h += cos(data->cubplay->angle) * S_MOOVEMENT;
 		w -= sin(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	if (is_wall (data, w, h))
+	if (door_close(data, w, h) || is_wall (data, w, h))
 		return (0);
 	return (1);
 }

@@ -14,16 +14,12 @@
 
 void	destroy_image(t_image *img, t_win *win)
 {
-	if (!img || !win)
-		return ;
 	mlx_destroy_image(win->mlx_ptr, img->img);
 	free(img);
 }
 
 void	destroy_anim(t_anim *anim, t_win *win)
 {
-	if (!anim || !win)
-		return ;
 	destroy_image (anim->zero, win);
 	destroy_image (anim->one, win);
 	destroy_image (anim->two, win);
@@ -44,5 +40,7 @@ void	destroy_tex(t_tex *tex, t_win *win)
 	destroy_image (tex->south_tex, win);
 	destroy_image (tex->east_tex, win);
 	destroy_image (tex->west_tex, win);
+	destroy_image (tex->open_tex, win);
+	destroy_image (tex->close_tex, win);
 	free (tex);
 }

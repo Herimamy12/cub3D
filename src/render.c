@@ -12,6 +12,15 @@
 
 #include "../include/cube3d.h"
 
+void	close_door(t_data *data)
+{
+	static int	now = 0;
+
+	if (let_sleep(&now, SLEEP_TIME / 2))
+		return ;
+	data->map->door = 0;
+}
+
 int	render(t_data *data)
 {
 	draw_ceiling_floor (data);
@@ -19,6 +28,7 @@ int	render(t_data *data)
 	draw_mini_map (data);
 	mlx_put_image_to_window (data->win->mlx_ptr, data->win->mlx_win,
 		data->win_tex->img, 0, 0);
+	close_door (data);
 	return (0);
 }
 
@@ -54,9 +64,12 @@ void	draw_ray_per_width(t_data *data)
 	width = -1;
 	while (++width < WIDTH)
 	{
+		data->ray->door_flag = 0;
 		data->ray->angle = data->cubplay->angle - FOV / 2.0
 			+ (width / (double)WIDTH) * FOV;
 		adjust_ray_angle(data);
 		cast_ray(data, width);
+		if (data->ray->door_flag)
+			cast_ray(data, width);
 	}
 }

@@ -21,7 +21,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 
-// WINDOW PARAMETER
+// WINDOW PARAMETER && MINI MAP
 # define WIDTH 1280
 # define HEIGHT 720
 # define NAME "cube3d"
@@ -38,15 +38,18 @@
 # define ADDCAST 0.01
 
 // TIME TO SLEEP
-# define SLEEP_TIME 1500
+# define SLEEP_TIME 2000
 
 // ROTATION SPEED
-# define S_ROTATE 0.03		// souris
+# define S_ROTATE 0.025		// souris
 # define S_ROTATION 0.035	// clavier
 # define S_MOOVEMENT 2
 
 // QUIT
 # define ESC 65307
+
+// SPACE
+# define SPC 32
 
 // ANGLE ORIENTATION FORT 3D
 # define DEGEAS 0
@@ -87,6 +90,7 @@ typedef struct s_win
 // MAP STRUCT
 typedef struct s_map
 {
+	int		door;
 	int		width;
 	int		height;
 	char	**map;
@@ -121,6 +125,7 @@ typedef struct s_cubplay
 // RAY REQUIREMENT STRUCT
 typedef struct s_ray
 {
+	int		door_flag;
 	double	angle;
 	double	width;
 	double	height;
@@ -154,6 +159,7 @@ typedef struct s_mini
 	double	step_h;
 }			t_mini;
 
+// ALL IMAGE STRUCTURE
 typedef struct s_tex
 {
 	t_image		*east_tex;
@@ -161,49 +167,27 @@ typedef struct s_tex
 	t_image		*north_tex;
 	t_image		*south_tex;
 	t_image		*wall_tex;
+	t_image		*open_tex;
+	t_image		*close_tex;
 }				t_tex;
 
-// ALL IMAGE FOR ANIMATION WALL
+// STRUCTURE FOR ANIMATION
 typedef struct s_anim
 {
 	t_image	*zero;
 	t_image	*one;
 	t_image	*two;
 	t_image	*three;
-	t_image	*four;
-	t_image	*five;
-	t_image	*six;
-	t_image	*seven;
-	t_image	*eight;
+	t_image *four;
+	t_image *five;
+	t_image *six;
+	t_image *seven;
+	t_image *eight;
 }			t_anim;
-
-// ALL IMAGE FOR ANIMATION LOADING (tsy ilaina alo am zao)
-// typedef struct s_lanim
-// {
-// 	t_image	*zero;
-// 	t_image	*one;
-// 	t_image	*two;
-// 	t_image	*three;
-// 	t_image	*four;
-// 	t_image	*five;
-// 	t_image	*six;
-// 	t_image	*seven;
-// }			t_lanim;
-
-// STRUCT GENERALE FOR ANIMATION LOADING
-typedef struct s_load
-{
-	int		*loading;
-	t_win	*win;
-	t_anim	*anim;
-	t_image	*img;
-	t_image	*win_tex;
-}			t_load;
 
 // DATA STRUCT
 typedef struct s_data
 {
-	int			*load;
 	t_tex		*tex;
 	t_ray		*ray;
 	t_win		*win;
@@ -217,15 +201,14 @@ typedef struct s_data
 
 // NEW && DESTROY (DATA AND WINDOW)
 t_win		*new_win(void);
-t_tex		*init_tex(void);
-t_data		*new_data(char *av, t_win *win, int *load);
-t_image		*new_win_texture(t_win *win);
+t_data		*new_data(char *av);
+t_image		*new_win_texture(t_data *data);
 void		destroy_str(char **str);
 void		destroy_win(t_win *win);
 void		destroy_data(t_data *data);
 int			close_win(t_data *data);
-void		destroy_tex(t_tex *tex, t_win *win);
 void		destroy_anim(t_anim *anim, t_win *win);
+void		destroy_tex(t_tex *tex, t_win *win);
 
 // MAP && PARSING
 t_map		*new_struct_map(char *av);
@@ -249,10 +232,10 @@ double		get_angle(char **map, int width, int height);
 void		destroy_image(t_image *img, t_win *win);
 int			is_player(char set);
 void		adjust_ray_angle(t_data *data);
-void		cast_ray_wall(t_data *data);
+void		cast_ray_wall(t_data *data, int flag);
 int			rotate_cub(float angle, t_data *data);
 int			rotate_cub_key(int keycode, t_data *data);
-void		assign_the_wall(t_data *data, int width);
+void		assign_the_wall(t_data *data, int width, int flag);
 int			is_cub_event(int keycode);
 int			cub_event(int keycode, t_data *data);
 int			moovement(t_data *data, double w, double h);
@@ -263,17 +246,17 @@ void		get_intersec_horizontale(t_data *data);
 void		roundf_ray(t_data *data);
 void		draw_ceiling_floor(t_data *data);
 void		draw_ray_per_width(t_data *data);
-t_image		*get_circl(t_anim *anim);
 
 // INIT
 t_image		*alloc_image(void);
-void		init_image(t_win *win, t_image *img, char *filename);
+void		init_image(t_data *data, t_image *img, char *filename);
 void		my_mlx_pixel_put(t_image *img, int x, int y, int color);
 int			get_texture_pixel(t_image *img, int x, int y);
 t_wall		*init_wall(void);
 t_mini		*init_mini(void);
 t_ray		*init_ray(void);
 void		init_all_image(t_data *data);
+t_tex		*init_tex(void);
 
 // RAYCAST
 void		cast_ray(t_data *data, int width);
@@ -290,12 +273,12 @@ void		draw_mini_player(t_data *data);
 void		put_mini_wall(t_data *data, int width, int height);
 void		put_mini_ray(t_data *data, double step_x, double step_y);
 
-// TMP POUR L"ANIMATION
+// TMP POUR BONUS
 t_anim		*init_anim(void);
-
-// LOADING ANIMATION
-t_load		*new_load(t_win *win, int *loading);
-void		init_all_load(t_load *load);
+int			door_close(t_data *data, double w, double h);
+int			let_sleep(int *tmp, int delay);
+t_image		*circl_image(t_anim *anim, int index);
+t_image		*get_circl(t_data *data);
 
 // PARSE MAP
 int			is_line_map(char *line);

@@ -20,6 +20,7 @@ t_map	*new_struct_map(char *av)
 	map->map = new_map (av);
 	if (!map)
 		return (NULL);
+	map->door = 0;
 	map->width = count_width_map (map->map);
 	map->height = count_heigth_map (map->map);
 	map->text_no = get_texture(map->map, "NO");
@@ -43,7 +44,7 @@ t_win	*new_win(void)
 	return (win);
 }
 
-t_data	*new_data(char *av, t_win *win, int *load)
+t_data	*new_data(char *av)
 {
 	t_data	*data;
 
@@ -51,10 +52,11 @@ t_data	*new_data(char *av, t_win *win, int *load)
 	if (!data)
 		return (NULL);
 	data->map = new_struct_map (av);
-	data->load = load;
-	data->win = win;
-	data->win_tex = new_win_texture(win);
+	if (data->map->map == NULL)
+		return (free(data->map), free(data), NULL);
+	data->win = new_win();
 	data->cubplay = new_cubplay(data->map);
+	data->win_tex = new_win_texture(data);
 	data->tex = init_tex();
 	data->ray = init_ray();
 	data->wall = init_wall();
@@ -75,6 +77,8 @@ t_tex	*init_tex(void)
 	tex->west_tex = alloc_image();
 	tex->north_tex = alloc_image();
 	tex->south_tex = alloc_image();
+	tex->open_tex = alloc_image();
+	tex->close_tex = alloc_image();
 	return (tex);
 }
 

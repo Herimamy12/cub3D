@@ -14,21 +14,24 @@
 
 void	cast_ray(t_data *data, int width)
 {
+	int	flag;
+
+	flag = data->ray->door_flag;
 	data->ray->distance = 0;
 	data->ray->width = data->cubplay->width;
 	data->ray->height = data->cubplay->height;
 	data->ray->dwidth = cos(data->ray->angle);
 	data->ray->dheight = sin(data->ray->angle);
-	cast_ray_wall(data);
+	cast_ray_wall(data, flag);
 	roundf_ray(data);
 	data->ray->distance *= cos(data->ray->angle - data->cubplay->angle);
 	data->wall->height = (int)(HEIGHT / data->ray->distance);
 	data->wall->start = (HEIGHT - data->wall->height) / 2;
 	data->wall->end = data->wall->start + data->wall->height;
-	assign_the_wall(data, width);
+	assign_the_wall(data, width, flag);
 }
 
-void	cast_ray_wall(t_data *data)
+void	cast_ray_wall(t_data *data, int flag)
 {
 	int	go;
 	int	map_w;
@@ -45,7 +48,11 @@ void	cast_ray_wall(t_data *data)
 		if (map_h >= 0 && map_h < HEIGHT && map_w >= 0 && map_w < WIDTH)
 		{
 			if (data->map->map[map_h] && data->map->map[map_h][map_w]
-				&& data->map->map[map_h][map_w] == '1')
+				&& data->map->map[map_h][map_w] == 'P')
+				data->ray->door_flag = 1;
+			if (data->map->map[map_h] && data->map->map[map_h][map_w]
+				&& (data->map->map[map_h][map_w] == '1' || (flag
+				&& data->map->map[map_h][map_w] == 'P')))
 				break ;
 		}
 		else
@@ -53,29 +60,34 @@ void	cast_ray_wall(t_data *data)
 	}
 }
 
-void	assign_the_wall(t_data *data, int width)
+void	assign_the_wall(t_data *data, int width, int flag)
 {
 	int	color;
 	int	height;
 
 	height = data->wall->start;
-	if (data->tex->wall_tex == data->tex->north_tex || data->tex->wall_tex == data->tex->south_tex)
+	if (data->wall->type == NORTH || data->wall->type == SOUTH)
 		data->wall->tex_w = (int)(data->ray->width * data->tex->wall_tex->width)
 			% data->tex->wall_tex->width;
 	else
-
 		data->wall->tex_w = (int)(data->ray->height * data->tex->wall_tex->width)
 			% data->tex->wall_tex->width;
-	if (data->wall->type)
+	if (data->wall->type == WEST || data->wall->type == SOUTH)
 		data->wall->tex_w = data->tex->wall_tex->width - data->wall->tex_w;
-
 	while (height < data->wall->end)
 	{
 		data->wall->tex_h = (int)((height - data->wall->start)
 				/ (double)data->wall->height * data->tex->wall_tex->height);
 		color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
 				data->wall->tex_h);
-		my_mlx_pixel_put(data->win_tex, width, height, color);
+		if (!flag)
+			my_mlx_pixel_put(data->win_tex, width, height, color);
+		else if (flag && color != 256)
+		{
+			// printf("%d\n", color);
+			my_mlx_pixel_put(data->win_tex, width, height, color);
+		}
 		height++;
 	}
+	(void)flag;
 }
