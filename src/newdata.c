@@ -22,6 +22,7 @@ t_map	*new_struct_map(char *av)
 		return (NULL);
 	map->door = 0;
 	map->load_to_open = 0;
+	map->load_to_close = 0;
 	map->width = count_width_map (map->map);
 	map->height = count_heigth_map (map->map);
 	map->text_no = get_texture(map->map, "NO");
@@ -79,8 +80,10 @@ t_tex	*init_tex(void)
 	tex->west_tex = alloc_image();
 	tex->north_tex = alloc_image();
 	tex->south_tex = alloc_image();
-	tex->open_tex = alloc_image();
 	tex->close_tex = alloc_image();
+	tex->door_tex = alloc_image();
+	// Unitile en ce moment
+	tex->open_tex = alloc_image();
 	return (tex);
 }
 

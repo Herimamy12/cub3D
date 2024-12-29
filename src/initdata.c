@@ -37,8 +37,9 @@ void	init_all_image(t_data *data)
 	init_image(data, data->tex->west_tex, data->map->text_we);
 	init_image(data, data->tex->north_tex, data->map->text_no);
 	init_image(data, data->tex->south_tex, data->map->text_so);
-	init_image(data, data->tex->open_tex, "./textures/open.xpm");
+	init_image(data, data->tex->door_tex, "./textures/door.xpm");
 	init_image(data, data->tex->close_tex, "./textures/close.xpm");
+	init_image(data, data->tex->open_tex, "./textures/open.xpm");
 	init_anim_image(data);
 	init_door_image(data);
 }

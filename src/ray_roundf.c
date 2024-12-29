@@ -30,7 +30,6 @@ void	get_intersec_verticale(t_data *data)
 	{
 		data->ray->height += dist_heigth;
 		data->tex->wall_tex = get_circl(data);
-		// data->tex->wall_tex = data->west_tex;
 		data->wall->type = WEST;
 	}
 }
@@ -75,9 +74,10 @@ void	roundf_ray(t_data *data)
 		get_intersec_verticale(data);
 	if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->load_to_open)
 		data->tex->wall_tex = open_door(data);
-	// else if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->door && !data->map->load_to_open)
-	// 	data->tex->wall_tex = data->tex->open_tex;
+	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->load_to_close)
+		data->tex->wall_tex = close_door(data);
 	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && !data->map->door)
 		data->tex->wall_tex = data->tex->close_tex;
-	(void)last_heigth;
+	else if (data->map->map[(int)last_heigth][(int)last_width] == 'P')
+		data->tex->wall_tex = data->tex->door_tex;
 }

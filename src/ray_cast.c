@@ -53,7 +53,7 @@ void	cast_ray_wall(t_data *data, int flag)
 			if (data->map->map[map_h] && data->map->map[map_h][map_w]
 				&& (data->map->map[map_h][map_w] == '1' || (flag
 				&& data->map->map[map_h][map_w] == 'P'
-				&& !data->map->door)))
+				&& (!data->map->door || data->map->load_to_close))))
 				break ;
 		}
 		else

@@ -34,3 +34,31 @@ t_image	*get_door(t_data *data, int index)
 		return (data->door->eight);
 	return (data->door->zero);
 }
+
+t_image	*open_door(t_data *data)
+{
+	int			tmp;
+	static int	now = 0;
+
+	tmp = now / 4000;
+	data->map->load_to_close = 0;
+	if (let_sleep(&now, 36000))
+		return (get_door(data, tmp));
+	data->map->door = 1;
+	data->map->load_to_open = 0;
+	return (get_door(data, tmp));
+}
+
+t_image	*close_door(t_data *data)
+{
+	int			tmp;
+	static int	now = 0;
+
+	tmp = now / 4000;
+	data->map->load_to_open = 0;
+	if (let_sleep(&now, 36000))
+		return (get_door(data, 8 - tmp));
+	data->map->door = 0;
+	data->map->load_to_close = 0;
+	return (get_door(data, 8 - tmp));
+}

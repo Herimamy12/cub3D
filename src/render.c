@@ -12,16 +12,6 @@
 
 #include "../include/cube3d.h"
 
-void	close_door(t_data *data)
-{
-	static int	now = 0;
-
-	if (let_sleep(&now, SLEEP_TIME / 2))
-		return ;
-	data->map->door = 0;
-	data->map->load_to_open = 0;
-}
-
 int	render(t_data *data)
 {
 	draw_ceiling_floor (data);
@@ -30,8 +20,17 @@ int	render(t_data *data)
 	mlx_put_image_to_window (data->win->mlx_ptr, data->win->mlx_win,
 		data->win_tex->img, 0, 0);
 	if (data->map->door)
-		close_door (data);
+		wait_and_close(data);
 	return (0);
+}
+
+void	wait_and_close(t_data *data)
+{
+	static int	now = 0;
+
+	if (let_sleep(&now, SLEEP_TIME / 2))
+		return ;
+	data->map->load_to_close = 1;
 }
 
 void	adjust_ray_angle(t_data *data)

@@ -92,6 +92,7 @@ typedef struct s_map
 {
 	int		door;
 	int		load_to_open;
+	int		load_to_close;
 	int		width;
 	int		height;
 	char	**map;
@@ -168,8 +169,9 @@ typedef struct s_tex
 	t_image		*north_tex;
 	t_image		*south_tex;
 	t_image		*wall_tex;
-	t_image		*open_tex;
 	t_image		*close_tex;
+	t_image		*door_tex;
+	t_image		*open_tex;
 }				t_tex;
 
 // STRUCTURE FOR ANIMATION
@@ -285,6 +287,8 @@ t_image		*circl_image(t_anim *anim, int index);
 t_image		*get_circl(t_data *data);
 t_image		*get_door(t_data *data, int index);
 t_image		*open_door(t_data *data);
+t_image		*close_door(t_data *data);
+void		wait_and_close(t_data *data);
 
 // PARSE MAP
 int			is_line_map(char *line);
