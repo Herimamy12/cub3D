@@ -21,9 +21,17 @@ void	loop_cub3d(t_data *data)
 	mlx_loop (data->win->mlx_ptr);
 }
 
-void	open_door(t_data *data)
+t_image	*open_door(t_data *data)
 {
+	int			tmp;
+	static int	now = 0;
+
+	tmp = now / 4000;
+	if (let_sleep(&now, 36000))
+		return (get_door(data, tmp));
 	data->map->door = 1;
+	data->map->load_to_open = 0;
+	return (get_door(data, tmp));
 }
 
 int	handle_keypress(int keycode, t_data *data)
@@ -32,9 +40,9 @@ int	handle_keypress(int keycode, t_data *data)
 
 	res = 0;
 	if (keycode == ESC)
-		destroy_data (data);
+		destroy_data(data);
 	if (keycode == SPC)
-		open_door (data);
+		data->map->load_to_open = 1;
 	else if (keycode == RC_LEFT || keycode == RC_RIGHT)
 		res = rotate_cub_key(keycode, data);
 	else if (is_cub_event(keycode))

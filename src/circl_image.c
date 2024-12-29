@@ -49,7 +49,7 @@ t_image	*get_circl(t_data *data)
 	static int	now = 0;
 	static int	index = 0;
 
-	if (let_sleep(&now, 2 * SLEEP_TIME))
+	if (let_sleep(&now, 20 * SLEEP_TIME))
 		return (circl_image(data->anim, index));
 	index ++;
 	tmp = index;

@@ -37,6 +37,27 @@ void	init_all_image(t_data *data)
 	init_image(data, data->tex->west_tex, data->map->text_we);
 	init_image(data, data->tex->north_tex, data->map->text_no);
 	init_image(data, data->tex->south_tex, data->map->text_so);
+	init_image(data, data->tex->open_tex, "./textures/open.xpm");
+	init_image(data, data->tex->close_tex, "./textures/close.xpm");
+	init_anim_image(data);
+	init_door_image(data);
+}
+
+void	init_door_image(t_data *data)
+{
+	init_image(data, data->door->zero, "./textures/door/0.xpm");
+	init_image(data, data->door->one, "./textures/door/1.xpm");
+	init_image(data, data->door->two, "./textures/door/2.xpm");
+	init_image(data, data->door->three, "./textures/door/3.xpm");
+	init_image(data, data->door->four, "./textures/door/4.xpm");
+	init_image(data, data->door->five, "./textures/door/5.xpm");
+	init_image(data, data->door->six, "./textures/door/6.xpm");
+	init_image(data, data->door->seven, "./textures/door/7.xpm");
+	init_image(data, data->door->eight, "./textures/door/8.xpm");
+}
+
+void	init_anim_image(t_data *data)
+{
 	init_image(data, data->anim->zero, "./textures/anime/0.xpm");
 	init_image(data, data->anim->one, "./textures/anime/1.xpm");
 	init_image(data, data->anim->two, "./textures/anime/2.xpm");
@@ -46,8 +67,6 @@ void	init_all_image(t_data *data)
 	init_image(data, data->anim->six, "./textures/anime/6.xpm");
 	init_image(data, data->anim->seven, "./textures/anime/7.xpm");
 	init_image(data, data->anim->eight, "./textures/anime/8.xpm");
-	init_image(data, data->tex->open_tex, "./textures/open.xpm");
-	init_image(data, data->tex->close_tex, "./textures/close.xpm");
 }
 
 t_cubplay	*new_cubplay(t_map *map)

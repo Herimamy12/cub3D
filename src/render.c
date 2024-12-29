@@ -19,6 +19,7 @@ void	close_door(t_data *data)
 	if (let_sleep(&now, SLEEP_TIME / 2))
 		return ;
 	data->map->door = 0;
+	data->map->load_to_open = 0;
 }
 
 int	render(t_data *data)
@@ -28,7 +29,8 @@ int	render(t_data *data)
 	draw_mini_map (data);
 	mlx_put_image_to_window (data->win->mlx_ptr, data->win->mlx_win,
 		data->win_tex->img, 0, 0);
-	close_door (data);
+	if (data->map->door)
+		close_door (data);
 	return (0);
 }
 

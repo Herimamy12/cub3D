@@ -21,6 +21,7 @@ t_map	*new_struct_map(char *av)
 	if (!map)
 		return (NULL);
 	map->door = 0;
+	map->load_to_open = 0;
 	map->width = count_width_map (map->map);
 	map->height = count_heigth_map (map->map);
 	map->text_no = get_texture(map->map, "NO");
@@ -62,6 +63,7 @@ t_data	*new_data(char *av)
 	data->wall = init_wall();
 	data->mini = init_mini();
 	data->anim = init_anim();
+	data->door = init_anim();
 	init_all_image(data);
 	return (data);
 }

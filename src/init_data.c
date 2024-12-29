@@ -41,7 +41,7 @@ int	get_texture_pixel(t_image *img, int x, int y)
 {
 	int	pixel_index;
 
-	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
+	if (x < 0 || x > img->width || y < 0 || y > img->height)
 		return (0);
 	pixel_index = (y * img->line_length + x * (img->bpp / 8));
 	return (*(unsigned int *)(img->addr + pixel_index));

@@ -73,10 +73,11 @@ void	roundf_ray(t_data *data)
 		get_intersec_horizontale(data);
 	else
 		get_intersec_verticale(data);
-	if (data->map->map[tmp_heigth][tmp_width] == 'P' && !data->map->door)
+	if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->load_to_open)
+		data->tex->wall_tex = open_door(data);
+	// else if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->door && !data->map->load_to_open)
+	// 	data->tex->wall_tex = data->tex->open_tex;
+	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && !data->map->door)
 		data->tex->wall_tex = data->tex->close_tex;
-		// data->tex->wall_tex = get_circl(data);
-	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->door)
-		data->tex->wall_tex = data->tex->open_tex;
 	(void)last_heigth;
 }

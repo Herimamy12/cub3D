@@ -91,6 +91,7 @@ typedef struct s_win
 typedef struct s_map
 {
 	int		door;
+	int		load_to_open;
 	int		width;
 	int		height;
 	char	**map;
@@ -195,6 +196,7 @@ typedef struct s_data
 	t_wall		*wall;
 	t_mini		*mini;
 	t_anim		*anim;
+	t_anim		*door;
 	t_image		*win_tex;
 	t_cubplay	*cubplay;
 }				t_data;
@@ -257,6 +259,8 @@ t_mini		*init_mini(void);
 t_ray		*init_ray(void);
 void		init_all_image(t_data *data);
 t_tex		*init_tex(void);
+void		init_anim_image(t_data *data);
+void		init_door_image(t_data *data);
 
 // RAYCAST
 void		cast_ray(t_data *data, int width);
@@ -279,6 +283,8 @@ int			door_close(t_data *data, double w, double h);
 int			let_sleep(int *tmp, int delay);
 t_image		*circl_image(t_anim *anim, int index);
 t_image		*get_circl(t_data *data);
+t_image		*get_door(t_data *data, int index);
+t_image		*open_door(t_data *data);
 
 // PARSE MAP
 int			is_line_map(char *line);

@@ -52,7 +52,8 @@ void	cast_ray_wall(t_data *data, int flag)
 				data->ray->door_flag = 1;
 			if (data->map->map[map_h] && data->map->map[map_h][map_w]
 				&& (data->map->map[map_h][map_w] == '1' || (flag
-				&& data->map->map[map_h][map_w] == 'P')))
+				&& data->map->map[map_h][map_w] == 'P'
+				&& !data->map->door)))
 				break ;
 		}
 		else
@@ -83,10 +84,7 @@ void	assign_the_wall(t_data *data, int width, int flag)
 		if (!flag)
 			my_mlx_pixel_put(data->win_tex, width, height, color);
 		else if (flag && color != 256)
-		{
-			// printf("%d\n", color);
 			my_mlx_pixel_put(data->win_tex, width, height, color);
-		}
 		height++;
 	}
 	(void)flag;
