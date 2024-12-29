@@ -47,18 +47,28 @@ void	cast_ray_wall(t_data *data, int flag)
 		map_h = (int)data->ray->height;
 		if (map_h >= 0 && map_h < HEIGHT && map_w >= 0 && map_w < WIDTH)
 		{
-			if (data->map->map[map_h] && data->map->map[map_h][map_w]
+			if (is_valid_content(data, map_w, map_h)
 				&& data->map->map[map_h][map_w] == 'P')
 				data->ray->door_flag = 1;
-			if (data->map->map[map_h] && data->map->map[map_h][map_w]
-				&& (data->map->map[map_h][map_w] == '1' || (flag
-				&& data->map->map[map_h][map_w] == 'P'
-				&& (!data->map->door || data->map->load_to_close))))
+			if (is_loop_break(data, map_w, map_h, flag))
 				break ;
 		}
 		else
 			break ;
 	}
+}
+
+int	is_loop_break(t_data *data, int map_w, int map_h, int flag)
+{
+	return (is_valid_content(data, map_w, map_h)
+		&& (data->map->map[map_h][map_w] == '1' || (flag
+			&& data->map->map[map_h][map_w] == 'P'
+		&& (!data->map->door || data->map->load_to_close))));
+}
+
+int	is_valid_content(t_data *data, int map_w, int map_h)
+{
+	return (data->map->map[map_h] && data->map->map[map_h][map_w]);
 }
 
 void	assign_the_wall(t_data *data, int width, int flag)
@@ -68,12 +78,13 @@ void	assign_the_wall(t_data *data, int width, int flag)
 
 	height = data->wall->start;
 	if (data->wall->type == NORTH || data->wall->type == SOUTH)
-		data->wall->tex_w = (int)(data->ray->width * data->tex->wall_tex->width)
-			% data->tex->wall_tex->width;
+		data->wall->tex_w = (int)(data->ray->width
+				* data->tex->wall_tex->width) % data->tex->wall_tex->width;
 	else
-		data->wall->tex_w = (int)(data->ray->height * data->tex->wall_tex->width)
-			% data->tex->wall_tex->width;
-	if (data->wall->type == WEST || data->wall->type == SOUTH)
+		data->wall->tex_w = (int)(data->ray->height
+				* data->tex->wall_tex->width) % data->tex->wall_tex->width;
+	if ((data->wall->type == WEST || data->wall->type == SOUTH)
+		&& data->tex->wall_tex != data->tex->door_tex)
 		data->wall->tex_w = data->tex->wall_tex->width - data->wall->tex_w;
 	while (height < data->wall->end)
 	{
@@ -87,5 +98,4 @@ void	assign_the_wall(t_data *data, int width, int flag)
 			my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;
 	}
-	(void)flag;
 }

@@ -181,11 +181,11 @@ typedef struct s_anim
 	t_image	*one;
 	t_image	*two;
 	t_image	*three;
-	t_image *four;
-	t_image *five;
-	t_image *six;
-	t_image *seven;
-	t_image *eight;
+	t_image	*four;
+	t_image	*five;
+	t_image	*six;
+	t_image	*seven;
+	t_image	*eight;
 }			t_anim;
 
 // DATA STRUCT
@@ -289,6 +289,8 @@ t_image		*get_door(t_data *data, int index);
 t_image		*open_door(t_data *data);
 t_image		*close_door(t_data *data);
 void		wait_and_close(t_data *data);
+int			is_valid_content(t_data *data, int map_w, int map_h);
+int			is_loop_break(t_data *data, int map_w, int map_h, int flag);
 
 // PARSE MAP
 int			is_line_map(char *line);

@@ -28,6 +28,9 @@ void	wait_and_close(t_data *data)
 {
 	static int	now = 0;
 
+	if (data->map->map[(int)data->cubplay->height]
+		[(int)data->cubplay->width] == 'P')
+		return ;
 	if (let_sleep(&now, SLEEP_TIME / 2))
 		return ;
 	data->map->load_to_close = 1;

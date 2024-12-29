@@ -16,7 +16,7 @@ t_image	*get_door(t_data *data, int index)
 {
 	if (index == 0)
 		return (data->door->zero);
-	else if(index == 1)
+	else if (index == 1)
 		return (data->door->one);
 	else if (index == 2)
 		return (data->door->two);

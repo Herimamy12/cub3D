@@ -74,7 +74,8 @@ void	roundf_ray(t_data *data)
 		get_intersec_verticale(data);
 	if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->load_to_open)
 		data->tex->wall_tex = open_door(data);
-	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && data->map->load_to_close)
+	else if (data->map->map[tmp_heigth][tmp_width] == 'P'
+		&& data->map->load_to_close)
 		data->tex->wall_tex = close_door(data);
 	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && !data->map->door)
 		data->tex->wall_tex = data->tex->close_tex;

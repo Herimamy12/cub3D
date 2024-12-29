@@ -69,53 +69,6 @@ t_data	*new_data(char *av)
 	return (data);
 }
 
-t_tex	*init_tex(void)
-{
-	t_tex	*tex;
-
-	tex = (t_tex *)malloc(sizeof(t_tex));
-	if (!tex)
-		return (NULL);
-	tex->east_tex = alloc_image();
-	tex->west_tex = alloc_image();
-	tex->north_tex = alloc_image();
-	tex->south_tex = alloc_image();
-	tex->close_tex = alloc_image();
-	tex->door_tex = alloc_image();
-	// Unitile en ce moment
-	tex->open_tex = alloc_image();
-	return (tex);
-}
-
-t_anim	*init_anim(void)
-{
-	t_anim	*anim;
-
-	anim = (t_anim *)malloc(sizeof(t_anim));
-	if (!anim)
-		return (NULL);
-	anim->zero = alloc_image();
-	anim->one = alloc_image();
-	anim->two = alloc_image();
-	anim->three = alloc_image();
-	anim->four = alloc_image();
-	anim->five = alloc_image();
-	anim->six = alloc_image();
-	anim->seven = alloc_image();
-	anim->eight = alloc_image();
-	return (anim);
-}
-
-t_image	*alloc_image(void)
-{
-	t_image	*img;
-
-	img = (t_image *)malloc(sizeof(t_image));
-	if (!img)
-		return (NULL);
-	return (img);
-}
-
 t_wall	*init_wall(void)
 {
 	t_wall	*new;
