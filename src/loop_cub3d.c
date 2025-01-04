@@ -16,18 +16,10 @@ void	loop_cub3d(t_data *data)
 {
 	mlx_hook (data->win->mlx_win, 2, 1L << 0, handle_keypress, data);
 	mlx_hook (data->win->mlx_win, 3, 1L << 1, handle_keyrelease, data);
-	// mlx_hook (data->win->mlx_win, 6, 1L << 6, handle_mouse_move, data);
-	// mlx_hook (data->win->mlx_win, 7, 1L << 7, handle_focus_out, data);
+	mlx_hook (data->win->mlx_win, 6, 1L << 6, handle_mouse_move, data);
 	mlx_hook (data->win->mlx_win, 17, 0, close_win, data);
 	mlx_loop_hook (data->win->mlx_ptr, render, data);
 	mlx_loop (data->win->mlx_ptr);
-}
-int	handle_focus_out(int keycode, t_data *data)
-{
-	(void)keycode;
-	data->cubplay->rc_left = 0;
-	data->cubplay->rc_right = 0;
-	return (0);
 }
 
 int	handle_keyrelease(int keycode, t_data *data)
@@ -63,34 +55,34 @@ int	handle_keypress(int keycode, t_data *data)
 
 int	handle_mouse_move(int x, int y, t_data *data)
 {
-	int			res;
 	int			delta_x;
 	static int	last_x = -1;
 
 	(void)y;
 	delta_x = x - last_x;
-	if (last_x == -1 || abs(delta_x) >= 5)
+	if (last_x == -1 || abs(delta_x) > 5)
 	{
 		last_x = x;
 		return (0);
 	}
-	res = 0;
 	if (delta_x > 0)
 	{
+		data->cubplay->rc_left = 0;
 		data->cubplay->rc_right = 1;
-		data->cubplay->rc_left = 0;
+		last_x = x;
 	}
- 	else if (delta_x < 0)
+ 	if (delta_x < 0)
 	{
+		data->cubplay->rc_right = 0;
 		data->cubplay->rc_left = 1;
-		data->cubplay->rc_right = 0;
+		last_x = x;
 	}
-	else if (abs(delta_x) < 5)
+	if (abs(delta_x) < 2)
 	{
 		data->cubplay->rc_left = 0;
 		data->cubplay->rc_right = 0;
 	}
-	return (res);
+	return (0);
 }
 
 int	rotate_cub_key(int keycode, t_data *data)
