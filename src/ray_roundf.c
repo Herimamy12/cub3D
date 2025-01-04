@@ -68,7 +68,8 @@ void	roundf_ray(t_data *data)
 	last_width = data->ray->width - (ADDCAST * cos(data->ray->angle));
 	last_heigth = data->ray->height - (ADDCAST * sin(data->ray->angle));
 	if (data->map->map[(int)data->ray->height][(int)last_width] == '1'
-		|| data->map->map[(int)data->ray->height][(int)last_width] == 'P')
+		|| (data->map->map[(int)data->ray->height][(int)last_width] == 'P'
+		&& !data->map->door))
 		get_intersec_horizontale(data);
 	else
 		get_intersec_verticale(data);

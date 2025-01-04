@@ -55,10 +55,10 @@ t_image	*close_door(t_data *data)
 	static int	now = 0;
 
 	tmp = now / 4000;
+	data->map->door = 0;
 	data->map->load_to_open = 0;
 	if (let_sleep(&now, 36000))
 		return (get_door(data, 8 - tmp));
-	data->map->door = 0;
 	data->map->load_to_close = 0;
 	return (get_door(data, 8 - tmp));
 }
