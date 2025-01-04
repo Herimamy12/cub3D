@@ -94,7 +94,7 @@ void	assign_the_wall(t_data *data, int width, int flag)
 				data->wall->tex_h);
 		if (!flag)
 			my_mlx_pixel_put(data->win_tex, width, height, color);
-		else if (flag && color != 256)
+		else if (flag && color > 0)
 			my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;
 	}

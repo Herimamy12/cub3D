@@ -239,6 +239,7 @@ t_cubplay	*new_cubplay(t_map *map);
 int			handle_keypress(int keycode, t_data *data);
 int			handle_keyrelease(int keycode, t_data *data);
 int			handle_mouse_move(int x, int y, t_data *data);
+int			handle_focus_out(int keycode, t_data *data);
 void		loop_cub3d(t_data *data);
 
 // OTHER && DEBUG
