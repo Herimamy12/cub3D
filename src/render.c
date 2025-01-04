@@ -19,6 +19,8 @@ int	render(t_data *data)
 	draw_mini_map (data);
 	mlx_put_image_to_window (data->win->mlx_ptr, data->win->mlx_win,
 		data->win_tex->img, 0, 0);
+	moovement(data, 0, 0);
+	rotate_cub_key(0, data);
 	if (data->map->door)
 		wait_and_close(data);
 	return (0);

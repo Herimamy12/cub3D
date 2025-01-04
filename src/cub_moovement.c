@@ -26,22 +26,22 @@ int	door_close(t_data *data, double w, double h)
 
 int	moovement(t_data *data, double w, double h)
 {
-	if (data->cubplay->u_d == 1)
+	if (data->cubplay->up == 1)
 	{
 		h += sin(data->cubplay->angle) * S_MOOVEMENT;
 		w += cos(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	else if (data->cubplay->u_d == -1)
+	if (data->cubplay->down == 1)
 	{
 		h -= sin(data->cubplay->angle) * S_MOOVEMENT;
 		w -= cos(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	else if (data->cubplay->l_r == 1)
+	if (data->cubplay->left == 1)
 	{
 		h -= cos(data->cubplay->angle) * S_MOOVEMENT;
 		w += sin(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	else
+	if (data->cubplay->right == 1)
 	{
 		h += cos(data->cubplay->angle) * S_MOOVEMENT;
 		w -= sin(data->cubplay->angle) * S_MOOVEMENT;
@@ -69,6 +69,13 @@ int	is_wall(t_data *data, double w, double h)
 
 void	reset_flag(t_data *data)
 {
-	data->cubplay->u_d = 0;
-	data->cubplay->l_r = 0;
+	// function until now
+	if (data->cubplay->up)
+		data->cubplay->up = 0;
+	else if (data->cubplay->right)
+		data->cubplay->right = 0;
+	else if (data->cubplay->down)
+		data->cubplay->down = 0;
+	else if (data->cubplay->left)
+		data->cubplay->left = 0;
 }

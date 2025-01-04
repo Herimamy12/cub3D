@@ -61,12 +61,40 @@ t_data	*new_data(char *av)
 	data->win_tex = new_win_texture(data);
 	data->tex = init_tex();
 	data->ray = init_ray();
+	data->enemy = new_enemy(data->map);
 	data->wall = init_wall();
 	data->mini = init_mini();
 	data->anim = init_anim();
 	data->door = init_anim();
 	init_all_image(data);
 	return (data);
+}
+
+t_enemy	*new_enemy(t_map *map)
+{
+	int		width;
+	int		height;
+	t_enemy	*enemy;
+
+	enemy = (t_enemy *)malloc(sizeof(t_enemy));
+	if (!enemy)
+		return (NULL);
+	enemy->width = -1;
+	enemy->height = -1;
+	height = -1;
+	while (++height < map->height && map->map[height])
+	{
+		width = -1;
+		while (++width < map->width && map->map[height][width])
+		{
+			if (map->map[height][width] == 'E')
+			{
+				enemy->width = width + 0.5;
+				enemy->height = height + 0.5;
+			}
+		}
+	}
+	return (enemy);
 }
 
 t_wall	*init_wall(void)

@@ -117,8 +117,12 @@ typedef struct s_image
 // PLAYER STRUCT FOR 3D
 typedef struct s_cubplay
 {
-	int		l_r;
-	int		u_d;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		rc_left;
+	int		rc_right;
 	double	width;
 	double	height;
 	double	angle;
@@ -188,7 +192,14 @@ typedef struct s_anim
 	t_image	*eight;
 }			t_anim;
 
-// DATA STRUCT
+// STRUCTURE ENEMY
+typedef struct s_enemy
+{
+	double	width;
+	double	height;
+}			t_enemy;
+
+// DATA STRUCT (ALL)
 typedef struct s_data
 {
 	t_tex		*tex;
@@ -199,6 +210,7 @@ typedef struct s_data
 	t_mini		*mini;
 	t_anim		*anim;
 	t_anim		*door;
+	t_enemy		*enemy;
 	t_image		*win_tex;
 	t_cubplay	*cubplay;
 }				t_data;
@@ -225,6 +237,7 @@ t_cubplay	*new_cubplay(t_map *map);
 
 // LOOP && MOOV && KEYPRESS
 int			handle_keypress(int keycode, t_data *data);
+int			handle_keyrelease(int keycode, t_data *data);
 int			handle_mouse_move(int x, int y, t_data *data);
 void		loop_cub3d(t_data *data);
 
@@ -291,6 +304,7 @@ t_image		*close_door(t_data *data);
 void		wait_and_close(t_data *data);
 int			is_valid_content(t_data *data, int map_w, int map_h);
 int			is_loop_break(t_data *data, int map_w, int map_h, int flag);
+t_enemy		*new_enemy(t_map *map);
 
 // PARSE MAP
 int			is_line_map(char *line);

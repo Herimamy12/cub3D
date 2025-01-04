@@ -51,6 +51,7 @@ void	destroy_data(t_data *data)
 	destroy_win (data->win);
 	destroy_map (data->map);
 	free (data->cubplay);
+	free (data->enemy);
 	free (data->wall);
 	free (data->mini);
 	free (data->ray);

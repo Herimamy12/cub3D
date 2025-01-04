@@ -14,26 +14,26 @@
 
 int	cub_event(int keycode, t_data *data)
 {
-	double	w;
-	double	h;
-
-	w = 0;
-	h = 0;
 	if (keycode == NORTH)
-		data->cubplay->u_d = 1;
-	else if (keycode == SOUTH)
-		data->cubplay->u_d = -1;
-	else if (keycode == EAST)
-		data->cubplay->l_r = -1;
-	else
-		data->cubplay->l_r = 1;
-	return (moovement(data, w, h));
+		data->cubplay->up = 1;
+	if (keycode == SOUTH)
+		data->cubplay->down = 1;
+	if (keycode == EAST)
+		data->cubplay->right = 1;
+	if (keycode == WEST)
+		data->cubplay->left = 1;
+	if (keycode == RC_LEFT)
+		data->cubplay->rc_left = 1;
+	if (keycode == RC_RIGHT)
+		data->cubplay->rc_right = 1;
+	return (0);
 }
 
 int	is_cub_event(int keycode)
 {
 	return (keycode == NORTH || keycode == SOUTH
-		|| keycode == EAST || keycode == WEST);
+		|| keycode == EAST || keycode == WEST
+		|| keycode == RC_LEFT || keycode == RC_RIGHT);
 }
 
 int	rotate_cub(float angle, t_data *data)
