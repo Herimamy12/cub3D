@@ -21,7 +21,7 @@ int	is_line_map(char *line)
 	{
 		if ((line[i] != '1' && line[i] != '0' && line[i] != ' '
 				&& line[i] != 'N' && line[i] != 'S' && line[i] != 'E'
-				&& line[i] != 'W' && line[i] != 'P'))
+				&& line[i] != 'W' && line[i] != 'P' && line[i] != 'B'))
 			return (0);
 		i ++;
 	}
