@@ -305,6 +305,7 @@ void		wait_and_close(t_data *data);
 int			is_valid_content(t_data *data, int map_w, int map_h);
 int			is_loop_break(t_data *data, int map_w, int map_h, int flag);
 t_enemy		*new_enemy(t_map *map);
+void		init_cub_int(t_cubplay *new);
 
 // PARSE MAP
 int			is_line_map(char *line);

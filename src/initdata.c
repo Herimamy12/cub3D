@@ -54,7 +54,18 @@ t_cubplay	*new_cubplay(t_map *map)
 			}
 		}
 	}
+	init_cub_int(new);
 	return (new);
+}
+
+void	init_cub_int(t_cubplay *new)
+{
+	new->up = 0;
+	new->down = 0;
+	new->left = 0;
+	new->right = 0;
+	new->rc_left = 0;
+	new->rc_right = 0;
 }
 
 int	is_player(char set)
