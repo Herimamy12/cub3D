@@ -79,7 +79,10 @@ void	roundf_ray(t_data *data)
 		&& data->map->load_to_close)
 		data->tex->wall_tex = close_door(data);
 	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && !data->map->door)
+	{
 		data->tex->wall_tex = data->tex->close_tex;
+		data->ray->distance += 0.5;
+	}
 	else if (data->map->map[(int)last_heigth][(int)last_width] == 'P')
 		data->tex->wall_tex = data->tex->door_tex;
 }
