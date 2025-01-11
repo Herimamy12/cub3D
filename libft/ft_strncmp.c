@@ -37,3 +37,25 @@ int	lft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }
+
+int	ft_atoi(const char *nb)
+{
+	char	*nbr;
+	int		res;
+	int		i;
+	if (!nb)
+		return (-1);
+	i = 0;
+	res = 0;
+	nbr = (char *)nb;
+	while ((nbr[i] && nbr[i] >= 9 && nbr[i] <= 13) || nbr[i] == 32)
+		i ++;
+	if (nbr[i] == '-' || nbr[i] == '+')
+		return (0);
+	while (ft_isdigit(nbr[i]))
+	{
+		res = (res * 10) + (nbr[i] - 48);
+		i ++;
+	}
+	return (res);
+}

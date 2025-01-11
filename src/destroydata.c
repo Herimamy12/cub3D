@@ -17,8 +17,6 @@ void	destroy_str(char **str)
 	int	i;
 
 	i = 0;
-	if (!str || !*str)
-		return ;
 	while (str[i])
 	{
 		free (str[i]);
@@ -29,8 +27,6 @@ void	destroy_str(char **str)
 
 void	destroy_win(t_win *win)
 {
-	if (!win)
-		return ;
 	mlx_destroy_window(win->mlx_ptr, win->mlx_win);
 	mlx_destroy_display(win->mlx_ptr);
 	free (win->mlx_ptr);
@@ -49,11 +45,13 @@ void	destroy_data(t_data *data)
 	if (!data)
 		return ;
 	destroy_image (data->win_tex, data->win);
-	destroy_anim (data->anim, data->win);
 	destroy_tex (data->tex, data->win);
+	destroy_anim (data->anim, data->win);
+	destroy_anim (data->door, data->win);
 	destroy_win (data->win);
 	destroy_map (data->map);
 	free (data->cubplay);
+	free (data->enemy);
 	free (data->wall);
 	free (data->mini);
 	free (data->ray);

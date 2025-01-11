@@ -12,13 +12,14 @@
 
 #include "../include/cube3d.h"
 
-void	init_image(t_win *win, t_image *img, char *filename)
+void	init_image(t_data *data, t_image *img, char *filename)
 {
-	img->img = mlx_xpm_file_to_image(win->mlx_ptr, filename,
+	img->img = mlx_xpm_file_to_image(data->win->mlx_ptr, filename,
 			&img->width, &img->height);
 	if (!img->img)
 	{
 		printf("Erreur de chargement de l'image: %s\n", filename);
+		destroy_data(data);
 		exit(1);
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length,
@@ -40,20 +41,20 @@ int	get_texture_pixel(t_image *img, int x, int y)
 {
 	int	pixel_index;
 
-	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
+	if (x < 0 || x > img->width || y < 0 || y > img->height)
 		return (0);
 	pixel_index = (y * img->line_length + x * (img->bpp / 8));
 	return (*(unsigned int *)(img->addr + pixel_index));
 }
 
-t_image	*new_win_texture(t_win *win)
+t_image	*new_win_texture(t_data *data)
 {
 	t_image	*win_tex;
 
 	win_tex = (t_image *)malloc(sizeof(t_image));
 	if (!win_tex)
 		return (NULL);
-	win_tex->img = mlx_new_image(win->mlx_ptr, WIDTH, HEIGHT);
+	win_tex->img = mlx_new_image(data->win->mlx_ptr, WIDTH, HEIGHT);
 	win_tex->bpp = 0;
 	win_tex->line_length = 0;
 	win_tex->endian = 0;
@@ -69,11 +70,15 @@ t_ray	*init_ray(void)
 	new = (t_ray *)malloc(sizeof(t_ray));
 	if (!new)
 		return (NULL);
+	new->fdoor = 0;
+	new->fsprite = 0;
 	new->angle = 0;
 	new->width = 0;
 	new->height = 0;
 	new->dwidth = 0;
 	new->dheight = 0;
 	new->distance = 0;
+	new->door_flag = 0;
+	new->sprite_flag = 0;
 	return (new);
 }

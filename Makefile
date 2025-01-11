@@ -14,7 +14,7 @@ LIBX_DIR	=	./minilibx-linux/
 
 CC	=	gcc
 
-CFLAGS	=	-g -Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g
 
 LIBX_FLAGS	=	-lXext -lX11 -lm
 

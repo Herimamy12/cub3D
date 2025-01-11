@@ -37,5 +37,6 @@ int		ft_isdigit(int c);
 int		ft_strcmp(char *cmd, char *set);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(char *old, char *str);
+int	    ft_atoi(const char *nb);
 
 #endif

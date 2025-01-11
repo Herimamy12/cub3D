@@ -12,29 +12,41 @@
 
 #include "../include/cube3d.h"
 
+int	door_close(t_data *data, double w, double h)
+{
+	int	map_w;
+	int	map_h;
+
+	map_w = (int)((roundf(w) / 5) + data->cubplay->width);
+	map_h = (int)((roundf(h) / 5) + data->cubplay->height);
+	if (data->map->map[map_h][map_w] == 'P' && !data->map->door)
+		return (1);
+	return (0);
+}
+
 int	moovement(t_data *data, double w, double h)
 {
-	if (data->cubplay->u_d == 1)
+	if (data->cubplay->up == 1)
 	{
 		h += sin(data->cubplay->angle) * S_MOOVEMENT;
 		w += cos(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	else if (data->cubplay->u_d == -1)
+	if (data->cubplay->down == 1)
 	{
 		h -= sin(data->cubplay->angle) * S_MOOVEMENT;
 		w -= cos(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	else if (data->cubplay->l_r == 1)
+	if (data->cubplay->left == 1)
 	{
 		h -= cos(data->cubplay->angle) * S_MOOVEMENT;
 		w += sin(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	else
+	if (data->cubplay->right == 1)
 	{
 		h += cos(data->cubplay->angle) * S_MOOVEMENT;
 		w -= sin(data->cubplay->angle) * S_MOOVEMENT;
 	}
-	if (is_wall (data, w, h))
+	if (door_close(data, w, h) || is_wall (data, w, h))
 		return (0);
 	return (1);
 }
@@ -57,6 +69,13 @@ int	is_wall(t_data *data, double w, double h)
 
 void	reset_flag(t_data *data)
 {
-	data->cubplay->u_d = 0;
-	data->cubplay->l_r = 0;
+	// function until now
+	if (data->cubplay->up)
+		data->cubplay->up = 0;
+	else if (data->cubplay->right)
+		data->cubplay->right = 0;
+	else if (data->cubplay->down)
+		data->cubplay->down = 0;
+	else if (data->cubplay->left)
+		data->cubplay->left = 0;
 }

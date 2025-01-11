@@ -20,6 +20,9 @@ t_map	*new_struct_map(char *av)
 	map->map = new_map (av);
 	if (!map)
 		return (NULL);
+	map->door = 0;
+	map->load_to_open = 0;
+	map->load_to_close = 0;
 	map->width = count_width_map (map->map);
 	map->height = count_heigth_map (map->map);
 	map->text_no = get_texture(map->map, "NO");
@@ -43,7 +46,7 @@ t_win	*new_win(void)
 	return (win);
 }
 
-t_data	*new_data(char *av, t_win *win, int *load)
+t_data	*new_data(char *av)
 {
 	t_data	*data;
 
@@ -51,60 +54,56 @@ t_data	*new_data(char *av, t_win *win, int *load)
 	if (!data)
 		return (NULL);
 	data->map = new_struct_map (av);
-	data->load = load;
-	data->win = win;
-	data->win_tex = new_win_texture(win);
+	if (data->map->map == NULL)
+		return (free(data->map), free(data), NULL);
+	data->win = new_win();
 	data->cubplay = new_cubplay(data->map);
+	data->win_tex = new_win_texture(data);
 	data->tex = init_tex();
 	data->ray = init_ray();
+	data->enemy = new_enemy(data->map);
 	data->wall = init_wall();
 	data->mini = init_mini();
 	data->anim = init_anim();
+	data->door = init_anim();
+	data->color = init_color();
+	data->rgb_c = get_color(data->color, data->map->map, "C ");
+	data->rgb_f = get_color(data->color, data->map->map, "F ");
 	init_all_image(data);
 	return (data);
 }
 
-t_tex	*init_tex(void)
+t_enemy	*new_enemy(t_map *map)
 {
-	t_tex	*tex;
+	int		width;
+	int		height;
+	t_enemy	*enemy;
 
-	tex = (t_tex *)malloc(sizeof(t_tex));
-	if (!tex)
+	enemy = (t_enemy *)malloc(sizeof(t_enemy));
+	if (!enemy)
 		return (NULL);
-	tex->east_tex = alloc_image();
-	tex->west_tex = alloc_image();
-	tex->north_tex = alloc_image();
-	tex->south_tex = alloc_image();
-	return (tex);
-}
-
-t_anim	*init_anim(void)
-{
-	t_anim	*anim;
-
-	anim = (t_anim *)malloc(sizeof(t_anim));
-	if (!anim)
-		return (NULL);
-	anim->zero = alloc_image();
-	anim->one = alloc_image();
-	anim->two = alloc_image();
-	anim->three = alloc_image();
-	anim->four = alloc_image();
-	anim->five = alloc_image();
-	anim->six = alloc_image();
-	anim->seven = alloc_image();
-	anim->eight = alloc_image();
-	return (anim);
-}
-
-t_image	*alloc_image(void)
-{
-	t_image	*img;
-
-	img = (t_image *)malloc(sizeof(t_image));
-	if (!img)
-		return (NULL);
-	return (img);
+	enemy->width = -1;
+	enemy->height = -1;
+	height = -1;
+	while (++height < map->height && map->map[height])
+	{
+		width = -1;
+		while (++width < map->width && map->map[height][width])
+		{
+			if (map->map[height][width] == 'B')
+			{
+				enemy->width = width + 0.5;
+				enemy->height = height + 0.5;
+			}
+		}
+	}
+	enemy->fput = 0;
+	enemy->screen = 0;
+	enemy->screen_h = 0;
+	enemy->distance = 0;
+	enemy->start = 0;
+	enemy->end = 0;
+	return (enemy);
 }
 
 t_wall	*init_wall(void)
