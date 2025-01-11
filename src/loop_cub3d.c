@@ -58,22 +58,19 @@ int	handle_mouse_move(int x, int y, t_data *data)
 	int			delta_x;
 	static int	last_x = -1;
 
-	(void)y;
 	delta_x = x - last_x;
 	if (last_x == -1 || abs(delta_x) > 5)
 	{
 		last_x = x;
-		return (0);
+		return (y);
 	}
 	if (delta_x > 0)
 	{
-		data->cubplay->rc_left = 0;
 		data->cubplay->rc_right = 1;
 		last_x = x;
 	}
- 	if (delta_x < 0)
+	if (delta_x < 0)
 	{
-		data->cubplay->rc_right = 0;
 		data->cubplay->rc_left = 1;
 		last_x = x;
 	}
@@ -82,7 +79,7 @@ int	handle_mouse_move(int x, int y, t_data *data)
 		data->cubplay->rc_left = 0;
 		data->cubplay->rc_right = 0;
 	}
-	return (0);
+	return (y);
 }
 
 int	rotate_cub_key(int keycode, t_data *data)

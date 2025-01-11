@@ -48,9 +48,7 @@ void	cast_ray_wall(t_data *data, int width)
 			if (is_valid_content(data, map_w, map_h)
 				&& data->map->map[map_h][map_w] == 'P')
 				data->ray->door_flag = 1;
-			if (is_valid_content(data, map_w, map_h)
-				&& is_hit_enemy(data, width))
-				data->ray->sprite_flag = 1;
+			is_hit_enemy(data, width);
 			if (is_loop_break(data, map_w, map_h))
 				break ;
 		}
@@ -59,24 +57,10 @@ void	cast_ray_wall(t_data *data, int width)
 	}
 }
 
-int	is_hit_enemy(t_data *data, int width)
-{
-	if (fabs(data->enemy->height - data->ray->height) < ADDCAST
-		&& fabs(data->enemy->width - data->ray->width) < ADDCAST)
-	{
-		data->enemy->fput = 1;
-		data->enemy->screen = width;
-		data->enemy->distance = data->ray->distance;
-		return (1);
-	}
-	return (0);
-}
-
 int	is_loop_break(t_data *data, int map_w, int map_h)
 {
 	return (is_valid_content(data, map_w, map_h)
 		&& (data->map->map[map_h][map_w] == '1'
-		|| (data->ray->fsprite && data->map->map[map_h][map_w] == 'B')
 		|| (data->ray->fdoor && data->map->map[map_h][map_w] == 'P'
 		&& (!data->map->door || data->map->load_to_close))));
 }
@@ -88,11 +72,9 @@ int	is_valid_content(t_data *data, int map_w, int map_h)
 
 void	assign_the_wall(t_data *data, int width)
 {
-	int	flag;
 	int	color;
 	int	height;
 
-	flag = data->ray->door_flag;
 	height = data->wall->start;
 	if (data->wall->type == NORTH || data->wall->type == SOUTH)
 		data->wall->tex_w = (int)(data->ray->width
@@ -109,9 +91,9 @@ void	assign_the_wall(t_data *data, int width)
 				/ (double)data->wall->height * data->tex->wall_tex->height);
 		color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
 				data->wall->tex_h);
-		if (!flag)
+		if (!data->ray->door_flag)
 			my_mlx_pixel_put(data->win_tex, width, height, color);
-		else if (flag && color > 0x000000)
+		else if (data->ray->door_flag && color > 0x000000)
 			my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;
 	}

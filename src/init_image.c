@@ -20,7 +20,6 @@ void	init_all_image(t_data *data)
 	init_image(data, data->tex->south_tex, data->map->text_so);
 	init_image(data, data->tex->door_tex, "./textures/door.xpm");
 	init_image(data, data->tex->close_tex, "./textures/close.xpm");
-	init_image(data, data->tex->open_tex, "./textures/open.xpm");
 	init_anim_image(data);
 	init_door_image(data);
 }
@@ -64,8 +63,6 @@ t_tex	*init_tex(void)
 	tex->south_tex = alloc_image();
 	tex->close_tex = alloc_image();
 	tex->door_tex = alloc_image();
-	// Unitile en ce moment
-	tex->open_tex = alloc_image();
 	return (tex);
 }
 

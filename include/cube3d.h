@@ -140,9 +140,9 @@ typedef struct s_cubplay
 typedef struct s_ray
 {
 	int		fdoor;
-	int		fsprite;
+	// int		fsprite;
 	int		door_flag;
-	int		sprite_flag;
+	// int		sprite_flag;
 	double	angle;
 	double	width;
 	double	height;
@@ -186,7 +186,6 @@ typedef struct s_tex
 	t_image		*wall_tex;
 	t_image		*close_tex;
 	t_image		*door_tex;
-	t_image		*open_tex;
 }				t_tex;
 
 // STRUCTURE FOR ANIMATION
@@ -276,7 +275,6 @@ void		assign_the_wall(t_data *data, int width);
 int			is_cub_event(int keycode);
 int			cub_event(int keycode, t_data *data);
 int			moovement(t_data *data, double w, double h);
-void		reset_flag(t_data *data);
 int			is_wall(t_data *data, double w, double h);
 void		get_intersec_verticale(t_data *data);
 void		get_intersec_horizontale(t_data *data);
@@ -328,6 +326,8 @@ t_enemy		*new_enemy(t_map *map);
 void		init_cub_int(t_cubplay *new);
 int			is_hit_enemy(t_data *data, int width);
 void		draw_sprite(t_data *data);
+void		draw_sprite_next(t_data *data, double tex_ratio, int width);
+void		init_enemy_int(t_enemy *enemy);
 
 // PARSE MAP
 int			is_line_map(char *line);

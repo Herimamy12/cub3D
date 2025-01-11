@@ -97,12 +97,7 @@ t_enemy	*new_enemy(t_map *map)
 			}
 		}
 	}
-	enemy->fput = 0;
-	enemy->screen = 0;
-	enemy->screen_h = 0;
-	enemy->distance = 0;
-	enemy->start = 0;
-	enemy->end = 0;
+	init_enemy_int(enemy);
 	return (enemy);
 }
 

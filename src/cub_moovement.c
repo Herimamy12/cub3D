@@ -66,16 +66,3 @@ int	is_wall(t_data *data, double w, double h)
 	data->cubplay->width = w;
 	return (0);
 }
-
-void	reset_flag(t_data *data)
-{
-	// function until now
-	if (data->cubplay->up)
-		data->cubplay->up = 0;
-	else if (data->cubplay->right)
-		data->cubplay->right = 0;
-	else if (data->cubplay->down)
-		data->cubplay->down = 0;
-	else if (data->cubplay->left)
-		data->cubplay->left = 0;
-}

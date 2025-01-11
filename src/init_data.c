@@ -71,7 +71,6 @@ t_ray	*init_ray(void)
 	if (!new)
 		return (NULL);
 	new->fdoor = 0;
-	new->fsprite = 0;
 	new->angle = 0;
 	new->width = 0;
 	new->height = 0;
@@ -79,6 +78,5 @@ t_ray	*init_ray(void)
 	new->dheight = 0;
 	new->distance = 0;
 	new->door_flag = 0;
-	new->sprite_flag = 0;
 	return (new);
 }

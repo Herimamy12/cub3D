@@ -45,6 +45,5 @@ void	destroy_tex(t_tex *tex, t_win *win)
 	destroy_image (tex->west_tex, win);
 	destroy_image (tex->door_tex, win);
 	destroy_image (tex->close_tex, win);
-	destroy_image (tex->open_tex, win);
 	free (tex);
 }

@@ -79,10 +79,49 @@ void	roundf_ray(t_data *data)
 		&& data->map->load_to_close)
 		data->tex->wall_tex = close_door(data);
 	else if (data->map->map[tmp_heigth][tmp_width] == 'P' && !data->map->door)
-	{
 		data->tex->wall_tex = data->tex->close_tex;
-		data->ray->distance += 0.5;
-	}
 	else if (data->map->map[(int)last_heigth][(int)last_width] == 'P')
 		data->tex->wall_tex = data->tex->door_tex;
+}
+
+void	draw_sprite(t_data *data)
+{
+	int		width;
+	double	tex_ratio;
+
+	if (!data->enemy->fput)
+		return ;
+	width = data->enemy->screen - (data->enemy->screen_h / 2);
+	data->tex->wall_tex = get_circl(data);
+	data->enemy->screen_h = (int)(HEIGHT / data->enemy->distance);
+	data->enemy->start = (HEIGHT - data->enemy->screen_h) / 2;
+	data->enemy->end = data->enemy->start + data->enemy->screen_h;
+	tex_ratio = (double)
+		data->tex->wall_tex->width / (double)data->enemy->screen_h;
+	while (width < data->enemy->screen + (data->enemy->screen_h / 2))
+	{
+		draw_sprite_next(data, tex_ratio, width);
+		width++;
+	}
+}
+
+void	draw_sprite_next(t_data *data, double tex_ratio, int width)
+{
+	int	color;
+	int	heigth;
+
+	heigth = data->enemy->start;
+	color = (int)(width - (data->enemy->screen - data->enemy->screen_h / 2));
+	data->wall->tex_w = (int)(color * tex_ratio) % data->tex->wall_tex->width;
+	while (heigth < data->enemy->end)
+	{
+		data->wall->tex_h = (int)((heigth - data->enemy->start)
+				* data->tex->wall_tex->height / data->enemy->screen_h)
+			% data->tex->wall_tex->height;
+		color = get_texture_pixel(data->tex->wall_tex, data->wall->tex_w,
+				data->wall->tex_h);
+		if (color > 0x000000)
+			my_mlx_pixel_put(data->win_tex, width, heigth, color);
+		heigth++;
+	}
 }

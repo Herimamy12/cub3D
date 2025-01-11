@@ -40,3 +40,26 @@ void	init_cub_int(t_cubplay *new)
 	new->rc_left = 0;
 	new->rc_right = 0;
 }
+
+void	init_enemy_int(t_enemy *enemy)
+{
+	enemy->fput = 0;
+	enemy->screen = 0;
+	enemy->screen_h = 0;
+	enemy->distance = 0;
+	enemy->start = 0;
+	enemy->end = 0;
+}
+
+int	is_hit_enemy(t_data *data, int width)
+{
+	if (fabs(data->enemy->height - data->ray->height) < ADDCAST
+		&& fabs(data->enemy->width - data->ray->width) < ADDCAST)
+	{
+		data->enemy->fput = 1;
+		data->enemy->screen = width;
+		data->enemy->distance = data->ray->distance;
+		return (1);
+	}
+	return (0);
+}
