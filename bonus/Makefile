@@ -19,6 +19,7 @@ CFLAGS	=	-Wall -Werror -Wextra -g
 LIBX_FLAGS	=	-lXext -lX11 -lm
 
 SRC	=	./src/main.c ./src/circl_image.c \
+		./src/bonus_error.c \
 		./src/color.c ./src/cub_event.c \
 		./src/cub_moovement.c ./src/debug_function.c \
 		./src/destroydata.c ./src/destroydata_next.c \

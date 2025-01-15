@@ -24,6 +24,8 @@ int	render(t_data *data)
 	rotate_cub_key(0, data);
 	if (data->map->door)
 		wait_and_close(data);
+	if (data->cubplay->reset_mouse)
+		reset_mouse (data);
 	return (0);
 }
 

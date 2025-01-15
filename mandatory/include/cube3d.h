@@ -210,10 +210,10 @@ double		get_angle(char **map, int width, int height);
 void		destroy_image(t_image *img, t_win *win);
 int			is_player(char set);
 void		adjust_ray_angle(t_data *data);
-void		cast_ray_wall(t_data *data, int flag);
+void		cast_ray_wall(t_data *data);
 int			rotate_cub(float angle, t_data *data);
 int			rotate_cub_key(int keycode, t_data *data);
-void		assign_the_wall(t_data *data, int width, int flag);
+void		assign_the_wall(t_data *data, int width);
 int			is_cub_event(int keycode);
 int			cub_event(int keycode, t_data *data);
 int			moovement(t_data *data, double w, double h);
@@ -254,7 +254,7 @@ void		put_mini_ray(t_data *data, double step_x, double step_y);
 
 // TMP POUR BONUS
 int			is_valid_content(t_data *data, int map_w, int map_h);
-int			is_loop_break(t_data *data, int map_w, int map_h, int flag);
+int			is_loop_break(t_data *data, int map_w, int map_h);
 void		init_cub_int(t_cubplay *now);
 
 // PARSE MAP

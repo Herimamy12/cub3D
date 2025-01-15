@@ -37,8 +37,10 @@ void	init_cub_int(t_cubplay *new)
 	new->down = 0;
 	new->left = 0;
 	new->right = 0;
+	new->mouse_x = 0;
 	new->rc_left = 0;
 	new->rc_right = 0;
+	new->reset_mouse = 0;
 }
 
 void	init_enemy_int(t_enemy *enemy)

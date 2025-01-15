@@ -1,21 +1,29 @@
+NAME			=	cub3d
+
+NAME_BONUS		=	cub3d_bonus
+
 MAND_DIR		=	./mandatory
 
 BONUS_DIR		=	./bonus
 
-all				:
-				make -C $(MAND_DIR)
+all				:	$(NAME)
 
-bonus			:
-				make -C $(BONUS_DIR)
+$(NAME)			:
+					make -C $(MAND_DIR)
+
+bonus			:	$(NAME_BONUS)
+
+$(NAME_BONUS)	:
+					make -C $(BONUS_DIR)
 
 clean			:
-				make clean -C $(MAND_DIR)
-				make clean -C $(BONUS_DIR)
+					make clean -C $(MAND_DIR)
+					make clean -C $(BONUS_DIR)
 
 fclean			:	clean
-				make fclean -C $(MAND_DIR)
-				make fclean -C $(BONUS_DIR)
+					make fclean -C $(MAND_DIR)
+					make fclean -C $(BONUS_DIR)
 
 re				:	fclean all
 
-.PHONY			: all bonus clean fclean re
+.PHONY			:	all bonus clean fclean re

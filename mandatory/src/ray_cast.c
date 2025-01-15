@@ -14,24 +14,21 @@
 
 void	cast_ray(t_data *data, int width)
 {
-	int	flag;
-
-	flag = 0;
 	data->ray->distance = 0;
 	data->ray->width = data->cubplay->width;
 	data->ray->height = data->cubplay->height;
 	data->ray->dwidth = cos(data->ray->angle);
 	data->ray->dheight = sin(data->ray->angle);
-	cast_ray_wall(data, flag);
+	cast_ray_wall(data);
 	roundf_ray(data);
 	data->ray->distance *= cos(data->ray->angle - data->cubplay->angle);
 	data->wall->height = (int)(HEIGHT / data->ray->distance);
 	data->wall->start = (HEIGHT - data->wall->height) / 2;
 	data->wall->end = data->wall->start + data->wall->height;
-	assign_the_wall(data, width, flag);
+	assign_the_wall(data, width);
 }
 
-void	cast_ray_wall(t_data *data, int flag)
+void	cast_ray_wall(t_data *data)
 {
 	int	go;
 	int	map_w;
@@ -47,7 +44,7 @@ void	cast_ray_wall(t_data *data, int flag)
 		map_h = (int)data->ray->height;
 		if (map_h >= 0 && map_h < HEIGHT && map_w >= 0 && map_w < WIDTH)
 		{
-			if (is_loop_break(data, map_w, map_h, flag))
+			if (is_loop_break(data, map_w, map_h))
 				break ;
 		}
 		else
@@ -55,12 +52,10 @@ void	cast_ray_wall(t_data *data, int flag)
 	}
 }
 
-int	is_loop_break(t_data *data, int map_w, int map_h, int flag)
+int	is_loop_break(t_data *data, int map_w, int map_h)
 {
 	return (is_valid_content(data, map_w, map_h)
 		&& data->map->map[map_h][map_w] == '1');
-	// flag until now / you can delete it
-	(void)flag;
 }
 
 int	is_valid_content(t_data *data, int map_w, int map_h)
@@ -68,7 +63,7 @@ int	is_valid_content(t_data *data, int map_w, int map_h)
 	return (data->map->map[map_h] && data->map->map[map_h][map_w]);
 }
 
-void	assign_the_wall(t_data *data, int width, int flag)
+void	assign_the_wall(t_data *data, int width)
 {
 	int	color;
 	int	height;
@@ -91,6 +86,4 @@ void	assign_the_wall(t_data *data, int width, int flag)
 		my_mlx_pixel_put(data->win_tex, width, height, color);
 		height++;
 	}
-	// flag until now / you can delete it
-	(void)flag;
 }

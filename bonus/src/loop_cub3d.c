@@ -59,26 +59,18 @@ int	handle_mouse_move(int x, int y, t_data *data)
 	static int	last_x = -1;
 
 	delta_x = x - last_x;
-	if (last_x == -1 || abs(delta_x) > 5)
+	if (last_x == -1 || abs(delta_x) > 25)
 	{
 		last_x = x;
 		return (y);
 	}
 	if (delta_x > 0)
-	{
 		data->cubplay->rc_right = 1;
-		last_x = x;
-	}
 	if (delta_x < 0)
-	{
 		data->cubplay->rc_left = 1;
-		last_x = x;
-	}
-	if (abs(delta_x) < 2)
-	{
-		data->cubplay->rc_left = 0;
-		data->cubplay->rc_right = 0;
-	}
+	last_x = x;
+	data->cubplay->mouse_x = x;
+	data->cubplay->reset_mouse = 1;
 	return (y);
 }
 

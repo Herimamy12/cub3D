@@ -136,8 +136,10 @@ typedef struct s_cubplay
 	int		down;
 	int		left;
 	int		right;
+	int		mouse_x;
 	int		rc_left;
 	int		rc_right;
+	int		reset_mouse;
 	double	width;
 	double	height;
 	double	angle;
@@ -147,9 +149,7 @@ typedef struct s_cubplay
 typedef struct s_ray
 {
 	int		fdoor;
-	// int		fsprite;
 	int		door_flag;
-	// int		sprite_flag;
 	double	angle;
 	double	width;
 	double	height;
@@ -335,6 +335,7 @@ int			is_hit_enemy(t_data *data, int width);
 void		draw_sprite(t_data *data);
 void		draw_sprite_next(t_data *data, double tex_ratio, int width);
 void		init_enemy_int(t_enemy *enemy);
+void		reset_mouse(t_data *data);
 
 // PARSE MAP
 int			is_line_map(char *line);

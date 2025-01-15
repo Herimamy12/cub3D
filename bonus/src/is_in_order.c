@@ -6,7 +6,7 @@
 /*   By: herirand <herirand@student.42antananarivo>  #+#  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-11-18 16:13:30 by herirand          #+#    #+#             */
-/*   Updated: 2025/01/15 08:30:46 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:40:04 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,6 @@ int	is_map_valid(char **map, int x)
 	if (verify_elem(map, x) == 0)
 		return (0);
 	if (!bonus_valid(map, x))
-		return (0);
-	return (1);
-}
-
-int	bonus_valid(char **map, int x)
-{
-	if (!is_one_fire(map, x))
-		return (0);
-	if (!good_door(map, x))
 		return (0);
 	return (1);
 }
