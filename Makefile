@@ -1,69 +1,21 @@
-NAME	=	cub3d
+MAND_DIR		=	./mandatory
 
-LIBFT	=	./libft/libft.a
+BONUS_DIR		=	./bonus
 
-LIBFT_DIR	=	./libft/
+all				:
+				make -C $(MAND_DIR)
 
-INC_DIR	=	./include/cube3d.h
+bonus			:
+				make -C $(BONUS_DIR)
 
-LIBX	=	./minilibx-linux/libmlx.a
+clean			:
+				make clean -C $(MAND_DIR)
+				make clean -C $(BONUS_DIR)
 
-LIBXX	=	./minilibx-linux/libmlx_Linux.a
+fclean			:	clean
+				make fclean -C $(MAND_DIR)
+				make fclean -C $(BONUS_DIR)
 
-LIBX_DIR	=	./minilibx-linux/
+re				:	fclean all
 
-CC	=	gcc
-
-CFLAGS	=	-Wall -Werror -Wextra -g
-
-LIBX_FLAGS	=	-lXext -lX11 -lm
-
-SRC	=	${wildcard ./src/*.c}
-# SRC	=	./src/main.c ./src/newdata.c
-
-OBJ_DIR = obj
-
-OBJ	=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir ${SRC}))
-
-.SILENT	:
-
-${shell mkdir -p ${OBJ_DIR}}
-
-${OBJ_DIR}/%.o	:	./src/%.c
-		${CC} ${CFLAGS} -o $@ -c $<
-
-all	:	${NAME}
-
-${NAME}	:	${OBJ} $(INC_DIR)
-		make -C ${LIBX_DIR}
-		make -C ${LIBFT_DIR}
-		${CC} ${CFLAGS} -o $@ ${OBJ} ${LIBFT} ${LIBX} ${LIBXX} ${LIBX_FLAGS}
-
-clean	:
-		make clean -C ${LIBX_DIR}
-		make clean -C ${LIBFT_DIR}
-		rm -rf ${OBJ_DIR}
-
-fclean	:	clean
-		make fclean -C ${LIBFT_DIR}
-		rm -f ${NAME}
-
-re	:	fclean
-		make -C ./
-
-c	:
-		clear
-
-l	:
-		make -C ./
-		./${NAME} ./maps/map.cub
-
-v	:
-		make -C ./
-		valgrind -s --leak-check=full --show-leak-kinds=all ./${NAME} ./maps/map.cub
-
-vfd	:
-		make -C ./
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-fds=yes ./${NAME} ./maps/map.cub
-
-.PHONY	:	all clean fclean re
+.PHONY			: all bonus clean fclean re
