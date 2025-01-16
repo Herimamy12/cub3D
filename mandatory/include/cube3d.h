@@ -6,7 +6,7 @@
 /*   By: herirand <herirand@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 23:14:41 by nherimam          #+#    #+#             */
-/*   Updated: 2025/01/12 13:56:36 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:46:17 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,5 +279,10 @@ int			get_color(t_color *color, char	**map, char *colors);
 int			convers_color(t_color *color);
 int			verify_cols(char **map, int x);
 char		**map_completed(char **map);
+
+int			is_all_digit(char *line);
+int			verify_rgb(char *line);
+int			count_nbr_virg(char *line);
+int			verify_path(char **map);
 
 #endif

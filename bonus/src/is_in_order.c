@@ -6,7 +6,7 @@
 /*   By: herirand <herirand@student.42antananarivo>  #+#  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-11-18 16:13:30 by herirand          #+#    #+#             */
-/*   Updated: 2025/01/15 12:40:04 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:22:23 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	is_map_valid(char **map, int x)
 	if (verify_elem(map, x) == 0)
 		return (0);
 	if (!bonus_valid(map, x))
+		return (0);
+	if (verify_path(map) == 0)
 		return (0);
 	return (1);
 }

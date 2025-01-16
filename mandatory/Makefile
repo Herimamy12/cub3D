@@ -28,7 +28,7 @@ SRC	=	./src/main.c ./src/color.c \
 		./src/map_utils.c ./src/newdata.c \
 		./src/ray_cast.c ./src/ray_roundf.c \
 		./src/render.c ./src/surround.c \
-		./src/verify_line_map.c
+		./src/verify_line_map.c ./src/verify_path.c
 
 OBJ_DIR = obj
 

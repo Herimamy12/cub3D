@@ -6,7 +6,7 @@
 /*   By: nherimam <nherimam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 23:14:41 by nherimam          #+#    #+#             */
-/*   Updated: 2025/01/15 08:28:12 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:18:14 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,5 +364,10 @@ int			bonus_valid(char **map, int x);
 int			good_door(char **map, int x);
 int			verify_cols_door(char **map, int i, int j);
 int			verify_line_door(char **map, int i, int j);
+
+int			is_all_digit(char *line);
+int			verify_rgb(char *line);
+int			count_nbr_virg(char *line);
+int			verify_path(char **map);
 
 #endif

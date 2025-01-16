@@ -6,7 +6,7 @@
 /*   By: nherimam <nherimam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 22:32:12 by nherimam          #+#    #+#             */
-/*   Updated: 2024/10/04 22:32:15 by nherimam         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:19:33 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	ft_count_word(char const *s, char c)
 
 int	ft_isdigit(int c)
 {
-	return ('0' <= c && c <= '9');
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
 char	*ft_strjoin(char *stash, char *buff)

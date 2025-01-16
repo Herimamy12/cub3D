@@ -6,12 +6,11 @@
 /*   By: herirand <herirand@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:27:40 by herirand          #+#    #+#             */
-/*   Updated: 2025/01/12 13:52:28 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:11:27 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3d.h"
-#include <stdio.h>
 
 int	is_line_map(char *line)
 {

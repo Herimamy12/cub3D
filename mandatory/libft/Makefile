@@ -1,8 +1,8 @@
-CC = cc
+CC = gcc
 
 NAME = libft.a
 
-CFLAGS = -Wall -Werror -Wextra -fPIE
+CFLAGS = -Wall -Werror -Wextra 
 
 SRC = libft_utils.c libft_next.c \
 		get_next_line.c libft.c \
