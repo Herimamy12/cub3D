@@ -52,6 +52,9 @@
 // SPACE
 # define SPC 32
 
+// ENTER
+# define ETR 65293
+
 // ANGLE ORIENTATION FORT 3D
 # define DEGEAS 0
 # define DEGNOR 4.7124		// ((3 * M_PI) / 2)
@@ -138,6 +141,7 @@ typedef struct s_cubplay
 	int		left;
 	int		right;
 	int		mouse_x;
+	int		show_mouse;
 	int		rc_left;
 	int		rc_right;
 	int		reset_mouse;
@@ -149,14 +153,14 @@ typedef struct s_cubplay
 // RAY REQUIREMENT STRUCT
 typedef struct s_ray
 {
-	int			fdoor;
-	int			door_flag;
-	double		angle;
-	double		width;
-	double		height;
-	double		dwidth;
-	double		dheight;
-	double		distance;
+	int		fdoor;
+	int		door_flag;
+	double	angle;
+	double	width;
+	double	height;
+	double	dwidth;
+	double	dheight;
+	double	distance;
 	double	last_time;
 	double	delta_time;
 }			t_ray;
@@ -342,6 +346,9 @@ void		reset_mouse(t_data *data);
 long long	get_time(void);
 void		update_time(t_data *data);
 void		p_error(char *str);
+int			focus_window_in(t_data *data);
+int			focus_window_out(t_data *data);
+int			set_mouse_to_quit(t_data *data);
 
 // PARSE MAP
 int			is_line_map(char *line);

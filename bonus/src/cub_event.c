@@ -51,22 +51,3 @@ int	rotate_cub(float angle, t_data *data)
 		data->cubplay->angle -= 2 * M_PI;
 	return (1);
 }
-
-void	reset_mouse(t_data *data)
-{
-	static int	mouse_x = 0;
-	static int	sleep_time = 0;
-
-	if (data->cubplay->mouse_x == mouse_x)
-	{
-		data->cubplay->rc_left = 0;
-		data->cubplay->rc_right = 0;
-		data->cubplay->reset_mouse = 0;
-	}
-	else
-	{
-		let_sleep(&sleep_time, 50);
-		mouse_x = data->cubplay->mouse_x;
-	}
-	mlx_mouse_move (data->win->mlx_ptr, data->win->mlx_win, WIDTH / 2, HEIGHT / 2);
-}

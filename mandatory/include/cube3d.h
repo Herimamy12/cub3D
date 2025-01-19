@@ -22,8 +22,8 @@
 # include "../../minilibx-linux/mlx_int.h"
 
 // WINDOW PARAMETER && MINI MAP
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1440
+# define HEIGHT 810
 # define NAME "cube3d"
 
 // FIELD OF VIEW PLAYER 90°
