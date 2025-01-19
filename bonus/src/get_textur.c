@@ -6,7 +6,7 @@
 /*   By: herirand <herirand@student.42antananarivo>  #+#  +:+       +#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-11-18 16:09:56 by herirand          #+#    #+#             */
-/*   Updated: 2024/11/19 09:21:19 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:04:07 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ char	*texture(char *line)
 char	*get_texture(char **map, char *text)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	if (map == NULL)
 		return (NULL);
 	while (map[i])
 	{
-		if (ft_strncmp(map[i], text, ft_strlen(text)) == 0)
-			return (texture(&map[i][2]));
+		j = 0;
+		while (map[i][j] == ' ')
+			j++;
+		if (ft_strncmp(&map[i][j], text, ft_strlen(text)) == 0)
+			return (texture(&map[i][j + 2]));
 		i ++;
 	}
 	return (NULL);

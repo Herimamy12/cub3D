@@ -204,6 +204,7 @@ void		loop_cub3d(t_data *data);
 
 // OTHER && DEBUG
 void		print_map(char **map);
+void		p_error(char *str);
 
 // INITIATION OF 3D
 double		get_angle(char **map, int width, int height);

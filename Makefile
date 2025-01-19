@@ -2,9 +2,9 @@ MAND_DIR		=	./mandatory
 
 BONUS_DIR		=	./bonus
 
-NAME			=	cub3d
+NAME			=	cub3D
 
-NAME_BONUS 		=	cub3d_bonus
+NAME_BONUS 		=	cub3D_bonus
 
 all				:	${NAME} 
 

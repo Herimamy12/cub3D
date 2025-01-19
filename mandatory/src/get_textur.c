@@ -29,14 +29,18 @@ char	*texture(char *line)
 char	*get_texture(char **map, char *text)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	if (map == NULL)
 		return (NULL);
 	while (map[i])
 	{
-		if (ft_strncmp(map[i], text, ft_strlen(text)) == 0)
-			return (texture(&map[i][2]));
+		j = 0;
+		while (map[i][j] == ' ')
+			j++;
+		if (ft_strncmp(&map[i][j], text, ft_strlen(text)) == 0)
+			return (texture(&map[i][j + 2]));
 		i ++;
 	}
 	return (NULL);

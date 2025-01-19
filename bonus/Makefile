@@ -1,4 +1,4 @@
-NAME	=	../cub3d_bonus
+NAME	=	../cub3D_bonus
 
 LIBFT	=	./libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: herirand <herirand@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:13:30 by herirand          #+#    #+#             */
-/*   Updated: 2025/01/15 14:38:27 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/18 07:48:16 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	count_path(char **map, char *str, int x)
 {
 	int	i;
+	int	j;
 	int	cnt;
 
 	if (!map || !str)
@@ -23,7 +24,14 @@ int	count_path(char **map, char *str, int x)
 	cnt = 0;
 	while (i < x && map[i])
 	{
-		if (ft_strncmp(map[i], str, ft_strlen(str)) == 0)
+		j = 0;
+		while (map[i][j] == ' ')
+			j ++;
+		if (map[i][j] && map[i][j] != 'N' && map[i][j] != 'S'
+			&& map[i][j] != 'W' && map[i][j] != 'E' &&
+			map[i][j] != 'F' && map[i][j] != 'C')
+			return (0);
+		if (ft_strncmp(&map[i][j], str, ft_strlen(str)) == 0)
 			cnt ++;
 		i ++;
 	}

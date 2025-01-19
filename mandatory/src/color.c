@@ -6,7 +6,7 @@
 /*   By: herirand <herirand@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 09:30:58 by herirand          #+#    #+#             */
-/*   Updated: 2025/01/15 14:35:56 by herirand         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:03:13 by herirand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,18 @@ int	parse_color(t_color *color, char *line)
 int	get_color(t_color *color, char	**map, char *colors)
 {
 	int	i;
+	int	j;
 
 	if (map == NULL || color == NULL)
 		return (0);
 	i = 0;
 	while (map[i])
 	{
-		if (ft_strncmp(map[i], colors, ft_strlen(colors)) == 0)
-			return (parse_color(color, &(map[i][1])));
+		j = 0;
+		while (map[i][j] == ' ')
+			j ++;
+		if (ft_strncmp(&map[i][j], colors, ft_strlen(colors)) == 0)
+			return (parse_color(color, &(map[i][j + 1])));
 		i ++;
 	}
 	return (0);
