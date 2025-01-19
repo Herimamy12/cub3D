@@ -18,7 +18,7 @@ void	init_image(t_data *data, t_image *img, char *filename)
 			&img->width, &img->height);
 	if (!img->img)
 	{
-		printf("Erreur de chargement de l'image: %s\n", filename);
+		p_error("Load image failed\n");
 		destroy_data(data);
 		exit(1);
 	}

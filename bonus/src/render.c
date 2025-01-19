@@ -14,6 +14,7 @@
 
 int	render(t_data *data)
 {
+	update_time (data);
 	draw_ceiling_floor (data);
 	draw_ray_per_width (data);
 	draw_sprite (data);

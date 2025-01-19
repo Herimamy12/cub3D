@@ -32,7 +32,8 @@ SRC	=	./src/main.c ./src/circl_image.c \
 		./src/newdata.c ./src/ray_cast.c \
 		./src/ray_roundf.c ./src/render.c \
 		./src/surround.c ./src/verify_line_map.c \
-		./src/verify_path.c
+		./src/verify_path.c ./src/time.c
+
 OBJ_DIR = obj
 
 OBJ	=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir ${SRC}))

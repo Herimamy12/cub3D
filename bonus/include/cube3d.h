@@ -14,6 +14,8 @@
 # define CUBE3D_H
 
 # include <math.h>
+# include <time.h>
+# include <sys/time.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,8 +24,8 @@
 # include "../../minilibx-linux/mlx_int.h"
 
 // WINDOW PARAMETER && MINI MAP
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1440
+# define HEIGHT 810
 # define NAME "cube3d"
 # define M_WIDTH 120
 # define M_HEIGHT 80
@@ -41,8 +43,7 @@
 # define SLEEP_TIME 2000
 
 // ROTATION SPEED
-# define S_ROTATE 0.025		// souris
-# define S_ROTATION 0.035	// clavier
+# define S_ROTATION 0.05	// clavier
 # define S_MOOVEMENT 2
 
 // QUIT
@@ -148,14 +149,16 @@ typedef struct s_cubplay
 // RAY REQUIREMENT STRUCT
 typedef struct s_ray
 {
-	int		fdoor;
-	int		door_flag;
-	double	angle;
-	double	width;
-	double	height;
-	double	dwidth;
-	double	dheight;
-	double	distance;
+	int			fdoor;
+	int			door_flag;
+	double		angle;
+	double		width;
+	double		height;
+	double		dwidth;
+	double		dheight;
+	double		distance;
+	double	last_time;
+	double	delta_time;
 }			t_ray;
 
 // STRUCT FOR THE WALL
@@ -336,6 +339,9 @@ void		draw_sprite(t_data *data);
 void		draw_sprite_next(t_data *data, double tex_ratio, int width);
 void		init_enemy_int(t_enemy *enemy);
 void		reset_mouse(t_data *data);
+long long	get_time(void);
+void		update_time(t_data *data);
+void		p_error(char *str);
 
 // PARSE MAP
 int			is_line_map(char *line);

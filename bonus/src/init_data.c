@@ -18,7 +18,7 @@ void	init_image(t_data *data, t_image *img, char *filename)
 			&img->width, &img->height);
 	if (!img->img)
 	{
-		printf("Erreur de chargement de l'image: %s\n", filename);
+		p_error("Load image failed\n");
 		destroy_data(data);
 		exit(1);
 	}
@@ -78,5 +78,8 @@ t_ray	*init_ray(void)
 	new->dheight = 0;
 	new->distance = 0;
 	new->door_flag = 0;
+	new->last_time = 0;
+	new->last_time = (double) clock () / CLOCKS_PER_SEC;
+	new->delta_time = 0;
 	return (new);
 }
