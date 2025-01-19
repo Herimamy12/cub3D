@@ -68,4 +68,5 @@ void	reset_mouse(t_data *data)
 		let_sleep(&sleep_time, 50);
 		mouse_x = data->cubplay->mouse_x;
 	}
+	mlx_mouse_move (data->win->mlx_ptr, data->win->mlx_win, WIDTH / 2, HEIGHT / 2);
 }

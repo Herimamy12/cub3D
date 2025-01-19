@@ -18,6 +18,7 @@ void	loop_cub3d(t_data *data)
 	mlx_hook (data->win->mlx_win, 3, 1L << 1, handle_keyrelease, data);
 	mlx_hook (data->win->mlx_win, 6, 1L << 6, handle_mouse_move, data);
 	mlx_hook (data->win->mlx_win, 17, 0, close_win, data);
+	mlx_mouse_hide (data->win->mlx_ptr, data->win->mlx_win);
 	mlx_loop_hook (data->win->mlx_ptr, render, data);
 	mlx_loop (data->win->mlx_ptr);
 }
@@ -55,21 +56,10 @@ int	handle_keypress(int keycode, t_data *data)
 
 int	handle_mouse_move(int x, int y, t_data *data)
 {
-	int			delta_x;
-	static int	last_x = -1;
-
-	delta_x = x - last_x;
-	if (last_x == -1 || abs(delta_x) > 25)
-	{
-		last_x = x;
-		return (y);
-	}
-	if (delta_x > 0)
+	if (x > WIDTH / 2)
 		data->cubplay->rc_right = 1;
-	if (delta_x < 0)
+	else if (x < WIDTH / 2)
 		data->cubplay->rc_left = 1;
-	last_x = x;
-	data->cubplay->mouse_x = x;
 	data->cubplay->reset_mouse = 1;
 	return (y);
 }
