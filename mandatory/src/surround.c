@@ -12,19 +12,27 @@
 
 #include "../include/cube3d.h"
 
-int	len_cols(char **map, int x, int y)
+void	find_limits(char **map, int x, int j, t_limits *limits)
 {
-	int	len;
 	int	i;
+	int	len;
 
 	i = x;
-	len = 0;
-	while (map[i] != NULL && map[i][y] != '\0')
+	limits->start = -1;
+	limits->end = -1;
+	len = len_cols(map, x, j) + x;
+	while (map[i] && i < len)
 	{
-		len ++;
-		i ++;
+		while (map[i] && map[i][j] == ' ' && i < len)
+			i++;
+		if (!map[i])
+			break ;
+		if (limits->start == -1)
+			limits->start = i;
+		if (map[i] && map[i][j] && map[i][j] != ' ' && i < len)
+			limits->end = i;
+		i++;
 	}
-	return (len);
 }
 
 void	find_limit(char **map, int x, int j, t_limits *limits)
@@ -35,8 +43,8 @@ void	find_limit(char **map, int x, int j, t_limits *limits)
 	i = x;
 	limits->start = -1;
 	limits->end = -1;
-	len = len_cols(map, x, j) + x;
-	while (map[i] && i < len)
+	len = count_heigth_map(map) - x;
+	while (i < len)
 	{
 		while (map[i] && map[i][j] == ' ' && i < len)
 			i++;
@@ -63,12 +71,18 @@ int	verify_limits(char **map, t_limits *limits, int j)
 int	verify_cols(char **map, int x)
 {
 	int			j;
+	int			len;
 	t_limits	limits;
+	t_limits	limit;
 
 	j = 0;
-	while (map[x][j])
+	len = get_long_line(map, x);
+	while (j < len && map[x][j])
 	{
-		find_limit(map, x, j, &limits);
+		find_limit(map, x, j, &limit);
+		find_limits(map, x, j, &limits);
+		if (!(verify_limits(map, &limit, j)))
+			return (0);
 		if (!(verify_limits(map, &limits, j)))
 			return (0);
 		j++;

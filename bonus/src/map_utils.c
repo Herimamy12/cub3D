@@ -67,7 +67,7 @@ int	cols_map_verify(char **map, size_t x, size_t len)
 	i = x;
 	j = 0;
 	while (map[i])
-		res[j++] = cpy_map(map[i++], len, '\0', ' ');
+		res[j++] = cpy_map(map[i++], len, ' ', ' ');
 	res[j] = NULL;
 	if (verify_cols(res, 0) == 0)
 		return (destroy_str(res), 0);

@@ -78,20 +78,3 @@ int	handle_mouse_move(int x, int y, t_data *data)
 	data->cubplay->reset_mouse = 1;
 	return (y);
 }
-
-int	rotate_cub_key(int keycode, t_data *data)
-{
-	if (data->cubplay->rc_left)
-	{
-		data->cubplay->angle -= S_ROTATION * data->ray->delta_time;
-		if (data->cubplay->angle < 0)
-			data->cubplay->angle -= 2 * M_PI;
-	}
-	if (data->cubplay->rc_right)
-	{
-		data->cubplay->angle += S_ROTATION * data->ray->delta_time;
-		if (data->cubplay->angle > 2 * M_PI)
-			data->cubplay->angle -= 2 * M_PI;
-	}
-	return (keycode);
-}

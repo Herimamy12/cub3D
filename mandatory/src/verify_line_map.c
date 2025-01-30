@@ -55,6 +55,8 @@ int	is_surround(char *line)
 	{
 		while (line[i] && line[i] == ' ')
 			i ++;
+		if (!line[i])
+			return (1);
 		start = i;
 		if (!line[start] || line[start] != '1')
 			return (0);

@@ -280,10 +280,13 @@ int			get_color(t_color *color, char	**map, char *colors);
 int			convers_color(t_color *color);
 int			verify_cols(char **map, int x);
 char		**map_completed(char **map);
-
 int			is_all_digit(char *line);
 int			verify_rgb(char *line);
 int			count_nbr_virg(char *line);
 int			verify_path(char **map);
+void		find_limits(char **map, int x, int j, t_limits *limits);
+void		find_limit(char **map, int x, int j, t_limits *limits);
+int			len_cols(char **map, int x, int y);
+int			get_long_line(char **map, int x);
 
 #endif

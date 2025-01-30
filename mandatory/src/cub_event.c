@@ -45,3 +45,18 @@ int	rotate_cub(float angle, t_data *data)
 		data->cubplay->angle -= 2 * M_PI;
 	return (1);
 }
+
+int	len_cols(char **map, int x, int y)
+{
+	int	len;
+	int	i;
+
+	i = x;
+	len = 0;
+	while (map[i] != NULL && map[i][y] != '\0')
+	{
+		len ++;
+		i ++;
+	}
+	return (len);
+}

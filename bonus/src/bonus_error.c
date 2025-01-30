@@ -31,7 +31,7 @@ int	is_one_fire(char **map, int x)
 		}
 		i ++;
 	}
-	if (cnt != 1)
+	if (cnt > 1)
 		return (0);
 	return (1);
 }

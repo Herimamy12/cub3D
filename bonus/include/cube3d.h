@@ -377,10 +377,13 @@ int			bonus_valid(char **map, int x);
 int			good_door(char **map, int x);
 int			verify_cols_door(char **map, int i, int j);
 int			verify_line_door(char **map, int i, int j);
-
 int			is_all_digit(char *line);
 int			verify_rgb(char *line);
 int			count_nbr_virg(char *line);
 int			verify_path(char **map);
+void		find_limits(char **map, int x, int j, t_limits *limits);
+void		find_limit(char **map, int x, int j, t_limits *limits);
+int			len_cols(char **map, int x, int y);
+int			get_long_line(char **map, int x);
 
 #endif

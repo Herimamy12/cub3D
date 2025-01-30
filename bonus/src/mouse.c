@@ -29,7 +29,8 @@ void	reset_mouse(t_data *data)
 		mouse_x = data->cubplay->mouse_x;
 	}
 	if (!data->cubplay->show_mouse)
-		mlx_mouse_move (data->win->mlx_ptr, data->win->mlx_win, WIDTH / 2, HEIGHT / 2);
+		mlx_mouse_move (data->win->mlx_ptr, data->win->mlx_win,
+			WIDTH / 2, HEIGHT / 2);
 }
 
 int	focus_window_out(t_data *data)

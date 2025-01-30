@@ -51,3 +51,35 @@ int	rotate_cub(float angle, t_data *data)
 		data->cubplay->angle -= 2 * M_PI;
 	return (1);
 }
+
+int	rotate_cub_key(int keycode, t_data *data)
+{
+	if (data->cubplay->rc_left)
+	{
+		data->cubplay->angle -= S_ROTATION * data->ray->delta_time;
+		if (data->cubplay->angle < 0)
+			data->cubplay->angle -= 2 * M_PI;
+	}
+	if (data->cubplay->rc_right)
+	{
+		data->cubplay->angle += S_ROTATION * data->ray->delta_time;
+		if (data->cubplay->angle > 2 * M_PI)
+			data->cubplay->angle -= 2 * M_PI;
+	}
+	return (keycode);
+}
+
+int	len_cols(char **map, int x, int y)
+{
+	int	len;
+	int	i;
+
+	i = x;
+	len = 0;
+	while (map[i] != NULL && map[i][y] != '\0')
+	{
+		len ++;
+		i ++;
+	}
+	return (len);
+}

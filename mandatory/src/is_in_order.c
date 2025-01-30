@@ -42,17 +42,17 @@ int	count_path(char **map, char *str, int x)
 
 int	verify_count(char **map, int x)
 {
-	if (count_path(map, "NO ", x) != 1)
+	if (count_path(map, "NO", x) != 1)
 		return (0);
-	if (count_path(map, "SO ", x) != 1)
+	if (count_path(map, "SO", x) != 1)
 		return (0);
-	if (count_path(map, "WE ", x) != 1)
+	if (count_path(map, "WE", x) != 1)
 		return (0);
-	if (count_path(map, "EA ", x) != 1)
+	if (count_path(map, "EA", x) != 1)
 		return (0);
-	if (count_path(map, "F ", x) != 1)
+	if (count_path(map, "F", x) != 1)
 		return (0);
-	if (count_path(map, "C ", x) != 1)
+	if (count_path(map, "C", x) != 1)
 		return (0);
 	return (1);
 }
